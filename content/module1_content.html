@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 1 — Reproductive Physiology &amp; Endocrinology</title>
+<style>
+  :root {
+    --teal: #1a6b7a;
+    --teal-light: #e8f4f6;
+    --teal-mid: #2d8fa3;
+    --dark: #1e2d2f;
+    --grey: #37424a;
+    --mid-grey: #718096;
+    --border: #cbd5e0;
+    --bg: #f7fafc;
+    --white: #ffffff;
+    --amber: #b7791f;
+    --amber-light: #fef3c7;
+    --green: #276749;
+    --green-light: #d5f0dd;
+    --clinical: #6b46c1;
+    --clinical-light: #ede9fb;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    font-size: 15.5px; line-height: 1.7; color: var(--grey); background: var(--bg);
+  }
+  .page-wrap { max-width: 880px; margin: 0 auto; background: var(--white); box-shadow: 0 0 30px rgba(0,0,0,0.08); }
+
+  .doc-header { background: var(--teal); color: white; padding: 44px 52px 40px; }
+  .doc-header .clinic-name { font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.8; margin-bottom: 10px; }
+  .doc-header .mod-label { font-size: 13px; font-weight: 600; opacity: 0.85; margin-bottom: 6px; }
+  .doc-header h1 { font-size: 28px; font-weight: 700; line-height: 1.2; margin-bottom: 10px; }
+  .doc-header .subtitle { font-size: 16px; opacity: 0.85; }
+  .doc-header .meta { margin-top: 20px; font-size: 13px; opacity: 0.75; }
+  .doc-header .meta span { font-weight: 600; opacity: 1; }
+
+  .nav-strip { background: var(--dark); padding: 14px 52px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .nav-strip a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 20px; transition: all 0.2s; }
+  .nav-strip a:hover { background: rgba(255,255,255,0.15); color: white; }
+
+  .content { padding: 0 52px 60px; }
+
+  h2 { font-size: 22px; font-weight: 700; color: var(--teal); margin: 44px 0 4px; padding-top: 8px; }
+  h2 .num { color: var(--teal-mid); font-size: 18px; margin-right: 8px; }
+  .section-lead { font-size: 14px; color: var(--mid-grey); font-style: italic; margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid var(--teal-light); }
+  h3 { font-size: 17px; font-weight: 700; color: var(--dark); margin: 26px 0 10px; }
+  h4 { font-size: 14px; font-weight: 700; color: var(--teal); margin: 18px 0 6px; text-transform: uppercase; letter-spacing: 0.04em; }
+
+  p { margin-bottom: 14px; }
+  strong { color: var(--dark); }
+  em.term { font-style: normal; font-weight: 600; color: var(--teal); }
+
+  ul, ol { margin: 0 0 16px 22px; }
+  li { margin-bottom: 8px; }
+
+  .intro-block { background: var(--teal-light); border-left: 4px solid var(--teal); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 24px 0; }
+  .intro-block p:last-child { margin-bottom: 0; }
+  .intro-block h4 { margin-top: 0; }
+
+  .clinical-box { background: var(--clinical-light); border-left: 4px solid var(--clinical); border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 18px 0; }
+  .clinical-box .cb-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--clinical); margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+  .clinical-box p { margin-bottom: 8px; font-size: 14.5px; }
+  .clinical-box p:last-child { margin-bottom: 0; }
+
+  .key-box { background: var(--green-light); border-left: 4px solid var(--green); border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 18px 0; }
+  .key-box .kb-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--green); margin-bottom: 8px; }
+  .key-box ul { margin-bottom: 0; }
+  .key-box li { font-size: 14.5px; }
+
+  figure.diagram { margin: 24px 0; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 20px 22px 10px; }
+  figure.diagram svg { width: 100%; height: auto; display: block; }
+  figure.diagram .fig-title { font-size: 12px; font-weight: 700; color: var(--teal); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 14px; }
+  figure.diagram figcaption { font-size: 13px; color: var(--mid-grey); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--border); line-height: 1.5; }
+
+  table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 14px; }
+  th { background: var(--teal); color: white; padding: 10px 12px; text-align: left; font-weight: 600; font-size: 13px; }
+  td { padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:nth-child(even) td { background: var(--teal-light); }
+
+  .two-cell-diagram { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 20px; margin: 18px 0; font-size: 14px; }
+  .two-cell-diagram .cell-flow { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .cell-col { background: white; border: 1px solid var(--border); border-radius: 6px; padding: 14px; }
+  .cell-col .cell-name { font-weight: 700; color: var(--teal); font-size: 14px; margin-bottom: 8px; }
+  .cell-col .cell-step { font-size: 13px; color: var(--grey); padding: 3px 0; }
+
+  .worked-example { background: var(--amber-light); border: 1px solid #f6ad55; border-radius: 8px; padding: 20px 24px; margin: 22px 0; }
+  .worked-example .we-label { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--amber); margin-bottom: 12px; }
+  .worked-example .case { font-style: italic; color: #744210; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px dashed #f6ad55; }
+  .worked-example p { font-size: 14.5px; color: #5a3d0a; }
+  .worked-example .interp { background: white; border-radius: 6px; padding: 12px 16px; margin-top: 8px; }
+
+  .references { margin-top: 40px; padding-top: 20px; border-top: 2px solid var(--teal); }
+  .references h3 { color: var(--teal); }
+  .references ol { font-size: 13px; color: var(--mid-grey); margin-left: 18px; }
+  .references li { margin-bottom: 6px; }
+
+  .doc-footer { background: var(--dark); color: rgba(255,255,255,0.6); padding: 20px 52px; font-size: 12px; display: flex; justify-content: space-between; }
+
+  @media print {
+    .nav-strip { display: none; }
+    .page-wrap { box-shadow: none; }
+    body { font-size: 11pt; background: white; }
+    .clinical-box, .key-box, .worked-example, table { page-break-inside: avoid; }
+  }
+  @media (max-width: 600px) {
+    .content, .doc-header, .nav-strip, .doc-footer { padding-left: 22px; padding-right: 22px; }
+    .doc-header h1 { font-size: 22px; }
+    .two-cell-diagram .cell-flow { grid-template-columns: 1fr; }
+    .doc-footer { flex-direction: column; gap: 4px; }
+  }
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+<div class="doc-header">
+  <div class="clinic-name">Flinders Fertility · Education Program</div>
+  <div class="mod-label">Module 1 of 6 · Week 1</div>
+  <h1>Reproductive Physiology &amp; Endocrinology</h1>
+  <div class="subtitle">Foundations of human reproduction</div>
+  <div class="meta"><span>Estimated self-directed time:</span> 6–8 hours · <span>Complete before Week 1 clinic where possible</span></div>
+</div>
+
+<div class="nav-strip">
+  <a href="#intro">Orientation</a>
+  <a href="#anatomy">Anatomy</a>
+  <a href="#hpo">HPO axis</a>
+  <a href="#follicle">Folliculogenesis</a>
+  <a href="#oogenesis">Oogenesis</a>
+  <a href="#sperm">Spermatogenesis</a>
+  <a href="#fertilisation">Fertilisation</a>
+  <a href="#embryo">Embryogenesis</a>
+  <a href="#implantation">Implantation</a>
+  <a href="#hormones">Hormone evaluation</a>
+  <a href="#pathology">Endocrine pathology</a>
+  <a href="#reading">Further reading</a>
+</div>
+
+<div class="content">
+
+<!-- ORIENTATION -->
+<div id="intro">
+<div class="intro-block">
+  <h4>Why this module comes first</h4>
+  <p>Everything you will see in the clinic over the next six weeks is an intervention in a physiological system. A stimulation protocol manipulates the hypothalamic-pituitary-ovarian axis. An AMH result estimates a follicle population you cannot see. A failed implantation is a breakdown in a precisely timed molecular conversation between embryo and endometrium. If you understand the normal system, the clinical decisions become legible. If you don't, they look like a series of arbitrary rules.</p>
+  <p>This module is deliberately dense. It is the shared vocabulary for the whole rotation, and the concepts here — the two-cell model, the FSH window, ovarian reserve, the implantation window — will reappear in every subsequent module in progressively more clinical form. Read it once now; you will return to it.</p>
+</div>
+<p>By the end of this module you should be able to explain, to a patient or a colleague, how a normal menstrual cycle is controlled, why ovarian reserve declines with age, what a hormone panel is actually measuring, and why the interventions you will observe in the clinic are designed the way they are. The clinical activities in Week 1 are observational — the goal is to attach what you read here to what you see there.</p>
+</div>
+
+<!-- ANATOMY -->
+<h2 id="anatomy"><span class="num">1</span>Functional reproductive anatomy</h2>
+<div class="section-lead">A brief review — structure only insofar as it drives function.</div>
+
+<p>You have covered gross anatomy elsewhere. What matters for reproductive medicine is the functional organisation of a few key structures.</p>
+
+<h3>The ovary</h3>
+<p>The ovary has two jobs: it is both an <strong>endocrine organ</strong> and the store of the female gamete supply. Its cortex contains the entire follicle population — a fixed, non-renewable pool established before birth. Each <em class="term">follicle</em> is an oocyte surrounded by supporting somatic cells (granulosa and, later, theca cells) that do the hormone production. The medulla carries the vasculature and nerves. The clinically important point: the follicle is the functional unit, and the number of follicles remaining is finite and declining from birth onward. This is the substrate of <strong>ovarian reserve</strong>, the single most important concept in fertility prognosis.</p>
+
+<h3>The uterus and endometrium</h3>
+<p>The endometrium has two layers. The <em class="term">functionalis</em> is the upper layer that proliferates, secretes, and is shed each cycle; it is the layer that must be receptive for implantation. The <em class="term">basalis</em> is the deep regenerative layer that survives menstruation and regrows the functionalis. The myometrium is the muscular wall. When you assess an endometrium on ultrasound in the clinic — thickness, the "triple-line" pattern — you are assessing whether the functionalis has responded appropriately to oestrogen (proliferation) and progesterone (secretory transformation).</p>
+
+<h3>The fallopian tubes</h3>
+<p>Not passive conduits. The tube is the site of fertilisation and of the embryo's first three to four days of development. Ciliary beat and smooth muscle peristalsis transport the oocyte inward and the embryo toward the uterus, timed so the embryo arrives as a morula/early blastocyst when the endometrium is becoming receptive. Tubal damage — the reason tubal patency is assessed in the workup — disrupts both gamete transport and this developmental environment, and a damaged, fluid-filled tube (hydrosalpinx) is actively hostile to implantation.</p>
+
+<h3>The male tract</h3>
+<p>The testis performs the male equivalent of the ovary's dual role. The <em class="term">seminiferous tubules</em> house spermatogenesis, supported by <em class="term">Sertoli cells</em>; the interstitial <em class="term">Leydig cells</em> produce testosterone. Sperm mature and gain motility during transit through the epididymis, are stored, and are delivered via the vas deferens. Accessory glands (seminal vesicles, prostate) contribute the bulk of seminal fluid. This architecture explains the diagnostic logic in male-factor infertility: a blockage (obstructive) produces a very different picture from a production failure (non-obstructive), and you will trace that distinction in Module 5.</p>
+
+<!-- HPO AXIS -->
+<h2 id="hpo"><span class="num">2</span>The hypothalamic-pituitary-ovarian axis</h2>
+<div class="section-lead">The control system. Master this and the menstrual cycle, PCOS, and every stimulation protocol become coherent.</div>
+
+<p>Reproduction is governed by a three-tier hormonal cascade with feedback loops. Get the architecture first, then the cycle.</p>
+
+<h3>The cascade</h3>
+<p>The <strong>hypothalamus</strong> releases <em class="term">gonadotrophin-releasing hormone (GnRH)</em> in <strong>pulses</strong> into the pituitary portal circulation. The pulsatility is not incidental — it is the signal. The anterior pituitary gonadotrophs respond to pulsatile GnRH by secreting the two <em class="term">gonadotrophins</em>: <strong>FSH</strong> (follicle-stimulating hormone) and <strong>LH</strong> (luteinising hormone). These act on the ovary, which in turn produces <strong>oestradiol</strong>, <strong>progesterone</strong>, and the peptide hormones <strong>inhibin</strong> and <strong>AMH</strong>. The ovarian hormones feed back on both the hypothalamus and pituitary to regulate the whole system.</p>
+
+<figure class="diagram">
+  <div class="fig-title">Figure 1 · The hypothalamic-pituitary-ovarian axis</div>
+  <svg viewBox="0 0 660 280" role="img" aria-label="Diagram of the HPO axis showing stimulatory cascade downward and feedback upward">
+    <defs>
+      <marker id="ar" markerWidth="9" markerHeight="9" refX="6" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#1a6b7a"/></marker>
+      <marker id="arF" markerWidth="9" markerHeight="9" refX="6" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#b7791f"/></marker>
+    </defs>
+    <!-- boxes -->
+    <rect x="230" y="16" width="200" height="48" rx="8" fill="#1a6b7a"/>
+    <text x="330" y="38" text-anchor="middle" fill="#fff" font-size="15" font-weight="700">Hypothalamus</text>
+    <text x="330" y="55" text-anchor="middle" fill="#cfe6ea" font-size="12">GnRH neurons</text>
+
+    <rect x="230" y="116" width="200" height="48" rx="8" fill="#2d8fa3"/>
+    <text x="330" y="138" text-anchor="middle" fill="#fff" font-size="15" font-weight="700">Anterior pituitary</text>
+    <text x="330" y="155" text-anchor="middle" fill="#e8f4f6" font-size="12">gonadotrophs</text>
+
+    <rect x="230" y="216" width="200" height="48" rx="8" fill="#1a6b7a"/>
+    <text x="330" y="238" text-anchor="middle" fill="#fff" font-size="15" font-weight="700">Ovary</text>
+    <text x="330" y="255" text-anchor="middle" fill="#cfe6ea" font-size="12">follicles · corpus luteum</text>
+
+    <!-- stimulatory arrows down -->
+    <line x1="330" y1="64" x2="330" y2="114" stroke="#1a6b7a" stroke-width="2.5" marker-end="url(#ar)"/>
+    <text x="342" y="93" fill="#1a6b7a" font-size="12.5" font-weight="600">GnRH (pulsatile)</text>
+    <line x1="330" y1="164" x2="330" y2="214" stroke="#1a6b7a" stroke-width="2.5" marker-end="url(#ar)"/>
+    <text x="342" y="193" fill="#1a6b7a" font-size="12.5" font-weight="600">FSH · LH</text>
+
+    <!-- feedback arrows up (right side) -->
+    <path d="M470,240 C 560,240 560,40 442,40" fill="none" stroke="#b7791f" stroke-width="2.5" marker-end="url(#arF)"/>
+    <path d="M470,240 C 540,235 540,140 442,140" fill="none" stroke="#b7791f" stroke-width="2.5" marker-end="url(#arF)"/>
+    <text x="486" y="120" fill="#b7791f" font-size="12" font-weight="600">feedback</text>
+    <text x="486" y="138" fill="#8a5a12" font-size="11.5">oestradiol (− then +)</text>
+    <text x="486" y="154" fill="#8a5a12" font-size="11.5">progesterone (−)</text>
+    <text x="486" y="170" fill="#8a5a12" font-size="11.5">inhibin (− FSH)</text>
+
+    <!-- pulse note (left) -->
+    <rect x="18" y="96" width="176" height="72" rx="6" fill="#fff" stroke="#cbd5e0"/>
+    <text x="30" y="118" fill="#1a6b7a" font-size="11.5" font-weight="700">Pulse frequency encodes:</text>
+    <text x="30" y="137" fill="#37424a" font-size="11.5">slow pulses → favour FSH</text>
+    <text x="30" y="153" fill="#37424a" font-size="11.5">fast pulses → favour LH</text>
+  </svg>
+  <figcaption>Stimulatory signals descend (teal); ovarian hormones feed back on both upstream tiers (amber). Continuous, non-pulsatile GnRH desensitises the receptors and switches the axis off — the basis of GnRH-agonist down-regulation.</figcaption>
+</figure>
+
+<div class="clinical-box">
+  <div class="cb-label">◆ Clinical relevance — why pulse frequency matters</div>
+  <p>GnRH pulse frequency encodes different instructions. <strong>Slow pulses favour FSH</strong> secretion; <strong>fast pulses favour LH</strong>. This is not academic: continuous (non-pulsatile) GnRH exposure paradoxically <em>shuts down</em> the axis by desensitising the receptors. That is precisely the mechanism exploited by GnRH agonists in IVF down-regulation protocols — you flood the system continuously to switch it off, then control it exogenously. You will see this in Module 3. Altered pulse frequency also underlies the raised LH:FSH ratio characteristic of PCOS.</p>
+</div>
+
+<h3>The two-cell, two-gonadotrophin model</h3>
+<p>This is the most important single mechanism in the module. Oestradiol production requires <strong>two cell types responding to two gonadotrophins</strong>, working in series:</p>
+
+<figure class="diagram">
+  <div class="fig-title">Figure 2 · The two-cell, two-gonadotrophin model</div>
+  <svg viewBox="0 0 660 240" role="img" aria-label="Two-cell model: theca cell makes androgens under LH, granulosa cell aromatises them to oestradiol under FSH">
+    <defs>
+      <marker id="ar2" markerWidth="9" markerHeight="9" refX="6" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#37424a"/></marker>
+    </defs>
+    <!-- theca cell -->
+    <rect x="30" y="40" width="270" height="160" rx="10" fill="#fef3c7" stroke="#b7791f" stroke-width="1.5"/>
+    <text x="165" y="66" text-anchor="middle" fill="#8a5a12" font-size="14" font-weight="700">Theca cell</text>
+    <text x="165" y="84" text-anchor="middle" fill="#8a5a12" font-size="12">responds to LH</text>
+    <text x="52" y="118" fill="#5a3d0a" font-size="12.5">LH →</text>
+    <text x="52" y="140" fill="#5a3d0a" font-size="12.5">cholesterol</text>
+    <text x="52" y="160" fill="#5a3d0a" font-size="12.5">↓</text>
+    <text x="52" y="180" fill="#5a3d0a" font-size="12.5" font-weight="700">androgens</text>
+    <text x="150" y="180" fill="#8a5a12" font-size="11">(androstenedione,</text>
+    <text x="150" y="194" fill="#8a5a12" font-size="11">testosterone)</text>
+
+    <!-- basement membrane -->
+    <line x1="330" y1="30" x2="330" y2="210" stroke="#718096" stroke-width="2" stroke-dasharray="4 4"/>
+    <text x="330" y="24" text-anchor="middle" fill="#718096" font-size="10.5">basement membrane</text>
+
+    <!-- granulosa cell -->
+    <rect x="360" y="40" width="270" height="160" rx="10" fill="#e8f4f6" stroke="#1a6b7a" stroke-width="1.5"/>
+    <text x="495" y="66" text-anchor="middle" fill="#134e5a" font-size="14" font-weight="700">Granulosa cell</text>
+    <text x="495" y="84" text-anchor="middle" fill="#134e5a" font-size="12">responds to FSH</text>
+    <text x="382" y="118" fill="#134e5a" font-size="12.5">FSH → induces</text>
+    <text x="382" y="138" fill="#134e5a" font-size="12.5" font-weight="700">aromatase</text>
+    <text x="382" y="160" fill="#134e5a" font-size="12.5">↓</text>
+    <text x="382" y="182" fill="#1a6b7a" font-size="13" font-weight="700">OESTRADIOL</text>
+
+    <!-- androgen transfer arrow across membrane -->
+    <line x1="245" y1="176" x2="378" y2="176" stroke="#37424a" stroke-width="2.5" marker-end="url(#ar2)"/>
+    <text x="270" y="168" fill="#37424a" font-size="11" font-weight="600">androgens diffuse across →</text>
+  </svg>
+  <figcaption>Theca supplies the raw material (androgens) under LH; granulosa aromatises it to oestradiol under FSH. Neither cell makes oestradiol alone. This explains why letrozole (aromatase inhibitor) and exogenous FSH both work — and why theca-driven androgen excess produces the PCOS picture.</figcaption>
+</figure>
+
+<h3>The menstrual cycle, phase by phase</h3>
+<p>With the cascade in place, the cycle is a story about a single dominant follicle growing, ovulating, and becoming a corpus luteum. Conventionally counted from the first day of menses (day 1); an "average" cycle is 28 days but 24–35 is normal.</p>
+
+<h4>Follicular phase (day 1 to ovulation)</h4>
+<p>At the start, oestradiol, progesterone and inhibin are low, which releases the pituitary from negative feedback and allows <strong>FSH to rise</strong>. This FSH rise recruits a cohort of antral follicles into the final growth phase. As follicles grow, their granulosa cells produce increasing oestradiol and <strong>inhibin B</strong>. Inhibin B selectively suppresses FSH, so FSH falls again mid-follicular phase — and this falling FSH is the mechanism of <strong>dominant follicle selection</strong>: only the follicle with the most FSH receptors (the most FSH-sensitive) can continue growing as FSH declines. The others undergo atresia. Rising oestradiol from the dominant follicle drives endometrial proliferation.</p>
+
+<h4>Ovulation</h4>
+<p>Here the feedback logic <strong>flips</strong>. Once oestradiol from the mature follicle exceeds a threshold (roughly &gt;735 pmol/L / ~200 pg/mL) sustained for ~48 hours, it switches from negative to <strong>positive feedback</strong>, triggering the <strong>LH surge</strong>. The LH surge does several things over ~36 hours: it completes the oocyte's first meiotic division, triggers final maturation, and causes follicular rupture — ovulation — typically ~36–38 hours after the surge onset. This 36-hour interval is why ovulation timing works clinically, and why the "trigger" injection in IVF is timed the way it is.</p>
+
+<h4>Luteal phase (ovulation to menses)</h4>
+<p>The ruptured follicle luteinises into the <strong>corpus luteum</strong>, which produces large amounts of <strong>progesterone</strong> (plus oestradiol and inhibin A). Progesterone transforms the proliferative endometrium into a secretory, receptive state and maintains it. The luteal phase is remarkably constant at ~14 days (cycle length varies through the follicular phase, not the luteal). If no pregnancy occurs, the corpus luteum regresses after ~14 days, progesterone and oestradiol fall, the endometrium is shed (menses), FSH is released from suppression, and the next cycle begins. If pregnancy occurs, embryonic hCG rescues the corpus luteum, sustaining progesterone until the placenta takes over.</p>
+
+<figure class="diagram">
+  <div class="fig-title">Figure 3 · The integrated menstrual cycle</div>
+  <svg viewBox="0 0 700 470" role="img" aria-label="Integrated menstrual cycle: gonadotrophins, ovarian steroids, follicle development and endometrium across 28 days">
+    <!-- ovulation line -->
+    <line x1="365" y1="26" x2="365" y2="410" stroke="#6b46c1" stroke-width="1.5" stroke-dasharray="5 4" opacity="0.6"/>
+    <!-- phase labels -->
+    <text x="210" y="18" text-anchor="middle" fill="#718096" font-size="12" font-weight="700">FOLLICULAR PHASE</text>
+    <text x="365" y="18" text-anchor="middle" fill="#6b46c1" font-size="11" font-weight="700">OVULATION</text>
+    <text x="515" y="18" text-anchor="middle" fill="#718096" font-size="12" font-weight="700">LUTEAL PHASE</text>
+
+    <!-- PANEL A: gonadotrophins -->
+    <line x1="70" y1="112" x2="660" y2="112" stroke="#cbd5e0" stroke-width="1"/>
+    <text x="70" y="42" fill="#37424a" font-size="12" font-weight="700">Gonadotrophins</text>
+    <polyline fill="none" stroke="#2d8fa3" stroke-width="2.5"
+      points="70,86 112,79 196,99 300,96 350,88 365,86 386,97 449,104 560,102 639,85 660,81"/>
+    <polyline fill="none" stroke="#b7791f" stroke-width="2.5"
+      points="70,103 240,101 330,99 355,62 365,34 375,60 400,99 560,102 660,101"/>
+    <text x="600" y="78" fill="#2d8fa3" font-size="12" font-weight="700">FSH</text>
+    <text x="378" y="46" fill="#b7791f" font-size="12" font-weight="700">LH surge</text>
+
+    <!-- PANEL B: ovarian steroids -->
+    <line x1="70" y1="212" x2="660" y2="212" stroke="#cbd5e0" stroke-width="1"/>
+    <text x="70" y="142" fill="#37424a" font-size="12" font-weight="700">Ovarian steroids</text>
+    <polyline fill="none" stroke="#6b46c1" stroke-width="2.5"
+      points="70,205 140,198 250,177 330,150 352,140 365,152 386,174 445,162 500,165 600,192 660,207"/>
+    <polyline fill="none" stroke="#276749" stroke-width="2.5"
+      points="70,208 300,207 365,205 386,192 445,154 468,152 520,170 600,198 660,208"/>
+    <text x="250" y="168" fill="#6b46c1" font-size="12" font-weight="700">oestradiol</text>
+    <text x="470" y="146" fill="#276749" font-size="12" font-weight="700">progesterone</text>
+
+    <!-- PANEL C: follicle development -->
+    <text x="70" y="242" fill="#37424a" font-size="12" font-weight="700">Follicle</text>
+    <circle cx="95" cy="278" r="3" fill="#e8f4f6" stroke="#1a6b7a"/>
+    <circle cx="150" cy="278" r="5" fill="#e8f4f6" stroke="#1a6b7a"/>
+    <circle cx="215" cy="277" r="8" fill="#e8f4f6" stroke="#1a6b7a"/>
+    <circle cx="290" cy="276" r="11" fill="#e8f4f6" stroke="#1a6b7a"/>
+    <circle cx="350" cy="274" r="15" fill="#e8f4f6" stroke="#1a6b7a" stroke-width="1.5"/>
+    <text x="350" y="303" text-anchor="middle" fill="#718096" font-size="9.5">Graafian</text>
+    <!-- corpus luteum -->
+    <circle cx="440" cy="276" r="14" fill="#fef3c7" stroke="#b7791f" stroke-width="1.5"/>
+    <circle cx="510" cy="277" r="11" fill="#fef3c7" stroke="#b7791f"/>
+    <circle cx="575" cy="278" r="7" fill="#fef3c7" stroke="#b7791f" opacity="0.7"/>
+    <text x="490" y="303" text-anchor="middle" fill="#8a5a12" font-size="9.5">corpus luteum → regression</text>
+
+    <!-- PANEL D: endometrium -->
+    <text x="70" y="332" fill="#37424a" font-size="12" font-weight="700">Endometrium</text>
+    <path d="M70,392 L112,390 L150,388 C 230,384 300,352 365,344 C 445,336 520,336 600,360 L640,388 L660,392 Z"
+      fill="#f3d9dd" stroke="#b05a6b" stroke-width="1.5"/>
+    <rect x="70" y="386" width="42" height="8" fill="#b05a6b" opacity="0.55"/>
+    <text x="91" y="408" text-anchor="middle" fill="#8a4a58" font-size="9.5">menses</text>
+    <text x="470" y="332" fill="#8a4a58" font-size="10.5">proliferative → secretory</text>
+
+    <!-- x axis -->
+    <line x1="70" y1="410" x2="660" y2="410" stroke="#37424a" stroke-width="1.5"/>
+    <g fill="#37424a" font-size="11" text-anchor="middle">
+      <text x="91" y="428">Day 1</text>
+      <text x="217" y="428">7</text>
+      <text x="365" y="428">14</text>
+      <text x="512" y="428">21</text>
+      <text x="660" y="428">28</text>
+    </g>
+    <line x1="91" y1="410" x2="91" y2="415" stroke="#37424a"/>
+    <line x1="217" y1="410" x2="217" y2="415" stroke="#37424a"/>
+    <line x1="365" y1="410" x2="365" y2="415" stroke="#37424a"/>
+    <line x1="512" y1="410" x2="512" y2="415" stroke="#37424a"/>
+    <line x1="660" y1="410" x2="660" y2="415" stroke="#37424a"/>
+  </svg>
+  <figcaption>Read top to bottom at any day. Falling FSH mid-follicular selects the dominant follicle; rising oestradiol crosses its threshold and flips to positive feedback, triggering the LH surge and ovulation (~day 14); the corpus luteum then drives the progesterone dome that makes the endometrium secretory. Curves are schematic, not to scale.</figcaption>
+</figure>
+
+<div class="key-box">
+  <div class="kb-label">✓ Anchor concepts</div>
+  <ul>
+    <li><strong>Falling FSH selects the dominant follicle</strong> — the survivor is the most FSH-sensitive. In IVF, sustained high exogenous FSH overrides this selection to grow multiple follicles.</li>
+    <li><strong>Oestradiol switches from negative to positive feedback</strong> at a sustained threshold — this triggers the LH surge and is the pivot of the whole cycle.</li>
+    <li><strong>The luteal phase is fixed (~14 days); the follicular phase is variable</strong> — cycle-length variation lives in the follicular phase.</li>
+    <li><strong>Progesterone makes the endometrium receptive</strong> — this underpins luteal support and frozen transfer timing.</li>
+  </ul>
+</div>
+
+<!-- FOLLICULOGENESIS -->
+<h2 id="follicle"><span class="num">3</span>Folliculogenesis and ovarian reserve</h2>
+<div class="section-lead">The follicle's life story, and the finite pool that defines a patient's prognosis.</div>
+
+<p>A follicle takes far longer to develop than one menstrual cycle. The full journey from a dormant primordial follicle to a preovulatory follicle takes several months; only the last ~two weeks — the antral phase — is gonadotrophin-dependent and coincides with the cycle you can influence.</p>
+
+<h3>Stages of follicle development</h3>
+<table>
+  <tr><th>Stage</th><th>Key features</th><th>Gonadotrophin dependence</th></tr>
+  <tr><td>Primordial</td><td>Dormant oocyte + single flat granulosa layer. The reserve pool.</td><td>Independent</td></tr>
+  <tr><td>Primary</td><td>Granulosa cells become cuboidal; zona pellucida forms.</td><td>Independent</td></tr>
+  <tr><td>Secondary (pre-antral)</td><td>Multiple granulosa layers; theca layer develops.</td><td>Independent</td></tr>
+  <tr><td>Antral (early)</td><td>Fluid-filled antrum forms; visible on ultrasound (the AFC). Secretes AMH.</td><td>Becoming FSH-responsive</td></tr>
+  <tr><td>Antral (selectable)</td><td>The recruitable cohort each cycle; FSH-dependent growth.</td><td>FSH-dependent</td></tr>
+  <tr><td>Preovulatory (Graafian)</td><td>Dominant follicle, ~18–24 mm; primed to ovulate on the LH surge.</td><td>LH-responsive</td></tr>
+</table>
+
+<figure class="diagram">
+  <div class="fig-title">Figure 4 · Folliculogenesis and gonadotrophin dependence</div>
+  <svg viewBox="0 0 680 210" role="img" aria-label="Follicle development stages from primordial to Graafian, showing which are gonadotrophin-dependent">
+    <!-- follicle icons -->
+    <circle cx="60" cy="60" r="6" fill="#e8f4f6" stroke="#1a6b7a"/>
+    <circle cx="150" cy="60" r="11" fill="#e8f4f6" stroke="#1a6b7a"/>
+    <circle cx="260" cy="60" r="17" fill="#e8f4f6" stroke="#1a6b7a"/>
+    <circle cx="390" cy="60" r="24" fill="#e8f4f6" stroke="#1a6b7a"/><circle cx="398" cy="54" r="9" fill="#fff" stroke="#1a6b7a" stroke-width="0.8"/>
+    <circle cx="545" cy="60" r="32" fill="#e8f4f6" stroke="#1a6b7a" stroke-width="1.5"/><circle cx="556" cy="52" r="14" fill="#fff" stroke="#1a6b7a" stroke-width="0.8"/>
+    <!-- labels -->
+    <g font-size="11" fill="#37424a" text-anchor="middle">
+      <text x="60" y="98">Primordial</text>
+      <text x="150" y="98">Primary</text>
+      <text x="260" y="98">Secondary</text>
+      <text x="390" y="104">Antral</text>
+      <text x="545" y="108">Graafian</text>
+    </g>
+    <!-- arrow -->
+    <line x1="40" y1="128" x2="620" y2="128" stroke="#718096" stroke-width="1.5"/>
+    <polygon points="620,128 612,124 612,132" fill="#718096"/>
+    <!-- dependence bars -->
+    <rect x="40" y="145" width="330" height="24" rx="4" fill="#eceff3" stroke="#cbd5e0"/>
+    <text x="205" y="161" text-anchor="middle" fill="#4a5568" font-size="11">gonadotrophin-independent (several months)</text>
+    <rect x="372" y="145" width="248" height="24" rx="4" fill="#e8f4f6" stroke="#1a6b7a"/>
+    <text x="496" y="161" text-anchor="middle" fill="#134e5a" font-size="11" font-weight="700">FSH-dependent (~2 weeks / one cycle)</text>
+  </svg>
+  <figcaption>Only the last fortnight of a follicle's months-long journey is gonadotrophin-dependent and coincides with the cycle you can influence. The antral pool is what AMH and the antral follicle count measure — and what stimulation recruits.</figcaption>
+</figure>
+
+<h3>Ovarian reserve</h3>
+<p>The primordial pool is established in fetal life — peaking at ~6–7 million around mid-gestation, ~1–2 million at birth, ~300,000–400,000 at puberty — and only ever declines. Fewer than 500 will ever ovulate; the rest are lost to continuous atresia. This decline accelerates after ~age 37. Crucially, it is a decline in both <strong>quantity</strong> (how many follicles remain) and <strong>quality</strong> (the oocytes' propensity to be chromosomally normal). Both matter, and they are not the same axis — which is why a young woman with low reserve often has a better prognosis than her egg number alone suggests, and an older woman with adequate reserve still faces the quality problem of age.</p>
+
+<div class="clinical-box">
+  <div class="cb-label">◆ Clinical relevance — AMH as a reserve marker</div>
+  <p><strong>Anti-Müllerian hormone (AMH)</strong> is produced by the granulosa cells of pre-antral and small antral follicles — precisely the population that reflects the size of the remaining reserve pool. This makes it the best single blood marker of ovarian reserve, and unlike FSH it is relatively <strong>cycle-independent</strong>, so it can be measured on any day. In the clinic AMH is used mainly to <strong>predict response to stimulation and set the starting FSH dose</strong> — high AMH warns of over-response and OHSS risk; low AMH predicts a poor yield.</p>
+  <p>What AMH does <em>not</em> do well: predict natural fertility or the chance of conceiving in any given month. A patient with low AMH is not infertile; she has fewer eggs, not necessarily worse ones. Communicating this distinction sensitively is a real clinical skill you will see practised — and it is EPA 7.</p>
+</div>
+
+<!-- OOGENESIS -->
+<h2 id="oogenesis"><span class="num">4</span>Oogenesis and the meiotic arrests</h2>
+<div class="section-lead">Why maternal age is the dominant variable in fertility — the answer is in the timing of meiosis.</div>
+
+<p>Female gametogenesis is defined by two long pauses. Oogonia proliferate in the fetal ovary and enter meiosis, but then <strong>arrest in prophase of meiosis I</strong> (the dictyate stage) before birth. Every oocyte a woman ovulates in her lifetime has been sitting in this arrested state since before she was born. That is the central fact.</p>
+
+<p>Meiosis I is only <strong>completed at ovulation</strong>, triggered by the LH surge, producing a secondary oocyte and the first polar body. The oocyte then immediately <strong>arrests again in metaphase of meiosis II</strong>, and meiosis II is completed <strong>only if fertilisation occurs</strong>.</p>
+
+<figure class="diagram">
+  <div class="fig-title">Figure 5 · The two meiotic arrests of oogenesis</div>
+  <svg viewBox="0 0 680 200" role="img" aria-label="Timeline of oogenesis showing prophase I arrest from fetal life, completion of meiosis I at ovulation, and completion of meiosis II at fertilisation">
+    <!-- timeline -->
+    <line x1="40" y1="70" x2="640" y2="70" stroke="#37424a" stroke-width="2"/>
+    <polygon points="640,70 630,65 630,75" fill="#37424a"/>
+    <!-- nodes -->
+    <circle cx="70" cy="70" r="7" fill="#1a6b7a"/>
+    <circle cx="380" cy="70" r="7" fill="#b7791f"/>
+    <circle cx="560" cy="70" r="7" fill="#276749"/>
+    <!-- long-arrest bracket -->
+    <line x1="70" y1="70" x2="380" y2="70" stroke="#c0392b" stroke-width="4" opacity="0.35"/>
+    <text x="225" y="56" text-anchor="middle" fill="#c0392b" font-size="11.5" font-weight="700">arrested 12–50 years</text>
+    <text x="225" y="98" text-anchor="middle" fill="#8a3020" font-size="11">cohesins degrade → rising aneuploidy risk</text>
+    <!-- node labels -->
+    <text x="70" y="126" text-anchor="middle" fill="#134e5a" font-size="11" font-weight="700">Fetal life</text>
+    <text x="70" y="142" text-anchor="middle" fill="#37424a" font-size="10.5">enter meiosis I,</text>
+    <text x="70" y="156" text-anchor="middle" fill="#37424a" font-size="10.5">arrest at prophase I</text>
+    <text x="380" y="126" text-anchor="middle" fill="#8a5a12" font-size="11" font-weight="700">Ovulation</text>
+    <text x="380" y="142" text-anchor="middle" fill="#37424a" font-size="10.5">LH surge completes MI,</text>
+    <text x="380" y="156" text-anchor="middle" fill="#37424a" font-size="10.5">arrest at metaphase II</text>
+    <text x="560" y="126" text-anchor="middle" fill="#1e6040" font-size="11" font-weight="700">Fertilisation</text>
+    <text x="560" y="142" text-anchor="middle" fill="#37424a" font-size="10.5">completes</text>
+    <text x="560" y="156" text-anchor="middle" fill="#37424a" font-size="10.5">meiosis II</text>
+  </svg>
+  <figcaption>The decades-long prophase I arrest is the mechanistic root of age-related aneuploidy: the longer the chromosomes wait, the more the cohesins holding them degrade, and the more likely they mis-segregate when meiosis I finally completes. This is the biology under maternal-age counselling.</figcaption>
+</figure>
+
+<div class="clinical-box">
+  <div class="cb-label">◆ Clinical relevance — the aneuploidy problem</div>
+  <p>The decades-long prophase I arrest is the mechanistic reason for age-related aneuploidy. The molecular machinery holding the chromosomes together (cohesins) degrades over time. The longer an oocyte has been arrested, the more likely the chromosomes are to segregate incorrectly at the belated completion of meiosis I — producing eggs with the wrong chromosome number. This is why the miscarriage rate and the trisomy rate rise steeply with maternal age, why egg quality (not just quantity) drives IVF success, and why donor eggs from young women largely erase the age effect. When you hear a specialist counsel a 42-year-old about success rates, this is the biology underneath the numbers.</p>
+</div>
+
+<!-- SPERMATOGENESIS -->
+<h2 id="sperm"><span class="num">5</span>Spermatogenesis and male reproductive physiology</h2>
+<div class="section-lead">A continuous production line — the opposite design to the female system.</div>
+
+<p>Where oogenesis is a fixed pool laid down before birth, spermatogenesis is <strong>continuous production from puberty onward</strong>. One full cycle takes approximately <strong>74 days</strong> — a number worth remembering, because it dictates how long any intervention (lifestyle change, treatment of a varicocele, cessation of a gonadotoxin) takes to show up in a semen analysis. Advising a patient to stop smoking and re-test in three months is this number in practice.</p>
+
+<p>The sequence: <em class="term">spermatogonia</em> (stem cells) → primary spermatocytes → (meiosis) → secondary spermatocytes → spermatids → spermatozoa. This occurs within the seminiferous tubules, orchestrated by <strong>Sertoli cells</strong>, which respond to FSH, nurse the developing gametes, and form the <strong>blood-testis barrier</strong> that immunologically isolates sperm. Testosterone — produced by the <strong>Leydig cells</strong> under LH — is required locally at high concentration for spermatogenesis to proceed.</p>
+
+<table>
+  <tr><th></th><th>Oogenesis</th><th>Spermatogenesis</th></tr>
+  <tr><td>Timing</td><td>Begins in fetal life; arrests</td><td>Begins at puberty; continuous</td></tr>
+  <tr><td>Output</td><td>Finite pool, declining</td><td>Renewable, ~74-day cycle</td></tr>
+  <tr><td>Gametes per division</td><td>1 oocyte + polar bodies</td><td>4 spermatozoa</td></tr>
+  <tr><td>Support cell</td><td>Granulosa</td><td>Sertoli</td></tr>
+  <tr><td>Steroidogenic cell</td><td>Theca</td><td>Leydig</td></tr>
+  <tr><td>Age effect</td><td>Steep decline, quantity + quality</td><td>Gradual; quality decline milder</td></tr>
+</table>
+
+<!-- FERTILISATION -->
+<h2 id="fertilisation"><span class="num">6</span>Fertilisation</h2>
+<div class="section-lead">The molecular handshake — and where ICSI bypasses it.</div>
+
+<p>Fertilisation is a sequence, not an event. Ejaculated sperm are not immediately capable of fertilising; they must first undergo <em class="term">capacitation</em> in the female tract — a maturation of the membrane and motility (or, in the lab, an equivalent preparation step). A capacitated sperm reaching the oocyte binds to the <em class="term">zona pellucida</em>, the glycoprotein shell. Binding triggers the <em class="term">acrosome reaction</em>: the sperm releases enzymes that digest a path through the zona. The sperm membrane then fuses with the oocyte membrane, and the sperm nucleus enters.</p>
+
+<p>Fusion triggers the <em class="term">cortical reaction</em> — the oocyte releases granules that harden the zona and block any further sperm (the <strong>polyspermy block</strong>, since fertilisation by more than one sperm is lethal). It also completes meiosis II. The two haploid pronuclei — maternal and paternal — then migrate together and their membranes break down, restoring the diploid chromosome number. The fertilised egg is now a <em class="term">zygote</em>.</p>
+
+<div class="clinical-box">
+  <div class="cb-label">◆ Clinical relevance — conventional IVF vs ICSI</div>
+  <p>In <strong>conventional IVF</strong>, prepared sperm are placed with the oocyte and this natural sequence — binding, acrosome reaction, penetration — is allowed to happen in the dish. In <strong>ICSI (intracytoplasmic sperm injection)</strong>, a single sperm is injected directly into the oocyte cytoplasm, bypassing capacitation, zona binding and the acrosome reaction entirely. That is why ICSI is the answer to severe male factor: it makes fertilisation possible even when the sperm couldn't accomplish these steps themselves. You will watch both in the lab in Module 3, and understanding this section is what makes that visit meaningful rather than mysterious.</p>
+</div>
+
+<!-- EMBRYOGENESIS -->
+<h2 id="embryo"><span class="num">7</span>Early embryogenesis</h2>
+<div class="section-lead">Days 1 to 6 — the exact window the embryology lab observes and grades.</div>
+
+<p>The zygote undergoes <em class="term">cleavage</em> — successive cell divisions without overall growth, so the cells (blastomeres) get smaller. The rough timeline the lab watches:</p>
+
+<table>
+  <tr><th>Day</th><th>Stage</th><th>Features</th></tr>
+  <tr><td>0</td><td>Fertilisation</td><td>Two pronuclei visible (2PN) confirms normal fertilisation</td></tr>
+  <tr><td>1</td><td>Zygote</td><td>Pronuclei fuse</td></tr>
+  <tr><td>2</td><td>2–4 cell</td><td>Early cleavage</td></tr>
+  <tr><td>3</td><td>6–8 cell</td><td>Cleavage-stage embryo; historically a transfer point</td></tr>
+  <tr><td>4</td><td>Morula</td><td><em class="term">Compaction</em> — cells adhere into a solid ball</td></tr>
+  <tr><td>5–6</td><td>Blastocyst</td><td>Fluid cavity forms; two cell lines differentiate</td></tr>
+</table>
+
+<p>At the <strong>blastocyst</strong> stage two distinct populations emerge: the <em class="term">inner cell mass</em> (which becomes the fetus) and the <em class="term">trophectoderm</em> (which becomes the placenta). The blastocyst then <em class="term">hatches</em> from the zona pellucida, a prerequisite for implantation.</p>
+
+<div class="clinical-box">
+  <div class="cb-label">◆ Clinical relevance — why blastocyst transfer and why day 5</div>
+  <p>Modern practice favours culturing embryos to the <strong>blastocyst stage (day 5)</strong> before transfer or freezing, rather than transferring at cleavage stage (day 3). Extended culture lets the strongest embryos self-select — many chromosomally abnormal embryos arrest before reaching blastocyst — improving the odds that a transferred embryo is viable. The two cell lineages also matter for genetic testing: <strong>PGT-A</strong> biopsies a few trophectoderm cells (the future placenta, not the future baby) at blastocyst stage. The <strong>Gardner grading system</strong> you will hear quoted in the lab scores blastocyst expansion, inner cell mass, and trophectoderm quality. Module 3 covers this in full; you now have the developmental scaffold for it.</p>
+</div>
+
+<!-- IMPLANTATION -->
+<h2 id="implantation"><span class="num">8</span>Implantation and the window of receptivity</h2>
+<div class="section-lead">A timed, two-sided event — the failure point in much of IVF.</div>
+
+<p>Implantation requires a competent embryo <strong>and</strong> a receptive endometrium, synchronised. The endometrium is receptive only during a narrow <em class="term">window of implantation</em> — roughly days 20–24 of an idealised cycle, about 6–10 days after ovulation (or after the progesterone rise). Outside this window the endometrium will not accept an embryo, however good.</p>
+
+<p>Receptivity is created by <strong>progesterone</strong> acting on an oestrogen-primed endometrium, driving <em class="term">secretory transformation</em> and <em class="term">decidualisation</em> — the stromal changes that prepare the tissue to support an implanting embryo. Implantation itself proceeds through <strong>apposition</strong> (the blastocyst settles against the endometrium), <strong>adhesion</strong> (it attaches), and <strong>invasion</strong> (the trophoblast penetrates and establishes the placental interface, secreting hCG that rescues the corpus luteum).</p>
+
+<figure class="diagram">
+  <div class="fig-title">Figure 6 · The window of implantation</div>
+  <svg viewBox="0 0 680 250" role="img" aria-label="Window of implantation timeline showing progesterone rise, embryo development and the receptive window after ovulation">
+    <!-- receptivity band -->
+    <rect x="360" y="30" width="150" height="150" fill="#d5f0dd" opacity="0.7"/>
+    <text x="435" y="24" text-anchor="middle" fill="#276749" font-size="11.5" font-weight="700">window of implantation</text>
+    <text x="435" y="196" text-anchor="middle" fill="#1e6040" font-size="10.5">LH+6 to LH+10 (≈ days 20–24)</text>
+
+    <!-- progesterone curve -->
+    <text x="40" y="46" fill="#276749" font-size="12" font-weight="700">Progesterone</text>
+    <polyline fill="none" stroke="#276749" stroke-width="2.5"
+      points="60,150 140,148 220,120 320,80 420,66 520,72 600,96 640,120"/>
+
+    <!-- timeline -->
+    <line x1="60" y1="150" x2="650" y2="150" stroke="#37424a" stroke-width="1.5"/>
+    <g font-size="10.5" fill="#37424a" text-anchor="middle">
+      <text x="60" y="168">LH+0</text>
+      <text x="210" y="168">+4</text>
+      <text x="360" y="168">+6</text>
+      <text x="510" y="168">+10</text>
+      <text x="640" y="168">+12</text>
+    </g>
+    <text x="60" y="186" text-anchor="middle" fill="#6b46c1" font-size="10">ovulation</text>
+
+    <!-- embryo development icons -->
+    <circle cx="60" cy="212" r="6" fill="#ede9fb" stroke="#6b46c1"/>
+    <text x="60" y="238" text-anchor="middle" fill="#4a5568" font-size="9.5">zygote</text>
+    <circle cx="210" cy="212" r="8" fill="#ede9fb" stroke="#6b46c1"/>
+    <text x="210" y="238" text-anchor="middle" fill="#4a5568" font-size="9.5">morula (d4)</text>
+    <circle cx="330" cy="212" r="10" fill="#ede9fb" stroke="#6b46c1"/><circle cx="334" cy="209" r="4.5" fill="#fff"/>
+    <text x="330" y="238" text-anchor="middle" fill="#4a5568" font-size="9.5">blastocyst (d5)</text>
+    <circle cx="435" cy="212" r="10" fill="#c9b8f0" stroke="#6b46c1" stroke-width="1.5"/>
+    <text x="435" y="238" text-anchor="middle" fill="#4a3480" font-size="9.5" font-weight="700">implantation</text>
+    <!-- arrow embryo -->
+    <line x1="72" y1="212" x2="420" y2="212" stroke="#6b46c1" stroke-width="1.2" stroke-dasharray="3 3"/>
+  </svg>
+  <figcaption>Implantation succeeds only when a competent blastocyst meets a progesterone-primed, receptive endometrium inside a narrow window. Medicated frozen-transfer protocols reproduce this deliberately: build the lining with oestrogen, start progesterone, then transfer a day-5 blastocyst after the equivalent progesterone exposure.</figcaption>
+</figure>
+
+<div class="clinical-box">
+  <div class="cb-label">◆ Clinical relevance — luteal support and frozen transfer timing</div>
+  <p>Two clinical practices fall straight out of this. First, <strong>luteal phase support</strong>: IVF cycles often need supplemental progesterone because the stimulation and egg-collection process can impair natural corpus luteum function — and without adequate progesterone the window never opens. Second, <strong>frozen embryo transfer (FET) timing</strong>: in a medicated FET cycle the clinic builds the endometrium with oestrogen, then starts progesterone and counts precisely, transferring a day-5 blastocyst after the equivalent of five days of progesterone exposure — synchronising embryo stage to the receptivity window. The whole edifice of transfer timing is this window. When a good embryo fails to implant repeatedly, endometrial receptivity is one of the things reconsidered (Module 5, recurrent implantation failure).</p>
+</div>
+
+<!-- HORMONE EVALUATION -->
+<h2 id="hormones"><span class="num">9</span>Hormonal evaluation in practice</h2>
+<div class="section-lead">The single most clinically applicable section. This is what you will interpret in EPA 2.</div>
+
+<p>A fertility hormone panel is not a random battery — each test answers a specific question. Australian laboratories report in SI units; the reference points below use SI.</p>
+
+<h3>The core tests and what they mean</h3>
+
+<h4>Day 2–3 FSH, LH and oestradiol (basal panel)</h4>
+<p>Measured early in the follicular phase, when the system is at baseline. A <strong>high basal FSH</strong> (broadly &gt;10 IU/L, lab-dependent) suggests diminished ovarian reserve — the pituitary is working harder to recruit follicles from a depleted pool. But there is a trap: FSH is only interpretable if <strong>oestradiol is also low</strong> (roughly &lt;250 pmol/L). A prematurely rising oestradiol from an early-developing follicle suppresses FSH and can mask a poor reserve with a falsely reassuring FSH. Always read the two together. LH is assessed partly for the <strong>LH:FSH ratio</strong>, classically elevated in PCOS.</p>
+
+<h4>AMH (anti-Müllerian hormone)</h4>
+<p>As covered in section 3: reflects the antral follicle pool, cycle-independent, the workhorse marker for planning stimulation. Australian labs report in <strong>pmol/L</strong> (note international literature often uses ng/mL; 1 ng/mL ≈ 7.14 pmol/L, so a common cutoff of ~1 ng/mL corresponds to ~7 pmol/L). Interpret AMH as a guide to <em>response and dose</em>, not as a verdict on fertility.</p>
+
+<h4>Mid-luteal progesterone</h4>
+<p>Measured about 7 days after presumed ovulation (day 21 of a 28-day cycle). A level above ~30 nmol/L confirms that <strong>ovulation occurred</strong>. This is the simplest confirmation of an ovulatory cycle and directs the workup: an anovulatory pattern points toward PCOS, thyroid or prolactin causes.</p>
+
+<h4>Prolactin and TSH</h4>
+<p>Screening tests because both hyperprolactinaemia and thyroid dysfunction disrupt ovulation and are readily treatable. Always checked in an anovulatory or irregular-cycle presentation.</p>
+
+<table>
+  <tr><th>Test</th><th>When</th><th>Question it answers</th></tr>
+  <tr><td>FSH + oestradiol</td><td>Day 2–3</td><td>Ovarian reserve (read together)</td></tr>
+  <tr><td>LH</td><td>Day 2–3</td><td>LH:FSH ratio (PCOS)</td></tr>
+  <tr><td>AMH</td><td>Any day</td><td>Reserve; stimulation response &amp; dose</td></tr>
+  <tr><td>Progesterone</td><td>Mid-luteal (~day 21)</td><td>Did ovulation occur?</td></tr>
+  <tr><td>Prolactin, TSH</td><td>Any day</td><td>Treatable causes of anovulation</td></tr>
+</table>
+
+<div class="worked-example">
+  <div class="we-label">◆ Worked interpretation — try before reading the answer</div>
+  <div class="case">32-year-old, 14 months of trying, cycles every 45–60 days. AMH 48 pmol/L (high). Day 3 FSH 5 IU/L, LH 12 IU/L, oestradiol 140 pmol/L. Mid-luteal progesterone 8 nmol/L. TSH and prolactin normal.</div>
+  <p><strong>Work through it yourself first.</strong> What does each value tell you? What is the likely diagnosis? What is the reserve like, and what does that mean for treatment risk?</p>
+  <div class="interp">
+    <p style="margin-bottom:8px;"><strong>Interpretation.</strong> The long, irregular cycles plus a raised LH:FSH ratio (12:5) and a <strong>high AMH</strong> point to <strong>PCOS with anovulation</strong>. The low mid-luteal progesterone (8, well under 30) confirms she is <strong>not ovulating</strong> — consistent with the picture. Reserve is not the problem; it is abundant, which is exactly why the high AMH is a <strong>warning flag for OHSS</strong> if she is stimulated. Basal FSH and oestradiol are reassuring for reserve.</p>
+    <p style="margin-bottom:0;"><strong>Direction.</strong> This is an ovulation problem, not a reserve problem. First-line management is ovulation induction (letrozole), with lifestyle input, rather than jumping to IVF — and if IVF is ever needed, cautious stimulation because of the OHSS risk her high AMH signals. You will see this logic play out in Module 2.</p>
+  </div>
+</div>
+
+<!-- ENDOCRINE PATHOLOGY -->
+<h2 id="pathology"><span class="num">10</span>Endocrine pathology primer</h2>
+<div class="section-lead">An orientation only — each condition is developed clinically in later modules.</div>
+
+<h3>Polycystic ovary syndrome (PCOS)</h3>
+<p>The most common endocrine cause of anovulatory infertility. Diagnosed by the <strong>Rotterdam criteria</strong> — two of three: oligo/anovulation, clinical or biochemical hyperandrogenism, and polycystic ovarian morphology on ultrasound — after excluding mimics. The underlying physiology ties back to this module: altered GnRH pulsatility raises the LH:FSH ratio, LH drives theca androgen production (the two-cell model), and <strong>insulin resistance</strong> amplifies the androgen excess and disrupts follicle maturation, so follicles are recruited but stall before a dominant one is selected — hence the polycystic appearance and anovulation. High AMH is characteristic (large antral pool). Full clinical management is in Module 2.</p>
+
+<h3>Thyroid dysfunction</h3>
+<p>Both hypo- and hyperthyroidism disrupt the menstrual cycle and impair fertility, and thyroid autoimmunity is associated with miscarriage. Hypothyroidism is the more common issue in this setting; it can raise prolactin and disturb ovulation. Because it is easily screened (TSH) and easily treated, it is checked in essentially every workup, and optimising thyroid status before conception is standard.</p>
+
+<h3>Hyperprolactinaemia</h3>
+<p>Elevated prolactin suppresses GnRH pulsatility, causing anovulation, often with oligo/amenorrhoea and sometimes galactorrhoea. Causes range from physiological (stress, medications, hypothyroidism) to a pituitary prolactinoma. It is screened for the same reason as thyroid disease — common, detectable, treatable (dopamine agonists), and reversible as a cause of infertility.</p>
+
+<div class="key-box">
+  <div class="kb-label">✓ Module 1 — the concepts you must carry forward</div>
+  <ul>
+    <li><strong>The HPO axis with pulsatile GnRH and the two-cell model</strong> explains the normal cycle and every stimulation protocol you will see.</li>
+    <li><strong>Falling FSH selects one dominant follicle; sustained high oestradiol flips feedback to trigger the LH surge; the luteal phase is fixed at ~14 days.</strong></li>
+    <li><strong>Ovarian reserve is finite and declines in both quantity and quality</strong>; AMH estimates the pool and guides stimulation but does not define fertility.</li>
+    <li><strong>The meiotic arrests of oogenesis</strong> are the mechanistic basis of age-related aneuploidy — the dominant variable in prognosis.</li>
+    <li><strong>Implantation needs a receptive endometrium (progesterone-driven) synchronised to a competent embryo</strong> — the basis of luteal support and transfer timing.</li>
+    <li><strong>A hormone panel is a set of targeted questions</strong>: reserve (FSH+E2, AMH), ovulation (mid-luteal progesterone), treatable causes (TSH, prolactin), PCOS (LH:FSH, AMH).</li>
+  </ul>
+</div>
+
+<!-- CREI READING LIST -->
+<h2 id="reading"><span class="num">★</span>Further reading — CREI level</h2>
+<div class="section-lead">For those pursuing subspecialty-level understanding. Landmark reviews and primary literature, grouped by theme, with a note on why each is worth the time. All are peer-reviewed and current at the time of writing; verify against the latest editions and guideline updates.</div>
+
+<h3>Ovarian reserve and reproductive ageing</h3>
+<ul>
+  <li><strong>Broer SL, Broekmans FJM, Laven JSE, Fauser BCJM.</strong> Anti-Müllerian hormone: ovarian reserve testing and its potential clinical implications. <em>Hum Reprod Update.</em> 2014;20(5):688–701. doi:10.1093/humupd/dmu020. — The definitive synthesis of AMH biology and its clinical performance. Essential for understanding why AMH predicts stimulation response but not natural fertility.</li>
+  <li><strong>Broekmans FJ, Soules MR, Fauser BC.</strong> Ovarian aging: mechanisms and clinical consequences. <em>Endocr Rev.</em> 2009;30(5):465–493. doi:10.1210/er.2009-0006. — The mechanistic account of follicle-pool depletion and the quantity-versus-quality distinction that drives prognosis.</li>
+  <li><strong>Nelson SM, et al.</strong> Anti-Müllerian hormone for the diagnosis and prediction of menopause: a systematic review. <em>Hum Reprod Update.</em> 2023;29(3):327–346. doi:10.1093/humupd/dmac045. — Current evidence on AMH beyond IVF, including reproductive-lifespan forecasting.</li>
+</ul>
+
+<h3>Oocyte biology and aneuploidy</h3>
+<ul>
+  <li><strong>Nagaoka SI, Hassold TJ, Hunt PA.</strong> Human aneuploidy: mechanisms and new insights into an age-old problem. <em>Nat Rev Genet.</em> 2012;13(7):493–504. doi:10.1038/nrg3245. — The canonical review linking meiotic error, cohesin loss and maternal age. Read this before counselling anyone about age-related risk.</li>
+</ul>
+
+<h3>Implantation and endometrial receptivity</h3>
+<ul>
+  <li><strong>Wilcox AJ, Baird DD, Weinberg CR.</strong> Time of implantation of the conceptus and loss of pregnancy. <em>N Engl J Med.</em> 1999;340(23):1796–1799. doi:10.1056/NEJM199906103402304. — The foundational human data defining the implantation window and the loss risk associated with late implantation. Short and worth reading in full.</li>
+</ul>
+
+<h3>Endocrine disorders of reproduction</h3>
+<ul>
+  <li><strong>Teede HJ, et al.</strong> (on behalf of the International PCOS Network). Recommendations from the 2023 International Evidence-based Guideline for the Assessment and Management of Polycystic Ovary Syndrome. <em>J Clin Endocrinol Metab.</em> 2023;108(10):2447–2469. doi:10.1210/clinem/dgad463 (simultaneously published in <em>Fertil Steril</em>, <em>Hum Reprod</em> and <em>Eur J Endocrinol</em>). — The current international standard, Monash-led. Note the 2023 change permitting elevated AMH as a marker of polycystic ovarian morphology.</li>
+</ul>
+
+<div class="clinical-box">
+  <div class="cb-label">◆ How to use this list</div>
+  <p>These six are a curated starting point, not a survey — enough to anchor genuine depth in each of the module's core themes without drowning. Each subsequent module carries its own CREI-level list scoped to its content (stimulation protocols and OHSS in Module 3; endometriosis and male-factor primary literature in Module 5). If you are heading toward CREI, reading the primary sources here — rather than a textbook summary of them — is exactly the habit the subspecialty rewards.</p>
+</div>
+
+<!-- REFERENCES -->
+<div class="references">
+  <h3>References and further reading</h3>
+  <ol>
+    <li>Taylor HS, Pal L, Seli E. <em>Speroff's Clinical Gynecologic Endocrinology and Infertility.</em> 9th ed. Wolters Kluwer; 2019. Chapters 1–6.</li>
+    <li>Gardner DK, Weissman A, Howles CM, Shoham Z, eds. <em>Textbook of Assisted Reproductive Techniques.</em> 6th ed. CRC Press; 2023. Vol 1, foundational chapters.</li>
+    <li>Boron WF, Boulpaep EL. <em>Medical Physiology.</em> 3rd ed. Elsevier; 2017. Ch 54–56 (reproductive physiology).</li>
+    <li>National Institute for Health and Care Excellence. <em>Fertility problems: assessment and treatment</em> (CG156). 2013, updated 2017. Investigation sections.</li>
+    <li>Broekmans FJ, Soules MR, Fauser BC. Ovarian aging: mechanisms and clinical consequences. <em>Endocr Rev.</em> 2009;30(5):465–493.</li>
+    <li>Teede HJ, et al. International evidence-based guideline for the assessment and management of PCOS. 2023 update. (Monash-led; freely available.)</li>
+  </ol>
+  <p style="font-size:12px; color:var(--mid-grey); margin-top:12px;">Reference thresholds are indicative and lab-dependent; always interpret against the reporting laboratory's own reference ranges and current local guidelines. Content for educational use within the Flinders Fertility rotation; not a substitute for supervised clinical judgement.</p>
+</div>
+
+</div>
+
+<div class="doc-footer">
+  <div>Flinders Fertility · Education Program · Module 1 · v1.0 Draft</div>
+  <div>For review and iteration</div>
+</div>
+
+</div>
+</body>
+</html>

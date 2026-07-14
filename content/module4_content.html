@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 4 — Ultrasound in Reproductive Medicine</title>
+<style>
+  :root {
+    --teal: #1a6b7a; --teal-light: #e8f4f6; --teal-mid: #2d8fa3;
+    --dark: #1e2d2f; --grey: #37424a; --mid-grey: #718096;
+    --border: #cbd5e0; --bg: #f7fafc; --white: #ffffff;
+    --amber: #b7791f; --amber-light: #fef3c7; --green: #276749; --green-light: #d5f0dd;
+    --clinical: #6b46c1; --clinical-light: #ede9fb;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; font-size: 15.5px; line-height: 1.7; color: var(--grey); background: var(--bg); }
+  .page-wrap { max-width: 880px; margin: 0 auto; background: var(--white); box-shadow: 0 0 30px rgba(0,0,0,0.08); }
+  .doc-header { background: var(--teal); color: white; padding: 44px 52px 40px; }
+  .doc-header .clinic-name { font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.8; margin-bottom: 10px; }
+  .doc-header .mod-label { font-size: 13px; font-weight: 600; opacity: 0.85; margin-bottom: 6px; }
+  .doc-header h1 { font-size: 28px; font-weight: 700; line-height: 1.2; margin-bottom: 10px; }
+  .doc-header .subtitle { font-size: 16px; opacity: 0.85; }
+  .doc-header .meta { margin-top: 20px; font-size: 13px; opacity: 0.75; }
+  .doc-header .meta span { font-weight: 600; opacity: 1; }
+  .nav-strip { background: var(--dark); padding: 14px 52px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .nav-strip a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 20px; transition: all 0.2s; }
+  .nav-strip a:hover { background: rgba(255,255,255,0.15); color: white; }
+  .content { padding: 0 52px 60px; }
+  h2 { font-size: 22px; font-weight: 700; color: var(--teal); margin: 44px 0 4px; padding-top: 8px; }
+  h2 .num { color: var(--teal-mid); font-size: 18px; margin-right: 8px; }
+  .section-lead { font-size: 14px; color: var(--mid-grey); font-style: italic; margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid var(--teal-light); }
+  h3 { font-size: 17px; font-weight: 700; color: var(--dark); margin: 26px 0 10px; }
+  h4 { font-size: 14px; font-weight: 700; color: var(--teal); margin: 18px 0 6px; text-transform: uppercase; letter-spacing: 0.04em; }
+  p { margin-bottom: 14px; }
+  strong { color: var(--dark); }
+  em.term { font-style: normal; font-weight: 600; color: var(--teal); }
+  ul, ol { margin: 0 0 16px 22px; }
+  li { margin-bottom: 8px; }
+  .intro-block { background: var(--teal-light); border-left: 4px solid var(--teal); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 24px 0; }
+  .intro-block p:last-child { margin-bottom: 0; }
+  .intro-block h4 { margin-top: 0; }
+  .clinical-box { background: var(--clinical-light); border-left: 4px solid var(--clinical); border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 18px 0; }
+  .clinical-box .cb-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--clinical); margin-bottom: 6px; }
+  .clinical-box p { margin-bottom: 8px; font-size: 14.5px; }
+  .clinical-box p:last-child { margin-bottom: 0; }
+  .key-box { background: var(--green-light); border-left: 4px solid var(--green); border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 18px 0; }
+  .key-box .kb-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--green); margin-bottom: 8px; }
+  .key-box ul { margin-bottom: 0; }
+  .key-box li { font-size: 14.5px; }
+  figure.diagram { margin: 24px 0; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 20px 22px 10px; }
+  figure.diagram svg { width: 100%; height: auto; display: block; }
+  figure.diagram .fig-title { font-size: 12px; font-weight: 700; color: var(--teal); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 14px; }
+  figure.diagram figcaption { font-size: 13px; color: var(--mid-grey); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--border); line-height: 1.5; }
+  table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 14px; }
+  th { background: var(--teal); color: white; padding: 10px 12px; text-align: left; font-weight: 600; font-size: 13px; }
+  td { padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:nth-child(even) td { background: var(--teal-light); }
+  .worked-example { background: var(--amber-light); border: 1px solid #f6ad55; border-radius: 8px; padding: 20px 24px; margin: 22px 0; }
+  .worked-example .we-label { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--amber); margin-bottom: 12px; }
+  .worked-example .case { font-style: italic; color: #744210; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px dashed #f6ad55; }
+  .worked-example p { font-size: 14.5px; color: #5a3d0a; }
+  .worked-example .interp { background: white; border-radius: 6px; padding: 12px 16px; margin-top: 8px; }
+  .references { margin-top: 40px; padding-top: 20px; border-top: 2px solid var(--teal); }
+  .references h3 { color: var(--teal); }
+  .references ol { font-size: 13px; color: var(--mid-grey); margin-left: 18px; }
+  .references li { margin-bottom: 6px; }
+  .doc-footer { background: var(--dark); color: rgba(255,255,255,0.6); padding: 20px 52px; font-size: 12px; display: flex; justify-content: space-between; }
+  @media print { .nav-strip { display: none; } .page-wrap { box-shadow: none; } body { font-size: 11pt; background: white; } .clinical-box, .key-box, .worked-example, table, figure.diagram { page-break-inside: avoid; } }
+  @media (max-width: 600px) { .content, .doc-header, .nav-strip, .doc-footer { padding-left: 22px; padding-right: 22px; } .doc-header h1 { font-size: 22px; } .doc-footer { flex-direction: column; gap: 4px; } }
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+<div class="doc-header">
+  <div class="clinic-name">Flinders Fertility · Education Program</div>
+  <div class="mod-label">Module 4 of 6 · Week 4</div>
+  <h1>Ultrasound in Reproductive Medicine</h1>
+  <div class="subtitle">Spatial reasoning and procedural literacy — seeing what the clinic sees</div>
+  <div class="meta"><span>Estimated self-directed time:</span> 6–8 hours · <span>Supervised probe handling this week</span></div>
+</div>
+
+<div class="nav-strip">
+  <a href="#intro">Orientation</a>
+  <a href="#principles">Principles</a>
+  <a href="#normal">Normal pelvis</a>
+  <a href="#endometrium">Endometrium</a>
+  <a href="#fibroids">Fibroids</a>
+  <a href="#ovarian">Endometrioma &amp; PCOM</a>
+  <a href="#hydrosalpinx">Hydrosalpinx</a>
+  <a href="#earlypreg">Early pregnancy</a>
+  <a href="#procedural">Procedural US</a>
+  <a href="#reading">Further reading</a>
+</div>
+
+<div class="content">
+
+<!-- ORIENTATION -->
+<div id="intro">
+<div class="intro-block">
+  <h4>Learning to see</h4>
+  <p>Ultrasound is both the primary diagnostic tool and the procedural infrastructure of a fertility clinic. Almost nothing happens without it — reserve is estimated, cycles are monitored, eggs are collected, embryos are transferred, and early pregnancies are confirmed, all under ultrasound. This week you build the spatial vocabulary to look at a scan and say something useful <em>before</em> the report arrives.</p>
+  <p>The realistic target for a medical student in six weeks is <strong>interpretation competence plus supervised basic probe handling</strong> — not independent scanning, which takes far longer. By Friday you should be able to identify the normal pelvic structures on a transvaginal scan, count follicles, recognise a trilaminar endometrium, and flag the common pathologies. That is a genuine, transferable skill.</p>
+</div>
+<p>Two habits this week. First, on every scan you attend, form your own interpretation before the sonographer or clinician gives theirs — the same deliberate-practice discipline from Modules 1–3. Second, hold the probe whenever offered under supervision; the motor skill only comes from doing it, and this is EPA 4.</p>
+</div>
+
+<!-- PRINCIPLES -->
+<h2 id="principles"><span class="num">1</span>Principles: getting a usable image</h2>
+<div class="section-lead">Enough physics to understand resolution, plus the practical choice of probe and orientation.</div>
+
+<p>Ultrasound generates images from reflected high-frequency sound. The key trade-off to understand is <strong>frequency versus penetration</strong>: higher-frequency probes give better <em>resolution</em> but less <em>depth</em>, lower-frequency probes reach deeper structures but with coarser detail. This directly explains the two probes you will use.</p>
+
+<h3>Transvaginal versus transabdominal</h3>
+<p><em class="term">Transvaginal ultrasound (TVS)</em> uses a high-frequency probe placed close to the pelvic organs, giving excellent resolution of the uterus and ovaries — it is the workhorse of reproductive medicine and the default for follicle tracking, endometrial assessment, and early pregnancy. <em class="term">Transabdominal ultrasound (TAS)</em> uses a lower-frequency probe through the abdominal wall (with a full bladder as an acoustic window), giving a wider field but lower resolution — used for a large uterus, a mass extending out of the pelvis, or when TVS is not appropriate. For nearly everything in this clinic, TVS is the answer.</p>
+
+<p>Orientation matters for interpretation: on TVS the probe is close to the structures, and you learn to relate the image to the true anatomy — uterine position (anteverted vs retroverted), the relationship of ovaries to the uterus and iliac vessels, and the plane you are scanning in. Disorientation is the commonest early difficulty and resolves with reps.</p>
+
+<!-- NORMAL PELVIS -->
+<h2 id="normal"><span class="num">2</span>The normal pelvis on TVS</h2>
+<div class="section-lead">Know normal cold, and pathology announces itself. Uterus, endometrium, ovaries, and the antral follicle count.</div>
+
+<h3>Uterus and ovaries</h3>
+<p>The <strong>uterus</strong> is assessed for size, orientation, myometrial texture (looking for fibroids or adenomyosis), and the endometrium within. The <strong>ovaries</strong> sit lateral to the uterus, typically near the internal iliac vessels; each is assessed for size, follicle content, and any cyst or mass. Identifying both ovaries reliably is a core early skill and sometimes the hardest — a high or adherent ovary can hide.</p>
+
+<h3>The antral follicle count</h3>
+<p>The <em class="term">antral follicle count (AFC)</em> — from Module 2 — is the sum of small antral follicles (typically 2–10 mm) across both ovaries early in the cycle. With AMH it estimates ovarian reserve and predicts stimulation response. Counting reliably requires a systematic sweep through each ovary; it is operator-dependent, which is one reason AMH (a blood test, operator-independent) has become the co-primary reserve marker.</p>
+
+<h3>Follicle tracking during stimulation</h3>
+<p>This is where Module 3 and Module 4 meet. During a stimulated cycle, serial TVS tracks the growing cohort — counting follicles and measuring the leading ones — to time the trigger (when lead follicles reach ~17–18 mm) and to flag OHSS risk (an excessive count). You will watch this repeatedly this week; try to predict the trigger decision from the scan before it is made.</p>
+
+<figure class="diagram">
+  <div class="fig-title">Figure 1 · Follicle tracking &amp; the trigger point</div>
+  <svg viewBox="0 0 700 250" role="img" aria-label="Schematic of follicle growth across a stimulated cycle toward the trigger threshold">
+    <!-- three ovary snapshots -->
+    <g>
+      <ellipse cx="120" cy="90" rx="70" ry="52" fill="#e8f4f6" stroke="#1a6b7a" stroke-width="1.5"/>
+      <circle cx="100" cy="75" r="8" fill="#fff" stroke="#2d8fa3"/><circle cx="135" cy="85" r="7" fill="#fff" stroke="#2d8fa3"/>
+      <circle cx="110" cy="108" r="9" fill="#fff" stroke="#2d8fa3"/><circle cx="145" cy="110" r="6" fill="#fff" stroke="#2d8fa3"/>
+      <text x="120" y="168" text-anchor="middle" fill="#37424a" font-size="12" font-weight="700">Early stimulation</text>
+      <text x="120" y="185" text-anchor="middle" fill="#718096" font-size="11">multiple follicles ~6–9 mm</text>
+    </g>
+    <g>
+      <ellipse cx="350" cy="90" rx="72" ry="54" fill="#e8f4f6" stroke="#1a6b7a" stroke-width="1.5"/>
+      <circle cx="328" cy="78" r="13" fill="#fff" stroke="#2d8fa3"/><circle cx="368" cy="88" r="12" fill="#fff" stroke="#2d8fa3"/>
+      <circle cx="340" cy="112" r="14" fill="#fff" stroke="#2d8fa3"/>
+      <text x="350" y="168" text-anchor="middle" fill="#37424a" font-size="12" font-weight="700">Mid stimulation</text>
+      <text x="350" y="185" text-anchor="middle" fill="#718096" font-size="11">leading follicles ~12–14 mm</text>
+    </g>
+    <g>
+      <ellipse cx="580" cy="90" rx="74" ry="56" fill="#d5f0dd" stroke="#276749" stroke-width="1.5"/>
+      <circle cx="556" cy="80" r="18" fill="#fff" stroke="#276749"/><circle cx="600" cy="92" r="17" fill="#fff" stroke="#276749"/>
+      <circle cx="572" cy="115" r="15" fill="#fff" stroke="#276749"/>
+      <text x="580" y="168" text-anchor="middle" fill="#276749" font-size="12" font-weight="700">Trigger day</text>
+      <text x="580" y="185" text-anchor="middle" fill="#276749" font-size="11">lead follicles ~17–18 mm</text>
+    </g>
+    <!-- arrows -->
+    <path d="M196,90 L268,90" stroke="#1a6b7a" stroke-width="2" marker-end="url(#f4a)"/>
+    <path d="M426,90 L500,90" stroke="#1a6b7a" stroke-width="2" marker-end="url(#f4a)"/>
+    <defs><marker id="f4a" markerWidth="9" markerHeight="9" refX="6" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#1a6b7a"/></marker></defs>
+    <text x="350" y="222" text-anchor="middle" fill="#8a5a12" font-size="12">A high total follicle count with steeply rising oestradiol → OHSS risk → agonist trigger + freeze-all (Module 3)</text>
+  </svg>
+  <figcaption>Schematic, not to scale. The trigger is timed to lead-follicle size, but the whole-cohort count is watched for OHSS risk. This scan is what the Module 3 monitoring decisions are read from.</figcaption>
+</figure>
+
+<!-- ENDOMETRIUM -->
+<h2 id="endometrium"><span class="num">3</span>Endometrial assessment</h2>
+<div class="section-lead">The receptive lining, seen on ultrasound. Thickness and pattern, tied to Module 1's implantation window.</div>
+
+<p>The endometrium is assessed for <strong>thickness</strong> (measured as the double-layer thickness in the sagittal plane) and <strong>pattern</strong>. In the proliferative phase, oestrogen produces a <em class="term">trilaminar</em> or "triple-line" appearance — three parallel lines reflecting the layered structure — which is the pattern associated with receptivity. After ovulation, progesterone transforms it to a homogeneously echogenic (bright) secretory endometrium.</p>
+
+<p>For implantation, a periovulatory endometrium that is trilaminar and <strong>at least ~7 mm</strong> is generally associated with better outcomes; a persistently thin lining (&lt;7 mm) is associated with lower implantation rates. Treat these as <em>associations</em>, not hard cut-offs — the evidence is observational and thin endometria still achieve pregnancies. In the FET timing you learned in Module 3, the endometrium is built with oestrogen (aiming for an adequate trilaminar lining) before progesterone is started and the transfer counted.</p>
+
+<!-- FIBROIDS -->
+<h2 id="fibroids"><span class="num">4</span>Fibroids and the FIGO classification</h2>
+<div class="section-lead">Not all fibroids matter for fertility — location is everything. The FIGO system tells you which to worry about.</div>
+
+<p>Uterine fibroids (leiomyomas) are common and mostly incidental, but their effect on fertility depends almost entirely on their <strong>relationship to the endometrial cavity</strong>. The <strong>FIGO leiomyoma classification</strong> (Munro et al., part of the PALM-COEIN system) numbers fibroids 0–8 by location. The critical distinction for reproductive medicine: <strong>submucosal fibroids (types 0–2)</strong> that distort or contact the cavity are the ones that impair implantation and warrant treatment (usually hysteroscopic resection). Intramural fibroids not distorting the cavity (types 3–5) have a smaller and debated effect; subserosal fibroids (types 6–7) generally do not affect fertility.</p>
+
+<figure class="diagram">
+  <div class="fig-title">Figure 2 · FIGO leiomyoma classification (0–8)</div>
+  <svg viewBox="0 0 700 340" role="img" aria-label="Uterus cross-section showing FIGO fibroid types 0 to 8 by location">
+    <!-- uterus body -->
+    <path d="M250,40 C 180,60 160,180 190,270 C 210,315 300,320 350,320 C 400,320 490,315 510,270 C 540,180 520,60 450,40 C 400,28 300,28 250,40 Z" fill="#f6ede0" stroke="#b7791f" stroke-width="1.5"/>
+    <!-- cavity (endometrium) -->
+    <path d="M350,70 L318,150 C 315,190 335,240 350,275 C 365,240 385,190 382,150 Z" fill="#f3d9dd" stroke="#b05a6b" stroke-width="1.5"/>
+    <text x="350" y="175" text-anchor="middle" fill="#8a4a58" font-size="10">cavity</text>
+
+    <!-- fibroids by type -->
+    <!-- 0 pedunculated intracavitary -->
+    <circle cx="350" cy="110" r="13" fill="#6b46c1"/><text x="350" y="114" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">0</text>
+    <!-- 1 submucosal <50% intramural -->
+    <circle cx="325" cy="200" r="14" fill="#6b46c1"/><text x="325" y="204" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">1</text>
+    <!-- 2 submucosal >=50% -->
+    <circle cx="392" cy="205" r="14" fill="#6b46c1"/><text x="392" y="209" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">2</text>
+    <!-- 3 100% intramural contacts endometrium -->
+    <circle cx="300" cy="130" r="14" fill="#2d8fa3"/><text x="300" y="134" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">3</text>
+    <!-- 4 intramural -->
+    <circle cx="255" cy="180" r="15" fill="#2d8fa3"/><text x="255" y="184" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">4</text>
+    <!-- 5 subserosal >=50% intramural -->
+    <circle cx="455" cy="150" r="15" fill="#718096"/><text x="455" y="154" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">5</text>
+    <!-- 6 subserosal <50% -->
+    <circle cx="500" cy="210" r="15" fill="#718096"/><text x="500" y="214" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">6</text>
+    <!-- 7 subserosal pedunculated -->
+    <circle cx="540" cy="120" r="14" fill="#718096"/><text x="540" y="124" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">7</text>
+    <!-- 8 other/cervical -->
+    <circle cx="350" cy="305" r="13" fill="#718096"/><text x="350" y="309" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">8</text>
+
+    <!-- legend -->
+    <rect x="580" y="55" width="14" height="14" fill="#6b46c1"/><text x="600" y="67" fill="#37424a" font-size="12" font-weight="700">Submucosal (0–2)</text>
+    <text x="600" y="83" fill="#718096" font-size="11">fertility-relevant → treat</text>
+    <rect x="580" y="100" width="14" height="14" fill="#2d8fa3"/><text x="600" y="112" fill="#37424a" font-size="12" font-weight="700">Intramural (3–5)</text>
+    <text x="600" y="128" fill="#718096" font-size="11">effect debated</text>
+    <rect x="580" y="145" width="14" height="14" fill="#718096"/><text x="600" y="157" fill="#37424a" font-size="12" font-weight="700">Subserosal / other (6–8)</text>
+    <text x="600" y="173" fill="#718096" font-size="11">usually not relevant</text>
+  </svg>
+  <figcaption>The number encodes the fibroid's relationship to the cavity. For fertility, the submucosal group (0–2) is what matters — these distort the implantation surface and are the ones typically resected hysteroscopically. Type 3 contacts the endometrium without distorting it; the intramural group's effect is debated.</figcaption>
+</figure>
+
+<!-- OVARIAN -->
+<h2 id="ovarian"><span class="num">5</span>Endometrioma and polycystic ovarian morphology</h2>
+<div class="section-lead">Two ovarian appearances every reproductive sonographer must recognise.</div>
+
+<h3>Endometrioma</h3>
+<p>An <em class="term">endometrioma</em> ("chocolate cyst") is an ovarian cyst of ectopic endometrial tissue — the ovarian manifestation of endometriosis (Module 5). Its classic ultrasound appearance is a cyst with homogeneous, low-level "<strong>ground-glass</strong>" internal echoes and no solid vascular components. Recognising it matters before IVF: endometriomas can reduce the ovarian reserve of the affected ovary, and cystectomy — while sometimes indicated — itself removes normal ovarian tissue and can lower reserve. The decision to operate before IVF is nuanced and case-specific, and you will see it discussed in Module 5.</p>
+
+<h3>Polycystic ovarian morphology (PCOM)</h3>
+<p>Recall PCOS from Modules 1–2. On ultrasound, <em class="term">PCOM</em> is the appearance of numerous small antral follicles, classically arranged peripherally ("string of pearls") around increased central stroma. The threshold matters and has been updated: the 2023 international guideline defines PCOM as a <strong>follicle number per ovary of ≥20</strong> (follicles 2–9 mm) in at least one ovary <strong>when using a high-frequency transducer (bandwidth including 8 MHz)</strong>. With older/lower-frequency equipment or poor image quality, an <strong>ovarian volume ≥10 mL</strong> is used instead. Importantly, the 2023 guideline also permits an <strong>elevated AMH</strong> as an alternative marker of PCOM — reflecting how closely AMH tracks the antral follicle pool (Module 1).</p>
+
+<figure class="diagram">
+  <div class="fig-title">Figure 3 · Polycystic ovarian morphology</div>
+  <svg viewBox="0 0 700 230" role="img" aria-label="Schematic of a polycystic ovary with peripheral small follicles and criteria">
+    <ellipse cx="180" cy="115" rx="120" ry="88" fill="#eef1f4" stroke="#1a6b7a" stroke-width="1.5"/>
+    <!-- central stroma -->
+    <ellipse cx="180" cy="115" rx="55" ry="42" fill="#dfe4ea"/>
+    <text x="180" y="119" text-anchor="middle" fill="#718096" font-size="10">↑ stroma</text>
+    <!-- peripheral follicles (string of pearls) -->
+    <g fill="#fff" stroke="#2d8fa3">
+      <circle cx="180" cy="42" r="8"/><circle cx="228" cy="52" r="8"/><circle cx="262" cy="86" r="8"/>
+      <circle cx="278" cy="126" r="8"/><circle cx="262" cy="162" r="8"/><circle cx="226" cy="182" r="8"/>
+      <circle cx="180" cy="190" r="8"/><circle cx="134" cy="182" r="8"/><circle cx="98" cy="162" r="8"/>
+      <circle cx="82" cy="126" r="8"/><circle cx="98" cy="86" r="8"/><circle cx="132" cy="52" r="8"/>
+    </g>
+    <text x="180" y="222" text-anchor="middle" fill="#718096" font-size="11">"string of pearls" — peripheral small follicles</text>
+
+    <!-- criteria box -->
+    <rect x="330" y="40" width="350" height="150" rx="8" fill="#fff" stroke="#cbd5e0"/>
+    <text x="350" y="66" fill="#1a6b7a" font-size="13" font-weight="700">PCOM criteria (2023 guideline)</text>
+    <text x="350" y="92" fill="#37424a" font-size="12.5">• ≥20 follicles (2–9 mm) per ovary</text>
+    <text x="366" y="110" fill="#718096" font-size="11.5">with a high-frequency probe (≥8 MHz)</text>
+    <text x="350" y="134" fill="#37424a" font-size="12.5">• or ovarian volume ≥10 mL</text>
+    <text x="366" y="152" fill="#718096" font-size="11.5">if older equipment / poor image</text>
+    <text x="350" y="176" fill="#37424a" font-size="12.5">• or elevated AMH (new alternative)</text>
+  </svg>
+  <figcaption>The follicle-number threshold rose from ≥12 (Rotterdam 2003) to ≥20 because higher-resolution probes detect more follicles — a threshold change driven by technology, not biology. PCOM alone is not PCOS: it is one of the three Rotterdam criteria and is non-specific, especially in adolescents.</figcaption>
+</figure>
+
+<!-- HYDROSALPINX -->
+<h2 id="hydrosalpinx"><span class="num">6</span>Hydrosalpinx</h2>
+<div class="section-lead">A finding that changes the IVF plan before the cycle starts — recall Module 2.</div>
+
+<p>A <em class="term">hydrosalpinx</em> — a blocked, fluid-filled fallopian tube — appears on ultrasound as a tubular, fluid-filled adnexal structure, sometimes with a folded or "cog-wheel" appearance, separate from the ovary. As covered in Module 2, its importance is that the fluid is toxic to embryos and roughly halves IVF success if it communicates with the uterine cavity. Recognising a hydrosalpinx on the pre-IVF scan is what triggers the surgical decision (salpingectomy or proximal occlusion) <em>before</em> transfer — a clear example of how a scan finding reshapes the treatment plan rather than merely describing anatomy.</p>
+
+<!-- EARLY PREGNANCY -->
+<h2 id="earlypreg"><span class="num">7</span>Early pregnancy ultrasound</h2>
+<div class="section-lead">Confirming location, dating, and viability — with strict criteria that exist to avoid harming a viable pregnancy.</div>
+
+<p>After a positive pregnancy test, TVS answers three questions: is the pregnancy <strong>intrauterine</strong> (excluding ectopic), how many, and is it <strong>viable</strong>. The normal early landmarks appear in a predictable sequence:</p>
+
+<ul>
+  <li><strong>Gestational sac</strong> — visible from ~4.5–5 weeks.</li>
+  <li><strong>Yolk sac</strong> — appears within the sac at ~5.5 weeks; the first definite sign of an intrauterine pregnancy.</li>
+  <li><strong>Embryo (fetal pole) with cardiac activity</strong> — by ~6 weeks; cardiac motion is usually seen once the embryo is ≥2 mm.</li>
+</ul>
+
+<h3>Diagnosing non-viability — the strict criteria</h3>
+<p>Because a false diagnosis of miscarriage could end a wanted, viable pregnancy, the criteria for calling non-viability are deliberately <strong>conservative and specific</strong> (Doubilet et al., 2013; adopted by the Society of Radiologists in Ultrasound and equivalents in the UK and Australia). On a transvaginal scan, a pregnancy is <strong>definitively non-viable</strong> when:</p>
+<ul>
+  <li>an embryo with <strong>crown-rump length ≥7 mm has no cardiac activity</strong>, or</li>
+  <li>a gestational sac with <strong>mean sac diameter ≥25 mm contains no embryo</strong>, or</li>
+  <li>there is no embryo with a heartbeat ≥2 weeks after a scan showing a sac without a yolk sac (or ≥11 days after a scan showing a sac with a yolk sac).</li>
+</ul>
+<p>Findings below these thresholds (e.g. CRL &lt;7 mm with no heartbeat, or an empty sac of MSD 16–24 mm) are <strong>suspicious but not diagnostic</strong> — they mandate a follow-up scan, not a diagnosis. Getting this discipline right is exactly the "don't over-call" judgement the criteria were built to enforce.</p>
+
+<figure class="diagram">
+  <div class="fig-title">Figure 4 · Early pregnancy milestones &amp; viability thresholds</div>
+  <svg viewBox="0 0 700 250" role="img" aria-label="Timeline of early pregnancy ultrasound milestones and non-viability criteria">
+    <!-- timeline -->
+    <line x1="60" y1="90" x2="640" y2="90" stroke="#37424a" stroke-width="1.5"/>
+    <g text-anchor="middle">
+      <circle cx="150" cy="90" r="7" fill="#2d8fa3"/>
+      <text x="150" y="70" fill="#134e5a" font-size="12" font-weight="700">~5 wk</text>
+      <text x="150" y="118" fill="#37424a" font-size="11">gestational sac</text>
+
+      <circle cx="350" cy="90" r="7" fill="#2d8fa3"/>
+      <text x="350" y="70" fill="#134e5a" font-size="12" font-weight="700">~5.5 wk</text>
+      <text x="350" y="118" fill="#37424a" font-size="11">yolk sac</text>
+
+      <circle cx="550" cy="90" r="7" fill="#276749"/>
+      <text x="550" y="70" fill="#1e6040" font-size="12" font-weight="700">~6 wk</text>
+      <text x="550" y="118" fill="#37424a" font-size="11">embryo + cardiac activity</text>
+    </g>
+    <!-- viability criteria box -->
+    <rect x="60" y="150" width="580" height="78" rx="8" fill="#fef3c7" stroke="#b7791f"/>
+    <text x="80" y="174" fill="#8a5a12" font-size="12.5" font-weight="700">Definitive non-viability on TVS (specificity ~100%):</text>
+    <text x="80" y="196" fill="#5a3d0a" font-size="12">• CRL ≥7 mm with NO cardiac activity   •  mean sac diameter ≥25 mm with NO embryo</text>
+    <text x="80" y="216" fill="#5a3d0a" font-size="12">Below these values → "suspicious, not diagnostic" → follow-up scan, never a diagnosis.</text>
+  </svg>
+  <figcaption>The thresholds are intentionally strict so that no viable pregnancy is ever wrongly called a miscarriage. When a finding is below the cut-off, the correct action is a repeat scan after a defined interval — the discipline of <em>not</em> over-calling is the whole point.</figcaption>
+</figure>
+
+<div class="clinical-box">
+  <div class="cb-label">◆ Clinical relevance — ectopic pregnancy</div>
+  <p>An <strong>ectopic pregnancy</strong> must always be considered when the pregnancy test is positive but no intrauterine gestational sac is seen — particularly in a woman with pain, bleeding, or risk factors (prior ectopic, tubal disease, IVF itself). Ultrasound signs include an adnexal mass separate from the ovary, a tubal ring, or free fluid; correlation with serial β-hCG is essential. Ectopic pregnancy is a potential emergency, and "pregnancy of unknown location" — positive test, nothing seen — is a recognised, actively managed clinical state, not a reassurance to send the patient home.</p>
+</div>
+
+<!-- PROCEDURAL -->
+<h2 id="procedural"><span class="num">8</span>Procedural ultrasound</h2>
+<div class="section-lead">Ultrasound is not only diagnostic — it guides the clinic's two core procedures.</div>
+
+<p>Two procedures you met in Module 3 are ultrasound-guided. <strong>Oocyte retrieval (OPU)</strong> is performed under continuous transvaginal ultrasound, the needle guided into each follicle in real time. <strong>Embryo transfer</strong> is frequently done under transabdominal ultrasound guidance, visualising the catheter to place the embryo optimally within the cavity. Seeing ultrasound used this way — as the eyes of a procedure, not just a diagnostic snapshot — completes the picture of why it is the indispensable tool of the unit.</p>
+
+<div class="worked-example">
+  <div class="we-label">◆ Worked interpretation — decide before reading the answer</div>
+  <div class="case">A woman conceives after a frozen embryo transfer. At what she believes is ~6 weeks, a transvaginal scan shows a single intrauterine gestational sac with a mean sac diameter of 22 mm, containing a yolk sac but no visible embryo. She is asymptomatic. The sonographer asks what you would report.</div>
+  <p><strong>Work through it against the criteria before deciding.</strong> Is this diagnostic of non-viability, suspicious, or normal? What is the correct next step?</p>
+  <div class="interp">
+    <p style="margin-bottom:8px;"><strong>Interpretation.</strong> Apply the thresholds. The mean sac diameter is <strong>22 mm — below the ≥25 mm cut-off</strong> for calling an empty sac non-viable. There is a yolk sac but no embryo yet. This does <strong>not</strong> meet any definitive non-viability criterion. It is, at most, <strong>suspicious but not diagnostic</strong>.</p>
+    <p style="margin-bottom:8px;"><strong>Critical point.</strong> The temptation — "6 weeks, no embryo, must be failing" — is exactly the over-call the criteria exist to prevent. The stated dates in an IVF pregnancy should be precise (transfer date is known), but even so, a 22 mm sac with a yolk sac and no embryo has not reached the threshold at which non-viability can be declared.</p>
+    <p style="margin-bottom:0;"><strong>Correct action.</strong> Report as an intrauterine pregnancy of uncertain viability and arrange a <strong>follow-up scan</strong> after the guideline interval (≥11 days after a scan showing a sac with a yolk sac). Do not diagnose miscarriage, and counsel the patient accordingly — hopeful but honest about the uncertainty. This is EPA 7: communicating an uncertain finding without either false reassurance or premature bad news.</p>
+  </div>
+</div>
+
+<div class="key-box">
+  <div class="kb-label">✓ Module 4 — the concepts you must carry forward</div>
+  <ul>
+    <li><strong>TVS is the workhorse</strong>: high frequency, high resolution, close to the pelvic organs. Higher frequency = better resolution, less depth.</li>
+    <li><strong>Know the normal pelvis cold</strong> — uterus, trilaminar endometrium (≥7 mm periovulatory is favourable), ovaries, and the AFC.</li>
+    <li><strong>Follicle tracking times the trigger (~17–18 mm) and flags OHSS risk</strong> — this scan drives Module 3's decisions.</li>
+    <li><strong>Fibroids: location decides relevance</strong>. FIGO submucosal types 0–2 impair fertility and are resected; subserosal usually do not.</li>
+    <li><strong>PCOM = ≥20 follicles per ovary (≥8 MHz probe) or volume ≥10 mL, or elevated AMH</strong> — one Rotterdam criterion, non-specific alone.</li>
+    <li><strong>Early-pregnancy non-viability is strictly defined</strong>: CRL ≥7 mm no cardiac, or MSD ≥25 mm no embryo. Below that → follow-up, never a diagnosis.</li>
+    <li><strong>A hydrosalpinx or endometrioma seen on ultrasound changes the plan before IVF</strong>, not after.</li>
+  </ul>
+</div>
+
+<!-- READING -->
+<h2 id="reading"><span class="num">★</span>Further reading — CREI level</h2>
+<div class="section-lead">Scoped to this module: the diagnostic criteria and classifications underpinning reproductive ultrasound. Verify against the latest editions and local (ASUM/RANZCOG) guidance.</div>
+
+<h3>Early pregnancy</h3>
+<ul>
+  <li><strong>Doubilet PM, Benson CB, Bourne T, Blaivas M, et al.</strong> Diagnostic criteria for nonviable pregnancy early in the first trimester. <em>N Engl J Med.</em> 2013;369(15):1443–1451. doi:10.1056/NEJMra1302417. — The paper that set the conservative, high-specificity criteria now used internationally. Essential reading; the rationale (avoiding false diagnosis of miscarriage) matters as much as the numbers.</li>
+</ul>
+
+<h3>Uterine pathology</h3>
+<ul>
+  <li><strong>Munro MG, Critchley HOD, Broder MS, Fraser IS; FIGO Working Group on Menstrual Disorders.</strong> FIGO classification system (PALM-COEIN) for causes of abnormal uterine bleeding in nongravid women of reproductive age. <em>Int J Gynaecol Obstet.</em> 2011;113(1):3–13. — The source of the leiomyoma 0–8 classification used above.</li>
+</ul>
+
+<h3>Ovarian morphology &amp; reserve</h3>
+<ul>
+  <li><strong>Teede HJ, et al.</strong> Recommendations from the 2023 International Evidence-based Guideline for the Assessment and Management of Polycystic Ovary Syndrome. <em>J Clin Endocrinol Metab.</em> 2023;108(10):2447–2469. — The current PCOM ultrasound criteria (≥20 follicles/ovary, high-frequency probe) and the new AMH alternative.</li>
+  <li><strong>Broer SL, Broekmans FJM, Laven JSE, Fauser BCJM.</strong> Anti-Müllerian hormone: ovarian reserve testing and its potential clinical implications. <em>Hum Reprod Update.</em> 2014;20(5):688–701. — Carried forward: how AFC and AMH relate as reserve markers, relevant to the operator-dependence of the antral count.</li>
+</ul>
+
+<div class="clinical-box">
+  <div class="cb-label">◆ How to use this list</div>
+  <p>Read the Doubilet criteria in full — they are short, and the discipline they encode (never over-call non-viability) is a genuine patient-safety principle. The FIGO paper is a reference to know exists rather than read cover to cover; understanding the 0–8 map is what matters. Module 5 develops the endometrioma and complex-pathology side; Module 6 covers the communication of uncertain findings.</p>
+</div>
+
+<!-- REFERENCES -->
+<div class="references">
+  <h3>References</h3>
+  <ol>
+    <li>Doubilet PM, Benson CB, Bourne T, Blaivas M, et al. Diagnostic criteria for nonviable pregnancy early in the first trimester. N Engl J Med. 2013;369(15):1443–1451. doi:10.1056/NEJMra1302417.</li>
+    <li>Munro MG, Critchley HOD, Broder MS, Fraser IS; FIGO Working Group on Menstrual Disorders. FIGO classification system (PALM-COEIN) for causes of abnormal uterine bleeding in nongravid women of reproductive age. Int J Gynaecol Obstet. 2011;113(1):3–13.</li>
+    <li>Teede HJ, et al. Recommendations from the 2023 International Evidence-based Guideline for the Assessment and Management of Polycystic Ovary Syndrome. J Clin Endocrinol Metab. 2023;108(10):2447–2469. doi:10.1210/clinem/dgad463.</li>
+    <li>Broer SL, Broekmans FJM, Laven JSE, Fauser BCJM. Anti-Müllerian hormone: ovarian reserve testing and its potential clinical implications. Hum Reprod Update. 2014;20(5):688–701. doi:10.1093/humupd/dmu020.</li>
+  </ol>
+  <p style="font-size:12px; color:var(--mid-grey); margin-top:12px;">Thresholds and criteria are indicative and evolve with technology and guidelines; always interpret against current local (ASUM, RANZCOG, ISUOG) guidance and the reporting service's protocols. Content for educational use within the Flinders Fertility rotation; not a substitute for supervised clinical judgement or formal sonographic training.</p>
+</div>
+
+</div>
+
+<div class="doc-footer">
+  <div>Flinders Fertility · Education Program · Module 4 · v1.0 Draft</div>
+  <div>For review and iteration</div>
+</div>
+
+</div>
+</body>
+</html>

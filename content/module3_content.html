@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 3 — ART Fundamentals: Stimulation, IVF &amp; the Laboratory</title>
+<style>
+  :root {
+    --teal: #1a6b7a; --teal-light: #e8f4f6; --teal-mid: #2d8fa3;
+    --dark: #1e2d2f; --grey: #37424a; --mid-grey: #718096;
+    --border: #cbd5e0; --bg: #f7fafc; --white: #ffffff;
+    --amber: #b7791f; --amber-light: #fef3c7; --green: #276749; --green-light: #d5f0dd;
+    --clinical: #6b46c1; --clinical-light: #ede9fb;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; font-size: 15.5px; line-height: 1.7; color: var(--grey); background: var(--bg); }
+  .page-wrap { max-width: 880px; margin: 0 auto; background: var(--white); box-shadow: 0 0 30px rgba(0,0,0,0.08); }
+
+  .doc-header { background: var(--teal); color: white; padding: 44px 52px 40px; }
+  .doc-header .clinic-name { font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.8; margin-bottom: 10px; }
+  .doc-header .mod-label { font-size: 13px; font-weight: 600; opacity: 0.85; margin-bottom: 6px; }
+  .doc-header h1 { font-size: 28px; font-weight: 700; line-height: 1.2; margin-bottom: 10px; }
+  .doc-header .subtitle { font-size: 16px; opacity: 0.85; }
+  .doc-header .meta { margin-top: 20px; font-size: 13px; opacity: 0.75; }
+  .doc-header .meta span { font-weight: 600; opacity: 1; }
+
+  .nav-strip { background: var(--dark); padding: 14px 52px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .nav-strip a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 20px; transition: all 0.2s; }
+  .nav-strip a:hover { background: rgba(255,255,255,0.15); color: white; }
+
+  .content { padding: 0 52px 60px; }
+  h2 { font-size: 22px; font-weight: 700; color: var(--teal); margin: 44px 0 4px; padding-top: 8px; }
+  h2 .num { color: var(--teal-mid); font-size: 18px; margin-right: 8px; }
+  .section-lead { font-size: 14px; color: var(--mid-grey); font-style: italic; margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid var(--teal-light); }
+  h3 { font-size: 17px; font-weight: 700; color: var(--dark); margin: 26px 0 10px; }
+  h4 { font-size: 14px; font-weight: 700; color: var(--teal); margin: 18px 0 6px; text-transform: uppercase; letter-spacing: 0.04em; }
+  p { margin-bottom: 14px; }
+  strong { color: var(--dark); }
+  em.term { font-style: normal; font-weight: 600; color: var(--teal); }
+  ul, ol { margin: 0 0 16px 22px; }
+  li { margin-bottom: 8px; }
+
+  .intro-block { background: var(--teal-light); border-left: 4px solid var(--teal); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 24px 0; }
+  .intro-block p:last-child { margin-bottom: 0; }
+  .intro-block h4 { margin-top: 0; }
+  .clinical-box { background: var(--clinical-light); border-left: 4px solid var(--clinical); border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 18px 0; }
+  .clinical-box .cb-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--clinical); margin-bottom: 6px; }
+  .clinical-box p { margin-bottom: 8px; font-size: 14.5px; }
+  .clinical-box p:last-child { margin-bottom: 0; }
+  .key-box { background: var(--green-light); border-left: 4px solid var(--green); border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 18px 0; }
+  .key-box .kb-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--green); margin-bottom: 8px; }
+  .key-box ul { margin-bottom: 0; }
+  .key-box li { font-size: 14.5px; }
+
+  figure.diagram { margin: 24px 0; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 20px 22px 10px; }
+  figure.diagram svg { width: 100%; height: auto; display: block; }
+  figure.diagram .fig-title { font-size: 12px; font-weight: 700; color: var(--teal); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 14px; }
+  figure.diagram figcaption { font-size: 13px; color: var(--mid-grey); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--border); line-height: 1.5; }
+
+  table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 14px; }
+  th { background: var(--teal); color: white; padding: 10px 12px; text-align: left; font-weight: 600; font-size: 13px; }
+  td { padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:nth-child(even) td { background: var(--teal-light); }
+
+  .worked-example { background: var(--amber-light); border: 1px solid #f6ad55; border-radius: 8px; padding: 20px 24px; margin: 22px 0; }
+  .worked-example .we-label { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--amber); margin-bottom: 12px; }
+  .worked-example .case { font-style: italic; color: #744210; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px dashed #f6ad55; }
+  .worked-example p { font-size: 14.5px; color: #5a3d0a; }
+  .worked-example .interp { background: white; border-radius: 6px; padding: 12px 16px; margin-top: 8px; }
+
+  .references { margin-top: 40px; padding-top: 20px; border-top: 2px solid var(--teal); }
+  .references h3 { color: var(--teal); }
+  .references ol { font-size: 13px; color: var(--mid-grey); margin-left: 18px; }
+  .references li { margin-bottom: 6px; }
+
+  .doc-footer { background: var(--dark); color: rgba(255,255,255,0.6); padding: 20px 52px; font-size: 12px; display: flex; justify-content: space-between; }
+
+  @media print { .nav-strip { display: none; } .page-wrap { box-shadow: none; } body { font-size: 11pt; background: white; } .clinical-box, .key-box, .worked-example, table, figure.diagram { page-break-inside: avoid; } }
+  @media (max-width: 600px) { .content, .doc-header, .nav-strip, .doc-footer { padding-left: 22px; padding-right: 22px; } .doc-header h1 { font-size: 22px; } .doc-footer { flex-direction: column; gap: 4px; } }
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+<div class="doc-header">
+  <div class="clinic-name">Flinders Fertility · Education Program</div>
+  <div class="mod-label">Module 3 of 6 · Week 3</div>
+  <h1>ART Fundamentals — Stimulation, IVF &amp; the Laboratory</h1>
+  <div class="subtitle">The clinic's core offering — and the thing an online course cannot replicate</div>
+  <div class="meta"><span>Estimated self-directed time:</span> 7–9 hours · <span>The most immersion-intensive week</span></div>
+</div>
+
+<div class="nav-strip">
+  <a href="#intro">Orientation</a>
+  <a href="#rationale">Why stimulate</a>
+  <a href="#protocols">Protocols</a>
+  <a href="#monitoring">Monitoring</a>
+  <a href="#trigger">Trigger &amp; OHSS</a>
+  <a href="#opu">Oocyte retrieval</a>
+  <a href="#lab">IVF vs ICSI</a>
+  <a href="#grading">Culture &amp; grading</a>
+  <a href="#transfer">Fresh vs frozen</a>
+  <a href="#pgt">Genetic testing</a>
+  <a href="#reading">Further reading</a>
+</div>
+
+<div class="content">
+
+<!-- ORIENTATION -->
+<div id="intro">
+<div class="intro-block">
+  <h4>The week the immersion pays off</h4>
+  <p>This is the module an online-only competitor structurally cannot deliver. You will attend theatre for oocyte retrieval, stand in the embryology laboratory as oocytes are identified and embryos graded, follow a stimulation cycle across real monitoring visits, and watch an embryo transfer. The reading here exists to make those experiences legible — so that when you see a trigger decision called or a "4AA blastocyst" recorded, you know exactly what is happening and why.</p>
+  <p>Every intervention in this module is a manipulation of the physiology from Module 1. Stimulation overrides the FSH threshold that normally selects a single follicle. The trigger substitutes for the natural LH surge. Luteal support replaces a corpus luteum the process has disrupted. Keep that lens: ART is applied reproductive physiology, not a separate set of rules.</p>
+</div>
+<p>Documentation matters this week. Your logbook OPU case entry and lab reflection require you to have watched carefully and asked the right questions. Read the relevant section before each clinical session so your observation is informed rather than passive.</p>
+</div>
+
+<!-- RATIONALE -->
+<h2 id="rationale"><span class="num">1</span>Why stimulate the ovaries at all</h2>
+<div class="section-lead">The logic follows directly from Module 1's follicle-selection mechanism.</div>
+
+<p>Recall from Module 1 that in a natural cycle, FSH rises, recruits a cohort of antral follicles, then <em>falls</em> — and that falling FSH selects a single dominant follicle (the most FSH-sensitive survives; the rest undergo atresia). IVF needs more than one egg per cycle to be efficient, so <em class="term">controlled ovarian stimulation (COS)</em> deliberately defeats this selection: sustained high-dose exogenous FSH keeps the whole recruited cohort growing rather than letting all but one die. The aim is a controlled number of mature follicles — enough to give a reasonable oocyte yield, not so many that the patient tips into ovarian hyperstimulation.</p>
+
+<p>The second problem stimulation must solve is the <strong>premature LH surge</strong>. As multiple follicles produce rising oestradiol, that oestradiol can trigger an early endogenous LH surge (the positive-feedback flip from Module 1), causing ovulation before eggs can be collected. So every stimulation protocol also includes a way to <strong>suppress the pituitary</strong> and prevent that surge — this is what distinguishes the two main protocols.</p>
+
+<!-- PROTOCOLS -->
+<h2 id="protocols"><span class="num">2</span>Stimulation protocols</h2>
+<div class="section-lead">Two dominant approaches, differing in how they prevent the premature LH surge. The antagonist protocol is now first-line for safety.</div>
+
+<h3>GnRH antagonist protocol (first-line)</h3>
+<p>Stimulation with FSH begins early in the cycle (day 2–3). A <strong>GnRH antagonist</strong> is added once follicles reach a certain size (typically around day 5–6 of stimulation); it blocks the pituitary GnRH receptor <em>immediately</em>, preventing the LH surge without a lengthy lead-in. When lead follicles reach ~17–18 mm, final maturation is triggered and oocytes are collected ~36 hours later. The 2020 ESHRE ovarian-stimulation guideline makes a <strong>strong recommendation for the antagonist protocol over agonist protocols in the general population</strong>, on the basis of comparable efficacy and higher safety — chiefly because it permits a GnRH-agonist trigger and thus dramatically lowers OHSS risk (see section 4).</p>
+
+<h3>GnRH agonist "long" protocol</h3>
+<p>Here a <strong>GnRH agonist</strong> is started in the mid-luteal phase of the <em>preceding</em> cycle. Recall from Module 1 that continuous (non-pulsatile) GnRH exposure paradoxically desensitises the pituitary — so after an initial "flare," the agonist switches the axis <em>off</em> over about two weeks (down-regulation). Only once suppression is confirmed does FSH stimulation begin, with the agonist continued throughout to hold the pituitary silent. It is effective and still used for specific indications, but the long lead-in and the inability to use an agonist trigger (the pituitary is already suppressed) make it less flexible and higher-risk for OHSS than the antagonist approach.</p>
+
+<h3>Other approaches</h3>
+<p><strong>Mild stimulation</strong> uses lower gonadotrophin doses aiming for fewer follicles, and <strong>natural or modified-natural cycle</strong> IVF uses little or no stimulation — options for particular patients (poor responders, those avoiding OHSS risk, or by preference), trading oocyte yield for lower drug burden.</p>
+
+<figure class="diagram">
+  <div class="fig-title">Figure 1 · Antagonist vs agonist long protocol</div>
+  <svg viewBox="0 0 700 320" role="img" aria-label="Timeline comparison of GnRH antagonist and agonist long stimulation protocols">
+    <defs>
+      <marker id="p3t" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#c0392b"/></marker>
+    </defs>
+    <!-- day axis reference lines -->
+    <text x="70" y="20" fill="#718096" font-size="11">previous cycle</text>
+    <line x1="369" y1="28" x2="369" y2="270" stroke="#cbd5e0" stroke-width="1" stroke-dasharray="4 4"/>
+    <text x="369" y="24" text-anchor="middle" fill="#37424a" font-size="11" font-weight="700">stimulation start (day 2–3)</text>
+
+    <!-- ANTAGONIST -->
+    <text x="70" y="62" fill="#1a6b7a" font-size="13" font-weight="700">GnRH ANTAGONIST (first-line)</text>
+    <rect x="369" y="74" width="206" height="20" rx="4" fill="#2d8fa3"/>
+    <text x="472" y="88" text-anchor="middle" fill="#fff" font-size="11">FSH stimulation</text>
+    <rect x="463" y="98" width="112" height="16" rx="4" fill="#6b46c1"/>
+    <text x="519" y="110" text-anchor="middle" fill="#fff" font-size="10">antagonist (from ~day 5–6)</text>
+    <line x1="575" y1="70" x2="575" y2="120" stroke="#c0392b" stroke-width="2" marker-end="url(#p3t)"/>
+    <text x="583" y="86" fill="#c0392b" font-size="10.5" font-weight="700">trigger</text>
+    <circle cx="612" cy="84" r="5" fill="#b7791f"/>
+    <text x="612" y="132" text-anchor="middle" fill="#8a5a12" font-size="10">OPU (+36h)</text>
+
+    <!-- AGONIST LONG -->
+    <text x="70" y="190" fill="#b7791f" font-size="13" font-weight="700">GnRH AGONIST "LONG"</text>
+    <rect x="108" y="202" width="467" height="16" rx="4" fill="#b7791f" opacity="0.85"/>
+    <text x="200" y="214" fill="#fff" font-size="10">agonist — down-regulation (~2 weeks) then continued</text>
+    <rect x="369" y="222" width="206" height="20" rx="4" fill="#2d8fa3"/>
+    <text x="472" y="236" text-anchor="middle" fill="#fff" font-size="11">FSH stimulation</text>
+    <line x1="575" y1="198" x2="575" y2="248" stroke="#c0392b" stroke-width="2" marker-end="url(#p3t)"/>
+    <text x="583" y="214" fill="#c0392b" font-size="10.5" font-weight="700">trigger</text>
+    <circle cx="612" cy="212" r="5" fill="#b7791f"/>
+    <text x="612" y="260" text-anchor="middle" fill="#8a5a12" font-size="10">OPU (+36h)</text>
+
+    <!-- axis -->
+    <line x1="108" y1="285" x2="640" y2="285" stroke="#37424a" stroke-width="1.5"/>
+    <g font-size="10" fill="#37424a" text-anchor="middle">
+      <text x="140" y="300">−14</text><text x="369" y="300">0</text><text x="575" y="300">~11</text><text x="620" y="300">~13</text>
+    </g>
+    <text x="355" y="315" text-anchor="middle" fill="#718096" font-size="10">days relative to stimulation start</text>
+  </svg>
+  <figcaption>The key contrast: the antagonist blocks the LH surge immediately and only for the days it is needed, allowing a short, flexible cycle and — critically — a GnRH-agonist trigger. The agonist long protocol needs a two-week down-regulation lead-in and commits the patient to an hCG trigger, carrying higher OHSS risk.</figcaption>
+</figure>
+
+<!-- MONITORING -->
+<h2 id="monitoring"><span class="num">3</span>Monitoring the stimulated cycle</h2>
+<div class="section-lead">Ultrasound plus hormones, tracking the cohort toward the trigger. This is EPA 2 in the ART setting.</div>
+
+<p>Once stimulation starts, the patient is monitored every few days with <strong>transvaginal ultrasound</strong> (counting and measuring follicles, assessing the endometrium) and often <strong>serum oestradiol</strong>. The two together tell the clinician how the cohort is responding: follicle number and size indicate maturity and the impending oocyte yield, while oestradiol reflects the aggregate granulosa-cell activity (recall the two-cell model — more growing follicles means more aromatase means higher oestradiol).</p>
+
+<p>Monitoring drives three decisions: <strong>dose adjustment</strong> (increase if under-responding, reduce or consider coasting if over-responding), <strong>timing of the trigger</strong> (when a satisfactory proportion of follicles reach ~17–18 mm), and <strong>safety</strong> — an excessive follicle count and steeply rising oestradiol flag OHSS risk and change the trigger and transfer plan. The ESHRE guideline recommends AMH or AFC (from the Module 2 workup) to <em>predict</em> response and set the starting dose before the cycle even begins.</p>
+
+<!-- TRIGGER & OHSS -->
+<h2 id="trigger"><span class="num">4</span>Triggering final maturation &amp; preventing OHSS</h2>
+<div class="section-lead">The single most important safety decision in stimulation. Understand it and you understand modern IVF safety.</div>
+
+<p>Follicular stimulation grows the follicles, but the oocytes inside are still immature — arrested, as you know from Module 1, in prophase I. A <strong>trigger</strong> substitutes for the natural LH surge to drive final maturation (completion of meiosis I) in the ~36 hours before retrieval. There are two trigger options, and the choice is central to safety:</p>
+
+<ul>
+  <li><strong>hCG trigger</strong>: human chorionic gonadotrophin mimics LH but has a long half-life, sustaining stimulation of the ovaries for days after the eggs are collected. Effective, but this prolonged stimulation is what <em>drives</em> ovarian hyperstimulation syndrome in susceptible patients.</li>
+  <li><strong>GnRH-agonist trigger</strong>: only possible in an <em>antagonist</em> cycle (the pituitary must be responsive). A bolus of agonist induces a short, physiological LH surge from the patient's own pituitary — enough to mature the oocytes, but short-lived, so the OHSS risk falls dramatically. The trade-off is a defective luteal phase, which is why an agonist trigger is usually paired with a <strong>freeze-all</strong> strategy (no fresh transfer) or intensive luteal support.</li>
+</ul>
+
+<h3>Ovarian hyperstimulation syndrome (OHSS)</h3>
+<p><em class="term">OHSS</em> is the most serious iatrogenic complication of stimulation: an exaggerated response producing enlarged ovaries and a vascular-permeability shift that moves fluid into the third space (ascites, effusions), with haemoconcentration, thromboembolic risk and, in severe cases, organ compromise. Risk is highest in high responders — PCOS, high AMH, many follicles, steeply rising oestradiol. It is largely preventable, and prevention is the whole point of the antagonist-plus-agonist-trigger-plus-freeze-all strategy.</p>
+
+<figure class="diagram">
+  <div class="fig-title">Figure 2 · Trigger and OHSS-prevention decision</div>
+  <svg viewBox="0 0 700 300" role="img" aria-label="Decision flow for trigger choice based on OHSS risk">
+    <defs>
+      <marker id="o3a" markerWidth="9" markerHeight="9" refX="6" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#1a6b7a"/></marker>
+    </defs>
+    <rect x="250" y="14" width="200" height="46" rx="8" fill="#1a6b7a"/>
+    <text x="350" y="34" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">Assess OHSS risk</text>
+    <text x="350" y="51" text-anchor="middle" fill="#cfe6ea" font-size="10.5">follicle count · oestradiol · AMH · PCOS</text>
+    <line x1="350" y1="60" x2="350" y2="78" stroke="#1a6b7a" stroke-width="2"/>
+    <line x1="180" y1="78" x2="520" y2="78" stroke="#1a6b7a" stroke-width="2"/>
+    <line x1="180" y1="78" x2="180" y2="96" stroke="#1a6b7a" stroke-width="2.5" marker-end="url(#o3a)"/>
+    <line x1="520" y1="78" x2="520" y2="96" stroke="#1a6b7a" stroke-width="2.5" marker-end="url(#o3a)"/>
+
+    <!-- normal responder -->
+    <rect x="60" y="98" width="240" height="44" rx="8" fill="#e8f4f6" stroke="#1a6b7a"/>
+    <text x="180" y="118" text-anchor="middle" fill="#134e5a" font-size="12.5" font-weight="700">Normal responder</text>
+    <text x="180" y="134" text-anchor="middle" fill="#37424a" font-size="11">acceptable follicle number</text>
+    <line x1="180" y1="142" x2="180" y2="162" stroke="#1a6b7a" stroke-width="2.5" marker-end="url(#o3a)"/>
+    <rect x="60" y="164" width="240" height="60" rx="8" fill="#d5e9ee" stroke="#1a6b7a"/>
+    <text x="180" y="186" text-anchor="middle" fill="#134e5a" font-size="12.5" font-weight="700">hCG trigger</text>
+    <text x="180" y="205" text-anchor="middle" fill="#37424a" font-size="11">fresh transfer possible</text>
+    <text x="180" y="219" text-anchor="middle" fill="#37424a" font-size="11">(or freeze by other indication)</text>
+
+    <!-- high responder -->
+    <rect x="400" y="98" width="240" height="44" rx="8" fill="#fef3c7" stroke="#b7791f"/>
+    <text x="520" y="118" text-anchor="middle" fill="#8a5a12" font-size="12.5" font-weight="700">High responder (OHSS risk)</text>
+    <text x="520" y="134" text-anchor="middle" fill="#5a3d0a" font-size="11">many follicles · high E₂ · PCOS</text>
+    <line x1="520" y1="142" x2="520" y2="162" stroke="#b7791f" stroke-width="2.5" marker-end="url(#o3a)"/>
+    <rect x="400" y="164" width="240" height="60" rx="8" fill="#b7791f"/>
+    <text x="520" y="184" text-anchor="middle" fill="#fff" font-size="12.5" font-weight="700">GnRH-agonist trigger</text>
+    <text x="520" y="202" text-anchor="middle" fill="#fef3c7" font-size="11">+ FREEZE-ALL</text>
+    <text x="520" y="216" text-anchor="middle" fill="#fef3c7" font-size="11">→ OHSS risk minimised</text>
+
+    <text x="350" y="258" text-anchor="middle" fill="#276749" font-size="12" font-weight="700">The antagonist protocol is what makes the agonist-trigger escape route possible.</text>
+    <text x="350" y="278" text-anchor="middle" fill="#718096" font-size="11">This is why it is first-line: safety, not efficacy, decides it.</text>
+  </svg>
+  <figcaption>Modern practice can approach an "OHSS-free" cycle in high responders by combining an antagonist protocol, a GnRH-agonist trigger, and a freeze-all strategy — deferring transfer to a later, unstimulated cycle when the OHSS risk has passed.</figcaption>
+</figure>
+
+<!-- OPU -->
+<h2 id="opu"><span class="num">5</span>Oocyte retrieval (OPU)</h2>
+<div class="section-lead">The procedure you will attend in theatre. Know it well enough to counsel a patient — that is EPA 5.</div>
+
+<p><em class="term">Oocyte pick-up (OPU)</em>, or transvaginal oocyte retrieval, is performed ~36 hours after the trigger, timed so the oocytes have matured but not yet ovulated. Under sedation or light anaesthesia, a needle is passed through the vaginal wall under <strong>transvaginal ultrasound guidance</strong> into each ovary, and the follicular fluid from each follicle is aspirated. The fluid goes immediately to the adjacent embryology laboratory, where the embryologist identifies the oocytes under the microscope — not every follicle yields an egg, and the retrieved number is usually a little below the follicle count.</p>
+
+<p>For your counselling competence, know the shape of it: a day procedure, ~20–30 minutes, done under sedation; risks include bleeding, infection, and injury to adjacent structures (all uncommon), plus the anaesthetic risk and the background OHSS risk in high responders. Patients are typically home within hours. When you attend, document in your logbook: indication, protocol used, number of follicles aspirated, number of oocytes retrieved, sedation type, and any complications.</p>
+
+<div class="clinical-box">
+  <div class="cb-label">◆ Clinical relevance — the follicle-to-oocyte gap</div>
+  <p>Patients often expect one egg per follicle and are distressed when, say, 12 follicles yield 8 eggs. This is normal — not every follicle contains a mature, retrievable oocyte, and empty-follicle situations occur. Knowing this lets you set expectations before OPU rather than explaining a "shortfall" afterwards. Attrition continues at every subsequent step (fertilisation, cleavage, blastocyst), which is why counselling frames the funnel early.</p>
+</div>
+
+<!-- LAB: IVF vs ICSI -->
+<h2 id="lab"><span class="num">6</span>The laboratory — IVF versus ICSI</h2>
+<div class="section-lead">Where fertilisation happens. The IVF-versus-ICSI decision comes straight from Module 1's fertilisation sequence.</div>
+
+<p>In the laboratory the retrieved oocytes meet the prepared sperm by one of two methods. In <strong>conventional IVF</strong>, prepared sperm are placed in the dish with each oocyte and the natural sequence — capacitation, zona binding, acrosome reaction, penetration (all from Module 1) — is allowed to occur. In <strong>ICSI (intracytoplasmic sperm injection)</strong>, a single sperm is injected directly into the oocyte cytoplasm, bypassing every one of those steps. ICSI is therefore the answer to significant male factor (from Module 2's semen analysis), prior fertilisation failure, or use of surgically retrieved sperm; it is not superior for non-male-factor cases and is not a default.</p>
+
+<p><strong>Fertilisation is checked the next morning (day 1)</strong>: normal fertilisation shows <strong>two pronuclei (2PN)</strong> — one maternal, one paternal — as described in Module 1. Abnormal fertilisation (1PN, 3PN) is identified and those embryos are not used. This 2PN check is the first quality gate in the culture sequence.</p>
+
+<figure class="diagram">
+  <div class="fig-title">Figure 3 · From retrieval to transfer — the laboratory workflow</div>
+  <svg viewBox="0 0 700 300" role="img" aria-label="Laboratory workflow from oocyte retrieval through fertilisation, culture, grading, and transfer or freeze">
+    <defs>
+      <marker id="l3a" markerWidth="9" markerHeight="9" refX="6" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#1a6b7a"/></marker>
+    </defs>
+    <rect x="20" y="120" width="110" height="52" rx="8" fill="#1a6b7a"/>
+    <text x="75" y="142" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">OPU</text>
+    <text x="75" y="159" text-anchor="middle" fill="#cfe6ea" font-size="10">oocytes to lab</text>
+    <line x1="130" y1="146" x2="158" y2="146" stroke="#1a6b7a" stroke-width="2.5" marker-end="url(#l3a)"/>
+
+    <!-- fertilisation branch -->
+    <rect x="160" y="92" width="120" height="34" rx="6" fill="#e8f4f6" stroke="#1a6b7a"/>
+    <text x="220" y="113" text-anchor="middle" fill="#134e5a" font-size="11.5" font-weight="700">Conventional IVF</text>
+    <rect x="160" y="166" width="120" height="34" rx="6" fill="#fef3c7" stroke="#b7791f"/>
+    <text x="220" y="187" text-anchor="middle" fill="#8a5a12" font-size="11.5" font-weight="700">ICSI (male factor)</text>
+    <line x1="150" y1="120" x2="158" y2="109" stroke="#1a6b7a" stroke-width="1.5"/>
+    <line x1="150" y1="172" x2="158" y2="183" stroke="#1a6b7a" stroke-width="1.5"/>
+    <line x1="150" y1="146" x2="150" y2="146" stroke="#1a6b7a" stroke-width="1.5"/>
+    <line x1="280" y1="109" x2="300" y2="140" stroke="#1a6b7a" stroke-width="2" marker-end="url(#l3a)"/>
+    <line x1="280" y1="183" x2="300" y2="152" stroke="#1a6b7a" stroke-width="2" marker-end="url(#l3a)"/>
+
+    <rect x="305" y="126" width="110" height="40" rx="8" fill="#d5e9ee" stroke="#1a6b7a"/>
+    <text x="360" y="145" text-anchor="middle" fill="#134e5a" font-size="11.5" font-weight="700">Day 1: 2PN</text>
+    <text x="360" y="160" text-anchor="middle" fill="#37424a" font-size="10">fertilisation check</text>
+    <line x1="415" y1="146" x2="443" y2="146" stroke="#1a6b7a" stroke-width="2.5" marker-end="url(#l3a)"/>
+
+    <rect x="445" y="126" width="110" height="40" rx="8" fill="#d5e9ee" stroke="#1a6b7a"/>
+    <text x="500" y="145" text-anchor="middle" fill="#134e5a" font-size="11.5" font-weight="700">Culture → D5</text>
+    <text x="500" y="160" text-anchor="middle" fill="#37424a" font-size="10">blastocyst + grading</text>
+    <line x1="555" y1="146" x2="583" y2="146" stroke="#1a6b7a" stroke-width="2.5" marker-end="url(#l3a)"/>
+
+    <rect x="585" y="106" width="100" height="34" rx="6" fill="#1a6b7a"/>
+    <text x="635" y="127" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">Fresh ET</text>
+    <rect x="585" y="152" width="100" height="34" rx="6" fill="#6b46c1"/>
+    <text x="635" y="167" text-anchor="middle" fill="#fff" font-size="10.5" font-weight="700">Vitrify</text>
+    <text x="635" y="179" text-anchor="middle" fill="#ede9fb" font-size="9">(→ FET later)</text>
+    <line x1="555" y1="140" x2="583" y2="126" stroke="#1a6b7a" stroke-width="1.5"/>
+    <line x1="555" y1="152" x2="583" y2="166" stroke="#1a6b7a" stroke-width="1.5"/>
+
+    <text x="350" y="240" text-anchor="middle" fill="#718096" font-size="11.5">Attrition at every step: oocytes → 2PN → cleavage → blastocyst. The funnel is normal and expected.</text>
+    <text x="350" y="262" text-anchor="middle" fill="#718096" font-size="11.5">Every transfer of custody is double-witnessed — the lab's core safety discipline.</text>
+  </svg>
+  <figcaption>The laboratory is a chain of quality gates and custody checks. Note the attrition funnel — a strong counselling point — and the witnessing discipline that guards against the catastrophic error of mismatched gametes or embryos.</figcaption>
+</figure>
+
+<div class="clinical-box">
+  <div class="cb-label">◆ Clinical relevance — why the lab obsesses over witnessing</div>
+  <p>Every time gametes or embryos change vessel or ownership, the step is <strong>double-witnessed</strong> (by a second embryologist or an electronic witnessing system). The reason is the single worst error an IVF unit can make — mixing up the gametes or embryos of two patients. This is why the laboratory feels rule-bound and repetitive; that culture of verification is a patient-safety feature, and it is exactly the sort of quality-assurance principle your lab reflection should engage with. RTAC accreditation (Module 6) exists to enforce it.</p>
+</div>
+
+<!-- GRADING -->
+<h2 id="grading"><span class="num">7</span>Embryo culture and grading</h2>
+<div class="section-lead">How the lab decides which embryo to transfer. The Gardner system you will hear quoted, decoded.</div>
+
+<p>Fertilised embryos are cultured, and modern practice usually grows them to the <strong>blastocyst stage (day 5–6)</strong> before transfer or freezing rather than transferring at cleavage stage (day 3). The rationale, from Module 1: extended culture lets the strongest embryos self-select — many chromosomally abnormal embryos arrest before blastocyst — improving the chance that a transferred embryo is viable.</p>
+
+<p>Blastocysts are scored with the <strong>Gardner grading system</strong>, which has three components: a <strong>number (1–6)</strong> for the degree of expansion of the blastocoel cavity and hatching status, then <strong>two letters (A–C)</strong> grading the <em class="term">inner cell mass</em> (ICM, which becomes the fetus) and the <em class="term">trophectoderm</em> (TE, which becomes the placenta). So "<strong>4AA</strong>" is an expanded blastocyst with a high-quality inner cell mass and trophectoderm — a good-looking embryo. Grading predicts implantation potential but is a morphological judgement, not a genetic one: a good-grade embryo can still be aneuploid, and a modest-grade embryo can be euploid.</p>
+
+<figure class="diagram">
+  <div class="fig-title">Figure 4 · Gardner blastocyst grading</div>
+  <svg viewBox="0 0 700 250" role="img" aria-label="Diagram of a blastocyst showing the three Gardner grading components">
+    <!-- blastocyst -->
+    <circle cx="170" cy="120" r="82" fill="#e8f4f6" stroke="#1a6b7a" stroke-width="2"/>
+    <circle cx="170" cy="120" r="60" fill="#fff" stroke="#2d8fa3" stroke-width="1" opacity="0.6"/>
+    <!-- ICM -->
+    <circle cx="140" cy="90" r="28" fill="#6b46c1" opacity="0.85"/>
+    <text x="140" y="94" text-anchor="middle" fill="#fff" font-size="10.5" font-weight="700">ICM</text>
+    <!-- TE ring cells -->
+    <g fill="#1a6b7a">
+      <circle cx="230" cy="120" r="5"/><circle cx="222" cy="150" r="5"/><circle cx="200" cy="175" r="5"/>
+      <circle cx="170" cy="188" r="5"/><circle cx="138" cy="182" r="5"/><circle cx="112" cy="165" r="5"/>
+    </g>
+    <text x="230" y="200" text-anchor="middle" fill="#134e5a" font-size="10.5" font-weight="700">trophectoderm</text>
+
+    <!-- key -->
+    <rect x="330" y="40" width="350" height="170" rx="8" fill="#fff" stroke="#cbd5e0"/>
+    <text x="350" y="66" fill="#1a6b7a" font-size="13" font-weight="700">Three-part score — e.g. "4AA"</text>
+    <text x="350" y="94" fill="#37424a" font-size="12.5"><tspan font-weight="700" fill="#2d8fa3">4</tspan>  Expansion (1–6): cavity size &amp; hatching</text>
+    <text x="350" y="122" fill="#37424a" font-size="12.5"><tspan font-weight="700" fill="#6b46c1">A</tspan>  Inner cell mass (A–C): → the fetus</text>
+    <text x="350" y="150" fill="#37424a" font-size="12.5"><tspan font-weight="700" fill="#1a6b7a">A</tspan>  Trophectoderm (A–C): → the placenta</text>
+    <line x1="350" y1="164" x2="662" y2="164" stroke="#e8f4f6" stroke-width="1.5"/>
+    <text x="350" y="186" fill="#718096" font-size="11.5">Morphology predicts implantation potential —</text>
+    <text x="350" y="202" fill="#718096" font-size="11.5">but a good grade does not guarantee a euploid embryo.</text>
+  </svg>
+  <figcaption>PGT-A, when performed, biopsies a few <strong>trophectoderm</strong> cells (the future placenta, not the future baby) at blastocyst stage. Grading and genetic status are separate axes — which is the crux of the PGT-A debate below.</figcaption>
+</figure>
+
+<!-- FRESH VS FROZEN -->
+<h2 id="transfer"><span class="num">8</span>Fresh versus frozen transfer &amp; luteal support</h2>
+<div class="section-lead">An area where the evidence has genuinely shifted. Know what the trials actually show.</div>
+
+<p>A blastocyst can be transferred in the same (fresh) cycle or vitrified and transferred later in a <strong>frozen embryo transfer (FET)</strong>. Vitrification — ultra-rapid freezing — has made frozen transfer highly effective, and survival on warming now exceeds 95% in good laboratories. This has driven a large shift toward <strong>freeze-all</strong> strategies, but the evidence for <em>routine</em> freeze-all is more nuanced than the enthusiasm sometimes suggests.</p>
+
+<p>The landmark randomised trials sort it out. In <strong>PCOS/high responders</strong>, freeze-all improves live birth <em>and</em> reduces OHSS (Chen et al., NEJM 2016). In <strong>ovulatory women without PCOS</strong>, freeze-all does <em>not</em> improve live birth (Shi et al., NEJM 2018) — though a later blastocyst-transfer trial did favour FET (Wei et al., Lancet 2019). Across the board, freeze-all reliably <strong>reduces OHSS</strong>. The reasonable synthesis: freeze-all is clearly indicated for OHSS risk and high responders; for normal ovulatory responders it is a reasonable option but not a universal live-birth upgrade.</p>
+
+<h3>Luteal support</h3>
+<p>Recall from Module 1 that implantation needs progesterone. Stimulation and the trigger disrupt normal corpus-luteum function, so fresh-transfer cycles receive <strong>luteal progesterone support</strong>. In a medicated FET cycle the endometrium is built with oestrogen and then progesterone is started and counted precisely, transferring a day-5 blastocyst after the equivalent progesterone exposure — reproducing the natural implantation window (Module 1, Figure 6) deliberately.</p>
+
+<!-- PGT -->
+<h2 id="pgt"><span class="num">9</span>Genetic testing of embryos (PGT)</h2>
+<div class="section-lead">An "add-on" you must be able to discuss critically, because patients will ask and the evidence is contested.</div>
+
+<p><em class="term">PGT-M</em> (for monogenic disorders) tests embryos for a specific known heritable condition when a couple carries it — an established, high-value indication. <em class="term">PGT-A</em> (for aneuploidy) screens embryos for whole-chromosome abnormalities to select which to transfer, and this is where the controversy lies.</p>
+
+<p>The intuition is appealing — transfer only euploid embryos — but the best trials do not show the expected benefit in general use. In good-prognosis patients, <strong>conventional IVF was non-inferior to PGT-A for cumulative live birth</strong> (Yan et al., NEJM 2021: 81.8% vs 77.2%), and the STAR trial (Munné et al., 2019) found no overall improvement. PGT-A <em>does</em> reduce miscarriage per transfer and can shorten time to a successful transfer, and post-hoc data suggest benefit in older women (35–40) — but a cumulative-live-birth advantage across all comers is not established, and embryos discarded as "abnormal" (including mosaics that can produce healthy babies) are a real cost. The ASRM's 2024 committee opinion characterises universal PGT-A as unproven for improving live birth across all patients.</p>
+
+<div class="clinical-box">
+  <div class="cb-label">◆ Clinical relevance — how to talk about add-ons</div>
+  <p>PGT-A is the archetypal IVF "add-on": intuitively attractive, widely marketed, expensive, and of contested benefit. The clinical skill is presenting it honestly — what it can do (reduce miscarriage per transfer, possibly help older patients, shorten the path), what it cannot (reliably raise cumulative live birth in good-prognosis patients), and its costs (expense, discarded potentially-viable embryos). Watching how the specialists here counsel on add-ons without overselling is a lesson in evidence-based, non-commercial practice — and directly relevant to the ethics content in Module 6.</p>
+</div>
+
+<div class="worked-example">
+  <div class="we-label">◆ Worked interpretation — work through it before the answer</div>
+  <div class="case">29-year-old with PCOS, undergoing her first IVF cycle on a GnRH antagonist protocol. AMH was 58 pmol/L (high). On the day of planned trigger: 24 follicles ≥12 mm across both ovaries, oestradiol markedly elevated, endometrium 10 mm triple-line. She feels well.</div>
+  <p><strong>What is the risk, and what trigger and transfer strategy would you expect the team to choose — and why?</strong></p>
+  <div class="interp">
+    <p style="margin-bottom:8px;"><strong>Interpretation.</strong> This is a classic <strong>high-responder, high-OHSS-risk</strong> picture: PCOS, high AMH, a large follicle cohort (24), and steeply elevated oestradiol. An hCG trigger followed by a fresh transfer would carry a serious risk of significant OHSS, made worse if she conceives (endogenous hCG sustains the syndrome).</p>
+    <p style="margin-bottom:8px;"><strong>Strategy.</strong> Because she is on an <strong>antagonist</strong> protocol, the safe route is available: a <strong>GnRH-agonist trigger</strong> (short LH surge from her own pituitary, matures the oocytes, avoids the prolonged hCG stimulus) combined with a <strong>freeze-all</strong> — vitrify all blastocysts and defer to a frozen transfer in a later, unstimulated cycle once the OHSS risk has passed.</p>
+    <p style="margin-bottom:0;"><strong>Why it ties together.</strong> This is the whole logic of Figure 2 in one patient: the antagonist protocol was the enabling choice, the agonist trigger is the safety lever, and freeze-all removes the pregnancy-driven OHSS risk. And recall Chen et al. — in PCOS, freeze-all also improves live birth, so here it is doubly justified.</p>
+  </div>
+</div>
+
+<div class="key-box">
+  <div class="kb-label">✓ Module 3 — the concepts you must carry forward</div>
+  <ul>
+    <li><strong>Stimulation defeats natural follicle selection</strong> (sustained high FSH) and must prevent a premature LH surge — the job of the antagonist or agonist.</li>
+    <li><strong>The antagonist protocol is first-line for safety</strong>: it enables a GnRH-agonist trigger, which — with freeze-all — largely prevents OHSS.</li>
+    <li><strong>The trigger substitutes for the LH surge</strong>; hCG is effective but OHSS-prone, agonist trigger is short and safe (antagonist cycles only).</li>
+    <li><strong>ICSI is for male factor and fertilisation failure</strong>, not a default; conventional IVF otherwise. 2PN on day 1 confirms normal fertilisation.</li>
+    <li><strong>Blastocyst culture self-selects; Gardner grading (number + ICM letter + TE letter) is morphological, not genetic.</strong></li>
+    <li><strong>Freeze-all clearly helps high responders (OHSS ↓, live birth ↑ in PCOS)</strong> but is not a universal upgrade for normal responders.</li>
+    <li><strong>PGT-A does not reliably raise cumulative live birth in good-prognosis patients</strong> — counsel add-ons honestly.</li>
+  </ul>
+</div>
+
+<!-- READING -->
+<h2 id="reading"><span class="num">★</span>Further reading — CREI level</h2>
+<div class="section-lead">Scoped to this module: stimulation guidelines, the freeze-all trials, and the PGT-A evidence. The trials here are the ones a CREI candidate is expected to know by name.</div>
+
+<h3>Ovarian stimulation</h3>
+<ul>
+  <li><strong>ESHRE Guideline Group on Ovarian Stimulation.</strong> Ovarian stimulation for IVF/ICSI. <em>Hum Reprod Open.</em> 2020;2020(2):hoaa009. doi:10.1093/hropen/hoaa009. — The comprehensive evidence base: 84 recommendations, including the strong recommendation for the antagonist protocol and AMH/AFC-guided dosing. The single most important read for this module.</li>
+</ul>
+
+<h3>Fresh versus frozen transfer</h3>
+<ul>
+  <li><strong>Chen ZJ, Shi Y, Sun Y, et al.</strong> Fresh versus frozen embryos for infertility in the polycystic ovary syndrome. <em>N Engl J Med.</em> 2016;375(6):523–533. — The trial establishing freeze-all's benefit (live birth ↑, OHSS ↓) in PCOS.</li>
+  <li><strong>Shi Y, Sun Y, Hao C, et al.</strong> Transfer of fresh versus frozen embryos in ovulatory women. <em>N Engl J Med.</em> 2018;378(2):126–136. — The essential counterpoint: no live-birth benefit of freeze-all in ovulatory women without PCOS. Read alongside Chen to understand why "freeze-all for everyone" is not supported.</li>
+</ul>
+
+<h3>Preimplantation genetic testing for aneuploidy</h3>
+<ul>
+  <li><strong>Munné S, Kaplan B, Frattarelli JL, et al.</strong> (STAR) Preimplantation genetic testing for aneuploidy versus morphology as selection criteria for single frozen-thawed embryo transfer in good-prognosis patients: a multicenter randomized clinical trial. <em>Fertil Steril.</em> 2019;112(6):1071–1079.e7. — The multicentre RCT that failed to show overall benefit; note the post-hoc age signal.</li>
+  <li><strong>Yan J, Qin Y, Zhao H, et al.</strong> Live birth with or without preimplantation genetic testing for aneuploidy. <em>N Engl J Med.</em> 2021;385(22):2047–2058. doi:10.1056/NEJMoa2103613. — The large RCT showing conventional IVF non-inferior to PGT-A for cumulative live birth in good-prognosis patients. The definitive read on the PGT-A debate.</li>
+</ul>
+
+<h3>Embryo assessment</h3>
+<ul>
+  <li><strong>Alpha Scientists in Reproductive Medicine &amp; ESHRE Special Interest Group of Embryology.</strong> The Istanbul consensus workshop on embryo assessment. <em>Hum Reprod.</em> 2011;26(6):1270–1283. — The consensus standard behind morphological grading, including the Gardner-type blastocyst criteria.</li>
+</ul>
+
+<div class="clinical-box">
+  <div class="cb-label">◆ How to use this list</div>
+  <p>Read Chen 2016 and Shi 2018 as a pair — they are the clearest demonstration in the field that "which patient" changes the answer, and understanding that nuance is exactly what separates CREI-level reasoning from add-on marketing. The Yan 2021 NEJM trial does the same for PGT-A. The ESHRE stimulation guideline is the reference you will return to throughout the rotation. Module 5 carries the deeper male-factor and endometriosis literature.</p>
+</div>
+
+<!-- REFERENCES -->
+<div class="references">
+  <h3>References</h3>
+  <ol>
+    <li>ESHRE Guideline Group on Ovarian Stimulation; Bosch E, Broer S, Griesinger G, et al. ESHRE guideline: ovarian stimulation for IVF/ICSI. Hum Reprod Open. 2020;2020(2):hoaa009. doi:10.1093/hropen/hoaa009.</li>
+    <li>Chen ZJ, Shi Y, Sun Y, et al. Fresh versus frozen embryos for infertility in the polycystic ovary syndrome. N Engl J Med. 2016;375(6):523–533. doi:10.1056/NEJMoa1513873.</li>
+    <li>Shi Y, Sun Y, Hao C, et al. Transfer of fresh versus frozen embryos in ovulatory women. N Engl J Med. 2018;378(2):126–136. doi:10.1056/NEJMoa1705334.</li>
+    <li>Wei D, Liu JY, Sun Y, et al. Frozen versus fresh single blastocyst transfer in ovulatory women: a multicentre, randomised controlled trial. Lancet. 2019;393(10178):1310–1318.</li>
+    <li>Munné S, Kaplan B, Frattarelli JL, et al. Preimplantation genetic testing for aneuploidy versus morphology as selection criteria for single frozen-thawed embryo transfer in good-prognosis patients: a multicenter randomized clinical trial (STAR). Fertil Steril. 2019;112(6):1071–1079.e7.</li>
+    <li>Yan J, Qin Y, Zhao H, et al. Live birth with or without preimplantation genetic testing for aneuploidy. N Engl J Med. 2021;385(22):2047–2058. doi:10.1056/NEJMoa2103613.</li>
+    <li>Alpha Scientists in Reproductive Medicine and ESHRE Special Interest Group of Embryology. The Istanbul consensus workshop on embryo assessment. Hum Reprod. 2011;26(6):1270–1283.</li>
+    <li>Practice Committee of the American Society for Reproductive Medicine. The use of preimplantation genetic testing for aneuploidy: a committee opinion. Fertil Steril. 2024.</li>
+  </ol>
+  <p style="font-size:12px; color:var(--mid-grey); margin-top:12px;">Protocols, doses and thresholds are indicative and unit-specific; always follow the treating clinic's protocols and current guidelines (ESHRE, RANZCOG, RTAC). Content for educational use within the Flinders Fertility rotation; not a substitute for supervised clinical judgement.</p>
+</div>
+
+</div>
+
+<div class="doc-footer">
+  <div>Flinders Fertility · Education Program · Module 3 · v1.0 Draft</div>
+  <div>For review and iteration</div>
+</div>
+
+</div>
+</body>
+</html>

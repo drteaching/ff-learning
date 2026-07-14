@@ -1,0 +1,35 @@
+/* ============================================================
+   FLINDERS FERTILITY — BRAND TOKENS
+   Clinical Rotation in Reproductive Medicine platform.
+   Flinders heritage interpretation: deep navy + gold.
+   NOT confirmed against the clinic's official brand — replace
+   these values with the official Flinders Fertility hex, logo
+   and typefaces when available. Everything derives from here.
+   ============================================================ */
+:root{
+  --ff-ink:#04203f;          /* deep Flinders navy — headers, banners */
+  --ff-primary:#0a4a8f;      /* Flinders blue — primary, headings, rules */
+  --ff-primary-2:#2f77b8;    /* lighter blue — links, secondary */
+  --ff-tint:#e9eff6;         /* blue tint — panels, hover */
+  --ff-accent:#d4a01e;       /* heritage gold — accents, used sparingly */
+  --ff-accent-tint:#f7edd2;  /* gold tint */
+  --ff-surface:#f6f8fb;      /* page background */
+  --ff-card:#ffffff;         /* cards, surfaces */
+  --ff-border:#d2dce7;       /* borders, dividers */
+  --ff-text:#2c3542;         /* body text */
+  --ff-muted:#66748a;        /* secondary text */
+  --ff-green:#2f6b4f;        /* success / target-met */
+  --ff-green-tint:#e0efe6;
+  --ff-amber:#a9782a;        /* caution / in-progress */
+  --ff-amber-tint:#f6eed9;
+  --ff-display:Georgia,'Times New Roman',serif;               /* replace w/ brand display face */
+  --ff-body:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif; /* replace w/ brand body face */
+}
+
+/* Entrustability level colours (logbook) */
+:root{
+  --ff-level-1:#66748a;  /* Observed */
+  --ff-level-2:#2f77b8;  /* Assisted */
+  --ff-level-3:#0a4a8f;  /* Supervised */
+  --ff-level-4:#2f6b4f;  /* Independent */
+}

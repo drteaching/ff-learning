@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 6 — Ethics, Law, Communication &amp; Professional Practice</title>
+<style>
+  :root {
+    --teal: #1a6b7a; --teal-light: #e8f4f6; --teal-mid: #2d8fa3;
+    --dark: #1e2d2f; --grey: #37424a; --mid-grey: #718096;
+    --border: #cbd5e0; --bg: #f7fafc; --white: #ffffff;
+    --amber: #b7791f; --amber-light: #fef3c7; --green: #276749; --green-light: #d5f0dd;
+    --clinical: #6b46c1; --clinical-light: #ede9fb;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; font-size: 15.5px; line-height: 1.7; color: var(--grey); background: var(--bg); }
+  .page-wrap { max-width: 880px; margin: 0 auto; background: var(--white); box-shadow: 0 0 30px rgba(0,0,0,0.08); }
+  .doc-header { background: var(--teal); color: white; padding: 44px 52px 40px; }
+  .doc-header .clinic-name { font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.8; margin-bottom: 10px; }
+  .doc-header .mod-label { font-size: 13px; font-weight: 600; opacity: 0.85; margin-bottom: 6px; }
+  .doc-header h1 { font-size: 27px; font-weight: 700; line-height: 1.2; margin-bottom: 10px; }
+  .doc-header .subtitle { font-size: 16px; opacity: 0.85; }
+  .doc-header .meta { margin-top: 20px; font-size: 13px; opacity: 0.75; }
+  .doc-header .meta span { font-weight: 600; opacity: 1; }
+  .nav-strip { background: var(--dark); padding: 14px 52px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .nav-strip a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 20px; transition: all 0.2s; }
+  .nav-strip a:hover { background: rgba(255,255,255,0.15); color: white; }
+  .content { padding: 0 52px 60px; }
+  h2 { font-size: 22px; font-weight: 700; color: var(--teal); margin: 44px 0 4px; padding-top: 8px; }
+  h2 .num { color: var(--teal-mid); font-size: 18px; margin-right: 8px; }
+  .section-lead { font-size: 14px; color: var(--mid-grey); font-style: italic; margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid var(--teal-light); }
+  h3 { font-size: 17px; font-weight: 700; color: var(--dark); margin: 26px 0 10px; }
+  h4 { font-size: 14px; font-weight: 700; color: var(--teal); margin: 18px 0 6px; text-transform: uppercase; letter-spacing: 0.04em; }
+  p { margin-bottom: 14px; }
+  strong { color: var(--dark); }
+  em.term { font-style: normal; font-weight: 600; color: var(--teal); }
+  ul, ol { margin: 0 0 16px 22px; }
+  li { margin-bottom: 8px; }
+  .intro-block { background: var(--teal-light); border-left: 4px solid var(--teal); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 24px 0; }
+  .intro-block p:last-child { margin-bottom: 0; }
+  .intro-block h4 { margin-top: 0; }
+  .clinical-box { background: var(--clinical-light); border-left: 4px solid var(--clinical); border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 18px 0; }
+  .clinical-box .cb-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--clinical); margin-bottom: 6px; }
+  .clinical-box p { margin-bottom: 8px; font-size: 14.5px; }
+  .clinical-box p:last-child { margin-bottom: 0; }
+  .key-box { background: var(--green-light); border-left: 4px solid var(--green); border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 18px 0; }
+  .key-box .kb-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--green); margin-bottom: 8px; }
+  .key-box ul { margin-bottom: 0; }
+  .key-box li { font-size: 14.5px; }
+  figure.diagram { margin: 24px 0; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 20px 22px 10px; }
+  figure.diagram svg { width: 100%; height: auto; display: block; }
+  figure.diagram .fig-title { font-size: 12px; font-weight: 700; color: var(--teal); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 14px; }
+  figure.diagram figcaption { font-size: 13px; color: var(--mid-grey); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--border); line-height: 1.5; }
+  table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 14px; }
+  th { background: var(--teal); color: white; padding: 10px 12px; text-align: left; font-weight: 600; font-size: 13px; }
+  td { padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:nth-child(even) td { background: var(--teal-light); }
+  .worked-example { background: var(--amber-light); border: 1px solid #f6ad55; border-radius: 8px; padding: 20px 24px; margin: 22px 0; }
+  .worked-example .we-label { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--amber); margin-bottom: 12px; }
+  .worked-example .case { font-style: italic; color: #744210; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px dashed #f6ad55; }
+  .worked-example p { font-size: 14.5px; color: #5a3d0a; }
+  .worked-example .interp { background: white; border-radius: 6px; padding: 12px 16px; margin-top: 8px; }
+  .references { margin-top: 40px; padding-top: 20px; border-top: 2px solid var(--teal); }
+  .references h3 { color: var(--teal); }
+  .references ol { font-size: 13px; color: var(--mid-grey); margin-left: 18px; }
+  .references li { margin-bottom: 6px; }
+  .capstone-box { background: linear-gradient(135deg, #1a6b7a, #2d8fa3); color: white; border-radius: 10px; padding: 24px 28px; margin: 28px 0; }
+  .capstone-box h3 { color: white; margin-top: 0; }
+  .capstone-box p { margin-bottom: 10px; }
+  .capstone-box ul { margin-left: 20px; }
+  .capstone-box li { color: rgba(255,255,255,0.92); }
+  .doc-footer { background: var(--dark); color: rgba(255,255,255,0.6); padding: 20px 52px; font-size: 12px; display: flex; justify-content: space-between; }
+  @media print { .nav-strip { display: none; } .page-wrap { box-shadow: none; } body { font-size: 11pt; background: white; } .clinical-box, .key-box, .worked-example, table, figure.diagram, .capstone-box { page-break-inside: avoid; } }
+  @media (max-width: 600px) { .content, .doc-header, .nav-strip, .doc-footer { padding-left: 22px; padding-right: 22px; } .doc-header h1 { font-size: 21px; } .doc-footer { flex-direction: column; gap: 4px; } }
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+<div class="doc-header">
+  <div class="clinic-name">Flinders Fertility · Education Program</div>
+  <div class="mod-label">Module 6 of 6 · Week 6 · Capstone</div>
+  <h1>Ethics, Law, Communication &amp; Professional Practice</h1>
+  <div class="subtitle">The judgement that holds the science together</div>
+  <div class="meta"><span>Estimated self-directed time:</span> 6–8 hours · <span>Capstone reflection &amp; presentation this week</span></div>
+</div>
+
+<div class="nav-strip">
+  <a href="#intro">Orientation</a>
+  <a href="#principles">Four principles</a>
+  <a href="#framework">The law</a>
+  <a href="#consent">Consent</a>
+  <a href="#donor">Donor &amp; surrogacy</a>
+  <a href="#coercion">Coercion &amp; safety</a>
+  <a href="#badnews">Breaking bad news</a>
+  <a href="#reflect">Reflective practice</a>
+  <a href="#close">Closing the rotation</a>
+  <a href="#reading">Further reading</a>
+</div>
+
+<div class="content">
+
+<!-- ORIENTATION -->
+<div id="intro">
+<div class="intro-block">
+  <h4>The capstone</h4>
+  <p>Five modules built your understanding of the science. This one is about everything that surrounds it: the ethical reasoning, the legal and regulatory boundaries, and the communication skills that turn clinical knowledge into humane care. Reproductive medicine is among the most ethically and legally regulated fields in all of medicine — it creates life, handles gametes and embryos across time, involves third parties, and touches identity, kinship, and grief. A technically excellent clinician who cannot navigate this dimension is not safe to practise here.</p>
+  <p>This week is also where your rotation is signed off. The communication and professionalism EPAs — explaining a plan (3), contributing to the MDT (6), communicating prognosis and difficult news (7), and recognising and responding to distress (8) — come to a head, and your capstone reflection asks you to integrate the whole six weeks.</p>
+</div>
+<p>One orienting idea: in this field, ethics and law are not abstractions bolted on at the end. They are <em>operational</em> — they determine what consent you take, what you can store and use, what you must tell a donor-conceived person, and how you counsel a couple whose cycle has failed. Treat this module as clinical, because it is.</p>
+</div>
+
+<!-- FOUR PRINCIPLES -->
+<h2 id="principles"><span class="num">1</span>The four principles — and what reproductive medicine adds</h2>
+<div class="section-lead">The familiar framework, plus two considerations unique to a field that creates people.</div>
+
+<p>The standard framework of biomedical ethics (Beauchamp &amp; Childress) gives four principles: <strong>autonomy</strong> (respecting the patient's informed choices), <strong>beneficence</strong> (acting in their interest), <strong>non-maleficence</strong> (avoiding harm), and <strong>justice</strong> (fairness in access and resources). These apply throughout medicine. Reproductive medicine adds two considerations that make its dilemmas distinctive:</p>
+<ul>
+  <li><strong>The welfare of the potential child</strong> — a person who does not yet exist but whose interests the clinic is ethically required to consider. This is written into the NHMRC guidelines and has no real parallel in most of medicine.</li>
+  <li><strong>The moral status of the embryo</strong> — how gametes and embryos are regarded, stored, donated, and disposed of, where views differ deeply and law sets limits.</li>
+</ul>
+
+<figure class="diagram">
+  <div class="fig-title">Figure 1 · The four principles in reproductive medicine</div>
+  <svg viewBox="0 0 700 320" role="img" aria-label="Four principles of biomedical ethics with reproductive examples and two ART-specific additions">
+    <!-- quadrants -->
+    <rect x="30" y="20" width="310" height="88" rx="8" fill="#e8f4f6" stroke="#1a6b7a"/>
+    <text x="46" y="44" fill="#134e5a" font-size="14" font-weight="700">Autonomy</text>
+    <text x="46" y="66" fill="#37424a" font-size="12">the couple's informed reproductive choices —</text>
+    <text x="46" y="83" fill="#37424a" font-size="12">which treatment, how many embryos, when to stop</text>
+
+    <rect x="360" y="20" width="310" height="88" rx="8" fill="#e8f4f6" stroke="#1a6b7a"/>
+    <text x="376" y="44" fill="#134e5a" font-size="14" font-weight="700">Beneficence</text>
+    <text x="376" y="66" fill="#37424a" font-size="12">offering treatment with a realistic chance —</text>
+    <text x="376" y="83" fill="#37424a" font-size="12">not false hope, not over-treatment</text>
+
+    <rect x="30" y="118" width="310" height="88" rx="8" fill="#e8f4f6" stroke="#1a6b7a"/>
+    <text x="46" y="142" fill="#134e5a" font-size="14" font-weight="700">Non-maleficence</text>
+    <text x="46" y="164" fill="#37424a" font-size="12">avoiding OHSS, multiple pregnancy,</text>
+    <text x="46" y="181" fill="#37424a" font-size="12">and unproven, costly add-ons</text>
+
+    <rect x="360" y="118" width="310" height="88" rx="8" fill="#e8f4f6" stroke="#1a6b7a"/>
+    <text x="376" y="142" fill="#134e5a" font-size="14" font-weight="700">Justice</text>
+    <text x="376" y="164" fill="#37424a" font-size="12">equitable access &amp; funding; not discriminating</text>
+    <text x="376" y="181" fill="#37424a" font-size="12">by relationship status, sexuality, or disability</text>
+
+    <!-- ART-specific band -->
+    <rect x="30" y="222" width="640" height="80" rx="8" fill="#6b46c1"/>
+    <text x="350" y="248" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">Reproductive medicine also weighs:</text>
+    <text x="350" y="272" text-anchor="middle" fill="#ede9fb" font-size="12.5">the welfare of the potential child (a person not yet in existence)</text>
+    <text x="350" y="291" text-anchor="middle" fill="#ede9fb" font-size="12.5">and the moral status of gametes and embryos across storage, donation &amp; disposal</text>
+  </svg>
+  <figcaption>The four principles frequently pull against each other here — a couple's autonomy to pursue treatment against non-maleficence when the chance is negligible, or against the welfare of a future child. Naming the tension is the first step of good ethical reasoning; the skill is weighing it transparently, not pretending it away.</figcaption>
+</figure>
+
+<!-- FRAMEWORK -->
+<h2 id="framework"><span class="num">2</span>The Australian and South Australian legal framework</h2>
+<div class="section-lead">Four layers of governance. Know which does what — students routinely confuse them.</div>
+
+<p>Regulation of ART in Australia is layered, and the layers do different jobs. Understanding the structure matters because it determines what actually constrains practice in this clinic.</p>
+
+<figure class="diagram">
+  <div class="fig-title">Figure 2 · Layers of ART governance (South Australia)</div>
+  <svg viewBox="0 0 700 340" role="img" aria-label="Four layers of ART governance from federal law to state law">
+    <rect x="60" y="20" width="580" height="66" rx="8" fill="#1a6b7a"/>
+    <text x="350" y="44" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">Commonwealth (federal) law</text>
+    <text x="350" y="65" text-anchor="middle" fill="#cfe6ea" font-size="12">Prohibition of Human Cloning for Reproduction Act 2002 · Research Involving Human Embryos Act 2002 · Maeve's Law 2022 (mito donation)</text>
+    <text x="350" y="80" text-anchor="middle" fill="#cfe6ea" font-size="11">sets outer limits on embryo research &amp; cloning — but does not regulate day-to-day clinical ART</text>
+
+    <rect x="90" y="96" width="520" height="60" rx="8" fill="#2d8fa3"/>
+    <text x="350" y="120" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">NHMRC Ethical Guidelines (2017, updated 2023)</text>
+    <text x="350" y="141" text-anchor="middle" fill="#e8f4f6" font-size="12">the national ethical standard — compliance is mandatory for accreditation</text>
+
+    <rect x="120" y="166" width="460" height="60" rx="8" fill="#5a8f9c"/>
+    <text x="350" y="190" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">RTAC Code of Practice (2024)</text>
+    <text x="350" y="211" text-anchor="middle" fill="#eef4f5" font-size="12">accreditation scheme · required for Medicare rebates · ANZARD data submission</text>
+
+    <rect x="150" y="236" width="400" height="66" rx="8" fill="#b7791f"/>
+    <text x="350" y="260" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">SA state law</text>
+    <text x="350" y="281" text-anchor="middle" fill="#fdf0d5" font-size="12">Assisted Reproductive Treatment Act 1988 + Regulations 2024</text>
+    <text x="350" y="296" text-anchor="middle" fill="#fdf0d5" font-size="11">Donor Conception Register · Surrogacy Act 2019</text>
+
+    <text x="350" y="326" text-anchor="middle" fill="#718096" font-size="11">Each inner layer operates within the one above it. In SA, all four apply to this clinic.</text>
+  </svg>
+  <figcaption>There is no single Commonwealth law governing clinical ART; federal statute addresses only cloning and embryo research. The operational constraints come from the NHMRC guidelines, the RTAC accreditation code (whose practical force is Medicare eligibility), and — in states that legislate, including SA — a state ART Act. Not all states have specific ART legislation; those that don't rely on RTAC plus NHMRC.</figcaption>
+</figure>
+
+<div class="clinical-box">
+  <div class="cb-label">◆ Clinical relevance — why RTAC accreditation is the lever</div>
+  <p>RTAC accreditation is not statutory law, yet it is arguably the most powerful control on practice, because <strong>clinics must hold it to receive Medicare rebates</strong> — and Medicare underpins the economics of ART in Australia. This is exactly the accreditation regime a Master of Reproductive Medicine and this rotation ultimately feed into, and it is why the figure-credits register, consent processes, and quality systems you have seen this rotation matter: they are audited. Compliance with the NHMRC guidelines is itself a condition of accreditation, so the layers reinforce each other.</p>
+</div>
+
+<!-- CONSENT -->
+<h2 id="consent"><span class="num">3</span>Consent in ART — wider than anywhere else in medicine</h2>
+<div class="section-lead">Consent here is not a one-off signature. It governs material that outlives the consultation, the relationship, and sometimes the person.</div>
+
+<p>Ordinary surgical consent covers one procedure at one time. ART consent must additionally govern <strong>gametes and embryos that persist for years</strong> and the many futures they might have. Both gamete providers must consent, consent can be <strong>withdrawn</strong>, and the paperwork must anticipate events that have not happened yet. The distinctive scenarios:</p>
+
+<table>
+  <thead><tr><th style="width:34%">Scenario</th><th>The consent principle</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Ongoing storage</strong></td><td>Consent specifies duration and what happens at expiry; storage limits and renewal are governed by guideline and regulation.</td></tr>
+    <tr><td><strong>Relationship breakdown</strong></td><td>Stored embryos generally cannot be used without the ongoing consent of <em>both</em> providers; one party can withdraw consent, preventing use.</td></tr>
+    <tr><td><strong>Death of a partner (posthumous use)</strong></td><td>Tightly restricted; requires specific prior consent and is subject to guideline and state law. SA law (amended 2024) now permits posthumous use of a partner's ova as well as sperm, with conditions.</td></tr>
+    <tr><td><strong>Loss of capacity</strong></td><td>Consent must be valid at the time material is used; incapacity may prevent use if fresh consent cannot be given.</td></tr>
+    <tr><td><strong>Donation to others or research</strong></td><td>Separate, explicit consent; donor-conception donations require consent to identity release (below).</td></tr>
+    <tr><td><strong>Disposal</strong></td><td>Consented pathways for embryos no longer wanted, respecting the differing views on embryo status.</td></tr>
+  </tbody>
+</table>
+
+<p>The practical point for your logbook and EPA 3: when you watch a consent conversation here, notice how much of it is about <em>the future</em> — not "do you consent to this procedure" but "what should happen to your embryos if you separate, if one of you dies, if you don't want them." That forward-looking consent is the signature feature of the field.</p>
+
+<!-- DONOR & SURROGACY -->
+<h2 id="donor"><span class="num">4</span>Donor conception and surrogacy</h2>
+<div class="section-lead">Two areas where the law has moved decisively toward the rights of the child — including a very recent SA change.</div>
+
+<h3>Donor conception — the end of anonymity</h3>
+<p>Australian practice has shifted firmly from donor anonymity to the <strong>donor-conceived person's right to know their genetic origins</strong>. Under the NHMRC guidelines, a clinic may only use a donation if the donor has consented to their identity being released to the donor-conceived person when that person turns 18 — <strong>identity-release donation is now the standard</strong>, and anonymous donation is not permitted. South Australia maintains a <em class="term">Donor Conception Register</em>.</p>
+
+<div class="clinical-box">
+  <div class="cb-label">◆ Clinical relevance — a very recent SA change (verify currency)</div>
+  <p>From <strong>26 February 2025</strong>, changes to the SA Assisted Reproductive Treatment Act give donor-conceived people access to identifying information about their donor <strong>retrospectively</strong> — regardless of when the conception occurred, and even where the donor had originally been assured of anonymity. This is a significant reversal of the pre-2004 anonymity undertakings and reflects the principle that knowledge of one's genetic heritage is a right of the donor-conceived person. It has real counselling implications for historical donors and recipient families, and it is the kind of fast-moving legal detail to confirm as current before advising anyone.</p>
+</div>
+
+<h3>Surrogacy</h3>
+<p>Across Australia, only <strong>altruistic surrogacy</strong> is lawful — the surrogate may be reimbursed for reasonable expenses but not paid a fee. <strong>Commercial surrogacy is prohibited</strong>, and some jurisdictions criminalise entering commercial arrangements even overseas. In South Australia, surrogacy is governed by the <strong>Surrogacy Act 2019</strong>, which sets the requirements a lawful arrangement must meet (including counselling and legal advice for all parties). Surrogacy involves complex parentage, consent, and psychosocial issues, and mandates counselling for everyone involved.</p>
+
+<!-- COERCION -->
+<h2 id="coercion"><span class="num">5</span>Reproductive coercion and patient safety</h2>
+<div class="section-lead">The clinic is not neutral ground — it can be a site where coercion and family violence surface.</div>
+
+<p><em class="term">Reproductive coercion</em> — pressure or control exerted over a person's reproductive choices — can present in a fertility setting: a partner insisting on treatment the other does not want, controlling decisions, or using pregnancy as a means of control. Family and domestic violence may coexist. The clinic has a duty to create space for each person to express their own wishes — which is one reason both partners are seen and consent independently, and why counsellors are integral to the team. Recognising the signs, ensuring the opportunity to speak privately, and knowing the referral pathways are core professional responsibilities, not optional extras. This connects directly to EPA 8: distress in this setting is not always about the diagnosis.</p>
+
+<!-- BAD NEWS -->
+<h2 id="badnews"><span class="num">6</span>Communicating difficult news</h2>
+<div class="section-lead">Failed cycles, poor prognosis, and abandoning treatment are among the hardest conversations in medicine. There is a method. This is EPA 7.</div>
+
+<p>Much of the communication in a fertility clinic is the delivery of unwelcome news — a failed cycle, a low chance of success, a recommendation to move to donor gametes or to stop. The <strong>SPIKES</strong> protocol gives a reliable structure for these conversations, and rehearsing it is directly relevant to your EPA 7 sign-off.</p>
+
+<figure class="diagram">
+  <div class="fig-title">Figure 3 · SPIKES — a structure for breaking bad news</div>
+  <svg viewBox="0 0 700 240" role="img" aria-label="The six steps of the SPIKES protocol for breaking bad news">
+    <defs><marker id="s6a" markerWidth="8" markerHeight="8" refX="5" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#2d8fa3"/></marker></defs>
+    <g font-size="12">
+      <rect x="20" y="30" width="200" height="52" rx="8" fill="#e8f4f6" stroke="#1a6b7a"/>
+      <text x="34" y="52" fill="#134e5a" font-size="14" font-weight="700">S — Setting</text>
+      <text x="34" y="70" fill="#37424a">privacy, no interruptions, both partners</text>
+
+      <rect x="250" y="30" width="200" height="52" rx="8" fill="#e8f4f6" stroke="#1a6b7a"/>
+      <text x="264" y="52" fill="#134e5a" font-size="14" font-weight="700">P — Perception</text>
+      <text x="264" y="70" fill="#37424a">ask what they already understand</text>
+
+      <rect x="480" y="30" width="200" height="52" rx="8" fill="#e8f4f6" stroke="#1a6b7a"/>
+      <text x="494" y="52" fill="#134e5a" font-size="14" font-weight="700">I — Invitation</text>
+      <text x="494" y="70" fill="#37424a">how much do they want to know?</text>
+
+      <rect x="20" y="120" width="200" height="52" rx="8" fill="#e8f4f6" stroke="#1a6b7a"/>
+      <text x="34" y="142" fill="#134e5a" font-size="14" font-weight="700">K — Knowledge</text>
+      <text x="34" y="160" fill="#37424a">warn, then tell plainly; no jargon</text>
+
+      <rect x="250" y="120" width="200" height="52" rx="8" fill="#e8f4f6" stroke="#1a6b7a"/>
+      <text x="264" y="142" fill="#134e5a" font-size="14" font-weight="700">E — Emotions</text>
+      <text x="264" y="160" fill="#37424a">respond with empathy, allow silence</text>
+
+      <rect x="480" y="120" width="200" height="52" rx="8" fill="#d5f0dd" stroke="#276749"/>
+      <text x="494" y="142" fill="#1e6040" font-size="14" font-weight="700">S — Strategy</text>
+      <text x="494" y="160" fill="#37424a">agree next steps &amp; summarise</text>
+    </g>
+    <line x1="220" y1="56" x2="248" y2="56" stroke="#2d8fa3" stroke-width="2" marker-end="url(#s6a)"/>
+    <line x1="450" y1="56" x2="478" y2="56" stroke="#2d8fa3" stroke-width="2" marker-end="url(#s6a)"/>
+    <line x1="220" y1="146" x2="248" y2="146" stroke="#2d8fa3" stroke-width="2" marker-end="url(#s6a)"/>
+    <line x1="450" y1="146" x2="478" y2="146" stroke="#2d8fa3" stroke-width="2" marker-end="url(#s6a)"/>
+    <path d="M580,82 C 580,100 350,100 120,118" fill="none" stroke="#2d8fa3" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#s6a)"/>
+  </svg>
+  <figcaption>SPIKES is not a script to recite but a scaffold that keeps a hard conversation humane and complete — especially the two steps clinicians most often skip under pressure: eliciting the patient's own perception first, and pausing to respond to emotion before moving to the plan.</figcaption>
+</figure>
+
+<!-- REFLECTIVE PRACTICE -->
+<h2 id="reflect"><span class="num">7</span>Reflective practice</h2>
+<div class="section-lead">The habit that turns six weeks of experience into durable learning — and the structure for your capstone reflection.</div>
+
+<p>Professional growth in a field this human depends on <strong>structured reflection</strong> — deliberately processing what happened, how it felt, and what you would do differently, rather than simply accumulating cases. <strong>Gibbs' reflective cycle</strong> gives a six-stage structure, and it is the scaffold for your capstone reflection.</p>
+
+<figure class="diagram">
+  <div class="fig-title">Figure 4 · Gibbs' reflective cycle</div>
+  <svg viewBox="0 0 620 340" role="img" aria-label="Gibbs reflective cycle with six stages arranged in a circle">
+    <defs><marker id="g6a" markerWidth="8" markerHeight="8" refX="5" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#6b46c1"/></marker></defs>
+    <circle cx="310" cy="170" r="96" fill="none" stroke="#cbd5e0" stroke-width="1.5" stroke-dasharray="5 4"/>
+    <!-- six nodes -->
+    <g font-size="12.5" font-weight="700">
+      <circle cx="310" cy="60" r="40" fill="#e8f4f6" stroke="#1a6b7a"/>
+      <text x="310" y="57" text-anchor="middle" fill="#134e5a">Description</text>
+      <text x="310" y="73" text-anchor="middle" fill="#718096" font-size="10" font-weight="400">what happened</text>
+
+      <circle cx="405" cy="115" r="40" fill="#e8f4f6" stroke="#1a6b7a"/>
+      <text x="405" y="112" text-anchor="middle" fill="#134e5a">Feelings</text>
+      <text x="405" y="128" text-anchor="middle" fill="#718096" font-size="10" font-weight="400">reactions</text>
+
+      <circle cx="405" cy="225" r="40" fill="#e8f4f6" stroke="#1a6b7a"/>
+      <text x="405" y="222" text-anchor="middle" fill="#134e5a">Evaluation</text>
+      <text x="405" y="238" text-anchor="middle" fill="#718096" font-size="10" font-weight="400">good &amp; bad</text>
+
+      <circle cx="310" cy="280" r="40" fill="#e8f4f6" stroke="#1a6b7a"/>
+      <text x="310" y="277" text-anchor="middle" fill="#134e5a">Analysis</text>
+      <text x="310" y="293" text-anchor="middle" fill="#718096" font-size="10" font-weight="400">why / sense</text>
+
+      <circle cx="215" cy="225" r="40" fill="#e8f4f6" stroke="#1a6b7a"/>
+      <text x="215" y="222" text-anchor="middle" fill="#134e5a">Conclusion</text>
+      <text x="215" y="238" text-anchor="middle" fill="#718096" font-size="10" font-weight="400">what else</text>
+
+      <circle cx="215" cy="115" r="40" fill="#d5f0dd" stroke="#276749"/>
+      <text x="215" y="112" text-anchor="middle" fill="#1e6040">Action plan</text>
+      <text x="215" y="128" text-anchor="middle" fill="#718096" font-size="10" font-weight="400">next time</text>
+    </g>
+    <!-- arrows around -->
+    <path d="M350,68 C 372,78 386,92 396,105" fill="none" stroke="#6b46c1" stroke-width="1.5" marker-end="url(#g6a)"/>
+    <path d="M411,155 C 414,175 414,195 411,210" fill="none" stroke="#6b46c1" stroke-width="1.5" marker-end="url(#g6a)"/>
+    <path d="M396,258 C 386,271 372,278 352,285" fill="none" stroke="#6b46c1" stroke-width="1.5" marker-end="url(#g6a)"/>
+    <path d="M270,285 C 250,278 236,271 226,258" fill="none" stroke="#6b46c1" stroke-width="1.5" marker-end="url(#g6a)"/>
+    <path d="M209,185 C 206,165 206,150 209,140" fill="none" stroke="#6b46c1" stroke-width="1.5" marker-end="url(#g6a)"/>
+    <path d="M226,82 C 236,69 250,62 268,66" fill="none" stroke="#6b46c1" stroke-width="1.5" marker-end="url(#g6a)"/>
+  </svg>
+  <figcaption>The value is in the lower half of the cycle. Description and feelings are easy; the learning happens in analysis (why did it go that way?) and the action plan (what will I do differently?). A reflection that stops at "it was a good experience" has skipped the point.</figcaption>
+</figure>
+
+<!-- WORKED EXAMPLE -->
+<div class="worked-example">
+  <div class="we-label">◆ Worked dilemma — reason before reading the response</div>
+  <div class="case">A couple created and froze several embryos together two years ago. They have now separated. One former partner wants to use the embryos to have a child; the other refuses and wants them discarded. Each contacts the clinic asking it to act on their wishes. What are the relevant considerations, and how should the clinic respond?</div>
+  <p><strong>Work through the ethical, legal, and communication dimensions before reading on.</strong></p>
+  <div class="interp">
+    <p style="margin-bottom:8px;"><strong>Consent (the decisive point).</strong> Embryos were created from both people's gametes, and their use generally requires the <strong>ongoing consent of both providers</strong>. Consent can be withdrawn. Here one party has withdrawn consent to use, which means the clinic <strong>cannot lawfully or ethically use the embryos</strong> to create a child, however much the other wishes it. Consent is not a one-time signature captured at freezing — it must be current at the time of use.</p>
+    <p style="margin-bottom:8px;"><strong>The four principles in tension.</strong> This is a genuine clash of two autonomies — one person's wish to reproduce against the other's equally strong right <em>not</em> to be made a parent against their will. Ethics does not resolve this by favouring the wish to have a child; the right not to be forced into unwanted genetic parenthood is generally treated as decisive, which is why the consent framework is built the way it is. The welfare of a potential child born into this conflict is a further consideration.</p>
+    <p style="margin-bottom:0;"><strong>Communication (EPA 7 &amp; 8).</strong> Both people are likely to be distressed, and one will receive an answer they do not want. The clinic's role is to explain the position clearly and compassionately, apply its consented disposition pathway for the embryos, and offer counselling to both. Notice that the anticipation of exactly this scenario is <em>why</em> the forward-looking consent in section 3 exists — the dilemma is managed at the consent stage, long before it arises.</p>
+  </div>
+</div>
+
+<div class="key-box">
+  <div class="kb-label">✓ Module 6 — the concepts you must carry forward</div>
+  <ul>
+    <li><strong>The four principles apply, plus two ART-specific weights</strong>: the welfare of the potential child and the moral status of the embryo.</li>
+    <li><strong>Governance is layered</strong>: federal embryo/cloning law → NHMRC guidelines → RTAC accreditation (Medicare) → SA state ART Act. No single Commonwealth law governs clinical ART.</li>
+    <li><strong>ART consent is forward-looking</strong> — it governs storage, separation, death, incapacity, donation and disposal, needs both providers, and can be withdrawn.</li>
+    <li><strong>Donation is identity-release</strong>; anonymous donation is not permitted, and SA now allows retrospective donor-identity access (from Feb 2025).</li>
+    <li><strong>Only altruistic surrogacy is lawful</strong>; commercial surrogacy is prohibited (SA Surrogacy Act 2019).</li>
+    <li><strong>The clinic must be alert to reproductive coercion and family violence</strong> — hence independent consent and integral counselling.</li>
+    <li><strong>SPIKES structures bad news; Gibbs structures reflection.</strong> Both are examinable and, more importantly, usable for life.</li>
+  </ul>
+</div>
+
+<!-- CLOSING THE ROTATION -->
+<h2 id="close"><span class="num">★</span>Closing the rotation</h2>
+<div class="section-lead">How the six weeks fit together, and what the capstone asks of you.</div>
+
+<div class="capstone-box">
+  <h3>The arc of the six weeks</h3>
+  <p>You began with the physiology (Module 1), learned to assess and investigate the infertile couple (Module 2), followed them through stimulation and the laboratory (Module 3), learned to see with ultrasound (Module 4), reasoned through the complex cases where algorithms fail (Module 5), and now hold the ethical, legal, and human frame that governs all of it. The through-line has been the same from the start: <strong>reproductive medicine is applied physiology practised with judgement and humanity</strong>, in one of medicine's most tightly regulated and emotionally charged fields.</p>
+  <p style="margin-bottom:0;">The point of difference of this rotation — clinical immersion in a working unit — is what your logbook documents. You have not just read about OPU, embryo grading, follicle tracking, and difficult consultations; you have been in the room. That is the thing no online course can replicate, and it is the foundation the Master of Reproductive Medicine is built upon.</p>
+</div>
+
+<h3>Your capstone assessment</h3>
+<ul>
+  <li><strong>Module quiz</strong> — covering the ethical, legal, and communication content above.</li>
+  <li><strong>Capstone reflection (≈800 words)</strong> — a structured reflection (use Gibbs) on a case or moment from the rotation that challenged or changed you. Aim for the lower half of the cycle: analysis and an action plan, not just description.</li>
+  <li><strong>Presentation (≈10 minutes)</strong> — present a case to the team, integrating the clinical reasoning and the professional/ethical dimensions. This is your EPA 6 showcase.</li>
+</ul>
+
+<p>Complete your logbook across all eight EPAs, ensure your supervisor sign-offs are current, and bring your reflection and case to the final week. The rotation ends here; the field, if it has caught you, does not.</p>
+
+<!-- READING -->
+<h2 id="reading"><span class="num">★</span>Further reading — CREI level</h2>
+<div class="section-lead">For this module the primary sources are the guidelines and statutes themselves. Read them as the operational documents they are — and always confirm the current version, as this area changes.</div>
+
+<h3>Ethical &amp; regulatory framework</h3>
+<ul>
+  <li><strong>National Health and Medical Research Council.</strong> Ethical guidelines on the use of assisted reproductive technology in clinical practice and research (2017, updated 2023). — The national ethical standard; read the sections on consent, welfare of the child, donation, and sex selection. Freely available (CC BY 4.0).</li>
+  <li><strong>Fertility Society of Australia and New Zealand.</strong> Reproductive Technology Accreditation Committee (RTAC) Code of Practice (2024 edition). — The accreditation standard that underpins Medicare eligibility.</li>
+  <li><strong>Assisted Reproductive Treatment Act 1988 (SA)</strong> and Assisted Reproductive Treatment Regulations 2024 (SA). — The governing SA statute, including the Donor Conception Register and the 2024/2025 amendments on donor identity and posthumous use.</li>
+  <li><strong>Surrogacy Act 2019 (SA).</strong> — The SA surrogacy framework (altruistic only).</li>
+</ul>
+
+<h3>Ethics &amp; communication</h3>
+<ul>
+  <li><strong>Beauchamp TL, Childress JF.</strong> Principles of Biomedical Ethics. 8th ed. Oxford University Press, 2019. — The source of the four-principles framework.</li>
+  <li><strong>Baile WF, Buckman R, Lenzi R, Glober G, Beale EA, Kudelka AP.</strong> SPIKES — a six-step protocol for delivering bad news: application to the patient with cancer. Oncologist. 2000;5(4):302–311. — The evidence-based structure for difficult conversations.</li>
+  <li><strong>Gibbs G.</strong> Learning by Doing: A Guide to Teaching and Learning Methods. Oxford Further Education Unit, 1988. — The reflective cycle used for the capstone.</li>
+</ul>
+
+<div class="clinical-box">
+  <div class="cb-label">◆ How to use this list</div>
+  <p>Unlike earlier modules, the core reading here is the guidelines and statutes rather than trials. Read the NHMRC guidelines' consent and welfare-of-the-child sections in full — they are the ethical backbone of everything you have seen this rotation. Because law in this area moves (the SA donor-identity change is a live example), always check you are reading the current version before you rely on it clinically or repeat it to a patient.</p>
+</div>
+
+<!-- REFERENCES -->
+<div class="references">
+  <h3>References</h3>
+  <ol>
+    <li>National Health and Medical Research Council. Ethical guidelines on the use of assisted reproductive technology in clinical practice and research (2017, updated 2023). Canberra: NHMRC; 2023.</li>
+    <li>Fertility Society of Australia and New Zealand, Reproductive Technology Accreditation Committee. RTAC Code of Practice (2024 edition).</li>
+    <li>Assisted Reproductive Treatment Act 1988 (SA); Assisted Reproductive Treatment Regulations 2024 (SA).</li>
+    <li>Surrogacy Act 2019 (SA).</li>
+    <li>Prohibition of Human Cloning for Reproduction Act 2002 (Cth); Research Involving Human Embryos Act 2002 (Cth); Mitochondrial Donation Law Reform (Maeve's Law) Act 2022 (Cth).</li>
+    <li>Beauchamp TL, Childress JF. Principles of Biomedical Ethics. 8th ed. New York: Oxford University Press; 2019.</li>
+    <li>Baile WF, Buckman R, Lenzi R, Glober G, Beale EA, Kudelka AP. SPIKES—a six-step protocol for delivering bad news: application to the patient with cancer. Oncologist. 2000;5(4):302–311.</li>
+    <li>Gibbs G. Learning by Doing: A Guide to Teaching and Learning Methods. Oxford: Further Education Unit, Oxford Polytechnic; 1988.</li>
+  </ol>
+  <p style="font-size:12px; color:var(--mid-grey); margin-top:12px;">Legislation, guidelines and accreditation codes change; the SA donor-conception provisions in particular were amended recently (commencing 26 February 2025). Always confirm the current version of any guideline or statute before relying on it in practice. Content for educational use within the Flinders Fertility rotation; not legal advice and not a substitute for supervised clinical judgement.</p>
+</div>
+
+</div>
+
+<div class="doc-footer">
+  <div>Flinders Fertility · Education Program · Module 6 · v1.0 Draft</div>
+  <div>Capstone · For review and iteration</div>
+</div>
+
+</div>
+</body>
+</html>

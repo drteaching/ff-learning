@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 2 — Infertility Assessment &amp; Initial Management</title>
+<style>
+  :root {
+    --teal: #1a6b7a; --teal-light: #e8f4f6; --teal-mid: #2d8fa3;
+    --dark: #1e2d2f; --grey: #37424a; --mid-grey: #718096;
+    --border: #cbd5e0; --bg: #f7fafc; --white: #ffffff;
+    --amber: #b7791f; --amber-light: #fef3c7; --green: #276749; --green-light: #d5f0dd;
+    --clinical: #6b46c1; --clinical-light: #ede9fb;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; font-size: 15.5px; line-height: 1.7; color: var(--grey); background: var(--bg); }
+  .page-wrap { max-width: 880px; margin: 0 auto; background: var(--white); box-shadow: 0 0 30px rgba(0,0,0,0.08); }
+
+  .doc-header { background: var(--teal); color: white; padding: 44px 52px 40px; }
+  .doc-header .clinic-name { font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.8; margin-bottom: 10px; }
+  .doc-header .mod-label { font-size: 13px; font-weight: 600; opacity: 0.85; margin-bottom: 6px; }
+  .doc-header h1 { font-size: 28px; font-weight: 700; line-height: 1.2; margin-bottom: 10px; }
+  .doc-header .subtitle { font-size: 16px; opacity: 0.85; }
+  .doc-header .meta { margin-top: 20px; font-size: 13px; opacity: 0.75; }
+  .doc-header .meta span { font-weight: 600; opacity: 1; }
+
+  .nav-strip { background: var(--dark); padding: 14px 52px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .nav-strip a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 20px; transition: all 0.2s; }
+  .nav-strip a:hover { background: rgba(255,255,255,0.15); color: white; }
+
+  .content { padding: 0 52px 60px; }
+  h2 { font-size: 22px; font-weight: 700; color: var(--teal); margin: 44px 0 4px; padding-top: 8px; }
+  h2 .num { color: var(--teal-mid); font-size: 18px; margin-right: 8px; }
+  .section-lead { font-size: 14px; color: var(--mid-grey); font-style: italic; margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid var(--teal-light); }
+  h3 { font-size: 17px; font-weight: 700; color: var(--dark); margin: 26px 0 10px; }
+  h4 { font-size: 14px; font-weight: 700; color: var(--teal); margin: 18px 0 6px; text-transform: uppercase; letter-spacing: 0.04em; }
+  p { margin-bottom: 14px; }
+  strong { color: var(--dark); }
+  em.term { font-style: normal; font-weight: 600; color: var(--teal); }
+  ul, ol { margin: 0 0 16px 22px; }
+  li { margin-bottom: 8px; }
+
+  .intro-block { background: var(--teal-light); border-left: 4px solid var(--teal); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 24px 0; }
+  .intro-block p:last-child { margin-bottom: 0; }
+  .intro-block h4 { margin-top: 0; }
+  .clinical-box { background: var(--clinical-light); border-left: 4px solid var(--clinical); border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 18px 0; }
+  .clinical-box .cb-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--clinical); margin-bottom: 6px; }
+  .clinical-box p { margin-bottom: 8px; font-size: 14.5px; }
+  .clinical-box p:last-child { margin-bottom: 0; }
+  .key-box { background: var(--green-light); border-left: 4px solid var(--green); border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 18px 0; }
+  .key-box .kb-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--green); margin-bottom: 8px; }
+  .key-box ul { margin-bottom: 0; }
+  .key-box li { font-size: 14.5px; }
+
+  figure.diagram { margin: 24px 0; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 20px 22px 10px; }
+  figure.diagram svg { width: 100%; height: auto; display: block; }
+  figure.diagram .fig-title { font-size: 12px; font-weight: 700; color: var(--teal); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 14px; }
+  figure.diagram figcaption { font-size: 13px; color: var(--mid-grey); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--border); line-height: 1.5; }
+
+  table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 14px; }
+  th { background: var(--teal); color: white; padding: 10px 12px; text-align: left; font-weight: 600; font-size: 13px; }
+  td { padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:nth-child(even) td { background: var(--teal-light); }
+
+  .worked-example { background: var(--amber-light); border: 1px solid #f6ad55; border-radius: 8px; padding: 20px 24px; margin: 22px 0; }
+  .worked-example .we-label { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--amber); margin-bottom: 12px; }
+  .worked-example .case { font-style: italic; color: #744210; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px dashed #f6ad55; }
+  .worked-example p { font-size: 14.5px; color: #5a3d0a; }
+  .worked-example .interp { background: white; border-radius: 6px; padding: 12px 16px; margin-top: 8px; }
+
+  .references { margin-top: 40px; padding-top: 20px; border-top: 2px solid var(--teal); }
+  .references h3 { color: var(--teal); }
+  .references ol { font-size: 13px; color: var(--mid-grey); margin-left: 18px; }
+  .references li { margin-bottom: 6px; }
+
+  .doc-footer { background: var(--dark); color: rgba(255,255,255,0.6); padding: 20px 52px; font-size: 12px; display: flex; justify-content: space-between; }
+
+  @media print { .nav-strip { display: none; } .page-wrap { box-shadow: none; } body { font-size: 11pt; background: white; } .clinical-box, .key-box, .worked-example, table, figure.diagram { page-break-inside: avoid; } }
+  @media (max-width: 600px) { .content, .doc-header, .nav-strip, .doc-footer { padding-left: 22px; padding-right: 22px; } .doc-header h1 { font-size: 22px; } .doc-footer { flex-direction: column; gap: 4px; } }
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+<div class="doc-header">
+  <div class="clinic-name">Flinders Fertility · Education Program</div>
+  <div class="mod-label">Module 2 of 6 · Week 2</div>
+  <h1>Infertility Assessment &amp; Initial Management</h1>
+  <div class="subtitle">Clinical translation — physiology becomes diagnostic reasoning</div>
+  <div class="meta"><span>Estimated self-directed time:</span> 6–8 hours · <span>Builds directly on Module 1</span></div>
+</div>
+
+<div class="nav-strip">
+  <a href="#intro">Orientation</a>
+  <a href="#defining">Defining infertility</a>
+  <a href="#history">The history</a>
+  <a href="#causes">Causes</a>
+  <a href="#ovulation">Ovulation &amp; reserve</a>
+  <a href="#tubal">Tubal &amp; uterine</a>
+  <a href="#semen">Semen analysis</a>
+  <a href="#unexplained">Unexplained</a>
+  <a href="#management">Initial management</a>
+  <a href="#communicating">Communicating</a>
+  <a href="#reading">Further reading</a>
+</div>
+
+<div class="content">
+
+<!-- ORIENTATION -->
+<div id="intro">
+<div class="intro-block">
+  <h4>From mechanism to management</h4>
+  <p>Module 1 gave you the normal system. This module is where you learn to work out how it has broken and what to do about it. The skills here — a structured history, a rational choice of investigations, an interpretation that synthesises rather than lists, and a plan communicated in plain language — are the everyday work of a fertility clinic. They are also the first three EPAs in your logbook.</p>
+  <p>Two habits to build this week. First, <strong>think in categories</strong>: ovulatory, tubal, uterine, male, unexplained. Almost every couple maps onto one or a combination, and the category dictates the pathway. Second, <strong>always assess both partners</strong>. Male factor contributes to a large share of cases and is the single most under-investigated area when a couple is worked up in a hurry. A workup that skips the semen analysis is not a workup.</p>
+</div>
+<p>Before each clinic consultation this week, write your own differential and proposed investigations before the specialist speaks. Comparing your reasoning against theirs — repeatedly — is how diagnostic judgement is built. That is the deliberate practice this module is designed around.</p>
+</div>
+
+<!-- DEFINING -->
+<h2 id="defining"><span class="num">1</span>Defining infertility and when to investigate</h2>
+<div class="section-lead">The definition sets the threshold for action — and the exceptions matter more than the rule.</div>
+
+<p><em class="term">Infertility</em> is conventionally defined as the failure to achieve a clinical pregnancy after <strong>12 months or more of regular, unprotected intercourse</strong>. That threshold reflects population data: roughly 80–85% of couples conceive within a year, so the 12-month mark identifies the minority for whom investigation is worthwhile. <em class="term">Primary infertility</em> means no prior pregnancy; <em class="term">secondary infertility</em> means difficulty after a previous conception (regardless of outcome).</p>
+
+<p>The 12-month rule is a default, not a straitjacket. Investigate <strong>earlier — at 6 months</strong> — when there is a reason the clock is against the couple or a specific cause is likely:</p>
+<ul>
+  <li><strong>Female age ≥35</strong> (and consider immediate assessment at ≥40), because ovarian reserve and oocyte quality decline steeply and delay is costly.</li>
+  <li><strong>Known or suspected cause</strong>: oligo/amenorrhoea, known tubal disease or pelvic infection, endometriosis, prior pelvic surgery, or a partner with a known reproductive problem.</li>
+  <li><strong>Iatrogenic or anatomical concern</strong>: prior chemotherapy/radiotherapy, undescended testes, or significant male urogenital history.</li>
+</ul>
+
+<div class="clinical-box">
+  <div class="cb-label">◆ Clinical relevance — age is the variable you cannot buy back</div>
+  <p>The commonest costly error in primary care is telling a 38-year-old to "keep trying for a year." By the time she re-presents, reserve and oocyte quality have both moved against her (recall the meiotic-arrest biology from Module 1). Waiting is only free when time is not the limiting factor — and for the older patient, time <em>is</em> the limiting factor. Lowering the investigation threshold for age is one of the highest-value habits in this field.</p>
+</div>
+
+<figure class="diagram">
+  <div class="fig-title">Figure 1 · Approximate contribution of the main causes</div>
+  <svg viewBox="0 0 680 250" role="img" aria-label="Bar chart of approximate contribution of causes of infertility">
+    <g font-size="13" fill="#37424a">
+      <text x="18" y="52">Ovulatory</text>
+      <text x="18" y="92">Male factor</text>
+      <text x="18" y="132">Tubal / pelvic</text>
+      <text x="18" y="172">Unexplained</text>
+      <text x="18" y="212">Uterine / other</text>
+    </g>
+    <!-- scale: 0-40%, x0=150, 12px per % -->
+    <g>
+      <rect x="150" y="36" width="300" height="24" rx="3" fill="#2d8fa3"/><text x="460" y="53" fill="#2d8fa3" font-size="12.5" font-weight="700">~25%</text>
+      <rect x="150" y="76" width="360" height="24" rx="3" fill="#b7791f"/><text x="520" y="93" fill="#b7791f" font-size="12.5" font-weight="700">~30%</text>
+      <rect x="150" y="116" width="240" height="24" rx="3" fill="#1a6b7a"/><text x="400" y="133" fill="#1a6b7a" font-size="12.5" font-weight="700">~20%</text>
+      <rect x="150" y="156" width="300" height="24" rx="3" fill="#6b46c1"/><text x="460" y="173" fill="#6b46c1" font-size="12.5" font-weight="700">~25%</text>
+      <rect x="150" y="196" width="120" height="24" rx="3" fill="#718096"/><text x="280" y="213" fill="#718096" font-size="12.5" font-weight="700">~10%</text>
+    </g>
+  </svg>
+  <figcaption>Figures are approximate and overlap — many couples have more than one factor, so the total exceeds 100%. Male factor is <strong>solely or partly responsible in roughly 40–50% of couples</strong>, which is why the male partner is investigated in every workup, not only when the woman's tests are normal.</figcaption>
+</figure>
+
+<!-- HISTORY -->
+<h2 id="history"><span class="num">2</span>The structured infertility history</h2>
+<div class="section-lead">A systematic history — for both partners — is the highest-yield, lowest-cost investigation you have. This is EPA 1.</div>
+
+<p>The history frequently points to the diagnostic category before a single test is ordered. Take it systematically for both partners; the temptation to focus on the woman is exactly the trap to avoid.</p>
+
+<h3>Both partners</h3>
+<ul>
+  <li><strong>Duration and pattern</strong>: how long trying, coital frequency and timing, any use of lubricants (some are spermicidal), previous relationships and fertility in them.</li>
+  <li><strong>Prior fertility</strong>: previous pregnancies for either partner, and their outcomes.</li>
+  <li><strong>General and lifestyle</strong>: age, BMI, smoking, alcohol, recreational drugs, occupational exposures, medications, chronic illness.</li>
+</ul>
+
+<h3>Female-specific</h3>
+<ul>
+  <li><strong>Menstrual history</strong>: cycle length and regularity (the single best proxy for ovulation), menarche, dysmenorrhoea, menorrhagia. Regular predictable cycles strongly suggest ovulation; irregular cycles point toward an ovulatory disorder.</li>
+  <li><strong>Symptoms of specific pathology</strong>: dysmenorrhoea and dyspareunia (endometriosis), galactorrhoea (hyperprolactinaemia), hirsutism/acne (hyperandrogenism/PCOS), thyroid symptoms.</li>
+  <li><strong>Gynaecological and surgical</strong>: prior pelvic infection (chlamydia — tubal risk), pelvic or tubal surgery, cervical procedures, previous contraception, cervical screening status.</li>
+</ul>
+
+<h3>Male-specific</h3>
+<ul>
+  <li><strong>Developmental and surgical</strong>: undescended testes, testicular torsion or trauma, hernia repair, vasectomy/reversal, prior fatherhood.</li>
+  <li><strong>Medical and iatrogenic</strong>: mumps orchitis, chemotherapy/radiotherapy, diabetes, spinal injury, medications (including testosterone — a common and reversible cause of azoospermia), anabolic steroid use.</li>
+  <li><strong>Sexual function</strong>: erectile and ejaculatory function, frequency, timing.</li>
+</ul>
+
+<div class="clinical-box">
+  <div class="cb-label">◆ Clinical relevance — the testosterone trap</div>
+  <p>A man on prescribed or self-administered <strong>testosterone</strong> (or anabolic steroids) suppresses his own gonadotrophins via the negative feedback you learned in Module 1 — and can be rendered azoospermic. It is a frequently missed, frequently reversible cause. Always ask directly. The fix is stopping the testosterone and allowing the axis to recover (the ~74-day spermatogenic cycle means this takes months), sometimes with adjunctive treatment.</p>
+</div>
+
+<!-- CAUSES -->
+<h2 id="causes"><span class="num">3</span>Causes and the diagnostic categories</h2>
+<div class="section-lead">Five buckets. Everything you investigate is aimed at sorting the couple into one — or several.</div>
+
+<table>
+  <tr><th>Category</th><th>Typical mechanism</th><th>Key test(s)</th></tr>
+  <tr><td><strong>Ovulatory</strong></td><td>Anovulation or oligo-ovulation — PCOS (commonest), hypothalamic, hyperprolactinaemia, thyroid, premature ovarian insufficiency</td><td>Cycle history, mid-luteal progesterone, TSH, prolactin, LH/FSH</td></tr>
+  <tr><td><strong>Tubal / pelvic</strong></td><td>Tubal occlusion or damage (prior infection, endometriosis, surgery); peritoneal adhesions</td><td>HyCoSy or HSG; laparoscopy if indicated</td></tr>
+  <tr><td><strong>Uterine</strong></td><td>Fibroids (submucosal), polyps, adhesions, congenital anomaly — affecting implantation</td><td>TVS, saline sonography, hysteroscopy</td></tr>
+  <tr><td><strong>Male</strong></td><td>Production or transport defect — see the male section</td><td>Semen analysis (repeat if abnormal)</td></tr>
+  <tr><td><strong>Unexplained</strong></td><td>No identifiable cause after a complete standard workup (~25%)</td><td>Diagnosis of exclusion</td></tr>
+</table>
+
+<p>The categories are not mutually exclusive — combined factors are common, and this is why the workup runs all streams rather than stopping at the first abnormality. A woman with PCOS can also have a partner with oligospermia; finding one does not excuse you from looking for the other.</p>
+
+<figure class="diagram">
+  <div class="fig-title">Figure 2 · The standard diagnostic workup</div>
+  <svg viewBox="0 0 700 440" role="img" aria-label="Flow diagram of the infertility diagnostic workup">
+    <defs>
+      <marker id="m2a" markerWidth="9" markerHeight="9" refX="6" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#1a6b7a"/></marker>
+    </defs>
+    <!-- presentation -->
+    <rect x="200" y="14" width="300" height="46" rx="8" fill="#1a6b7a"/>
+    <text x="350" y="34" text-anchor="middle" fill="#fff" font-size="13.5" font-weight="700">Couple presents</text>
+    <text x="350" y="51" text-anchor="middle" fill="#cfe6ea" font-size="11.5">≥12 months trying (≥6 if age ≥35 or a known cause)</text>
+    <line x1="350" y1="60" x2="350" y2="82" stroke="#1a6b7a" stroke-width="2.5" marker-end="url(#m2a)"/>
+    <!-- history/exam -->
+    <rect x="200" y="84" width="300" height="44" rx="8" fill="#2d8fa3"/>
+    <text x="350" y="104" text-anchor="middle" fill="#fff" font-size="13.5" font-weight="700">Structured history + examination</text>
+    <text x="350" y="120" text-anchor="middle" fill="#e8f4f6" font-size="11.5">BOTH partners</text>
+    <!-- three streams -->
+    <line x1="350" y1="128" x2="350" y2="146" stroke="#1a6b7a" stroke-width="2.5"/>
+    <line x1="120" y1="146" x2="580" y2="146" stroke="#1a6b7a" stroke-width="2"/>
+    <line x1="120" y1="146" x2="120" y2="166" stroke="#1a6b7a" stroke-width="2.5" marker-end="url(#m2a)"/>
+    <line x1="350" y1="146" x2="350" y2="166" stroke="#1a6b7a" stroke-width="2.5" marker-end="url(#m2a)"/>
+    <line x1="580" y1="146" x2="580" y2="166" stroke="#1a6b7a" stroke-width="2.5" marker-end="url(#m2a)"/>
+
+    <rect x="30" y="168" width="180" height="96" rx="8" fill="#e8f4f6" stroke="#1a6b7a"/>
+    <text x="120" y="188" text-anchor="middle" fill="#134e5a" font-size="12.5" font-weight="700">Ovulation &amp; reserve</text>
+    <text x="120" y="208" text-anchor="middle" fill="#37424a" font-size="11">cycle history</text>
+    <text x="120" y="224" text-anchor="middle" fill="#37424a" font-size="11">mid-luteal progesterone</text>
+    <text x="120" y="240" text-anchor="middle" fill="#37424a" font-size="11">AMH / AFC</text>
+    <text x="120" y="256" text-anchor="middle" fill="#37424a" font-size="11">TSH, prolactin</text>
+
+    <rect x="260" y="168" width="180" height="96" rx="8" fill="#e8f4f6" stroke="#1a6b7a"/>
+    <text x="350" y="188" text-anchor="middle" fill="#134e5a" font-size="12.5" font-weight="700">Tubal &amp; uterine</text>
+    <text x="350" y="210" text-anchor="middle" fill="#37424a" font-size="11">HyCoSy or HSG</text>
+    <text x="350" y="228" text-anchor="middle" fill="#37424a" font-size="11">TVS ± saline sono</text>
+    <text x="350" y="246" text-anchor="middle" fill="#37424a" font-size="11">laparoscopy if indicated</text>
+
+    <rect x="490" y="168" width="180" height="96" rx="8" fill="#fef3c7" stroke="#b7791f"/>
+    <text x="580" y="188" text-anchor="middle" fill="#8a5a12" font-size="12.5" font-weight="700">Male factor</text>
+    <text x="580" y="210" text-anchor="middle" fill="#5a3d0a" font-size="11">semen analysis</text>
+    <text x="580" y="228" text-anchor="middle" fill="#5a3d0a" font-size="11">repeat if abnormal</text>
+    <text x="580" y="246" text-anchor="middle" fill="#5a3d0a" font-size="11">(WHO 2021 limits)</text>
+
+    <!-- converge -->
+    <line x1="120" y1="264" x2="120" y2="292" stroke="#1a6b7a" stroke-width="2"/>
+    <line x1="580" y1="264" x2="580" y2="292" stroke="#1a6b7a" stroke-width="2"/>
+    <line x1="350" y1="264" x2="350" y2="292" stroke="#1a6b7a" stroke-width="2"/>
+    <line x1="120" y1="292" x2="580" y2="292" stroke="#1a6b7a" stroke-width="2"/>
+    <line x1="350" y1="292" x2="350" y2="312" stroke="#1a6b7a" stroke-width="2.5" marker-end="url(#m2a)"/>
+
+    <rect x="200" y="314" width="300" height="44" rx="8" fill="#2d8fa3"/>
+    <text x="350" y="334" text-anchor="middle" fill="#fff" font-size="13.5" font-weight="700">Synthesise → diagnostic category</text>
+    <text x="350" y="350" text-anchor="middle" fill="#e8f4f6" font-size="11">ovulatory · tubal · uterine · male · unexplained</text>
+    <line x1="350" y1="358" x2="350" y2="380" stroke="#1a6b7a" stroke-width="2.5" marker-end="url(#m2a)"/>
+    <rect x="200" y="382" width="300" height="40" rx="8" fill="#1a6b7a"/>
+    <text x="350" y="407" text-anchor="middle" fill="#fff" font-size="13.5" font-weight="700">Individualised management plan</text>
+  </svg>
+  <figcaption>All three streams run in parallel from the first visit — the workup is not sequential. Stopping at the first abnormality is the classic error, because combined factors are common and each stream changes the plan.</figcaption>
+</figure>
+
+<!-- OVULATION -->
+<h2 id="ovulation"><span class="num">4</span>Assessing ovulation and ovarian reserve</h2>
+<div class="section-lead">This section applies Module 1's hormone logic directly. Two different questions: is she ovulating, and how many eggs remain?</div>
+
+<h3>Is she ovulating?</h3>
+<p>Regular, predictable cycles (21–35 days) are reassuring but not proof. Confirmation comes from a <strong>mid-luteal progesterone</strong>, drawn about 7 days before the expected next period (day 21 of a 28-day cycle, but adjust for cycle length — the luteal phase is fixed, the follicular phase varies). A level above roughly <strong>30 nmol/L</strong> confirms ovulation. In irregular cycles, timing the test is harder and it may need repeating. If anovulation is confirmed, the workup pivots to <strong>why</strong>: TSH, prolactin, and the LH/FSH pattern and androgens that point to PCOS (recall the Rotterdam criteria from Module 1).</p>
+
+<h3>How many eggs remain — ovarian reserve?</h3>
+<p>A distinct question with a distinct purpose. <strong>AMH</strong> (cycle-independent) and the <strong>antral follicle count</strong> (AFC, on transvaginal ultrasound) together estimate the size of the recruitable follicle pool. Their main clinical use is <strong>planning treatment and dose</strong>, not diagnosing infertility: they predict how a woman will respond to stimulation, flagging both poor responders and those at risk of over-response and OHSS. As stressed in Module 1, a low reserve is not a verdict of infertility — it is information about the treatment runway and the urgency of the conversation.</p>
+
+<div class="clinical-box">
+  <div class="cb-label">◆ Clinical relevance — reserve ≠ fertility, and the counselling that follows</div>
+  <p>Patients routinely arrive believing a low AMH means they "can't have children," often after an online result. Part of the clinical work is undoing that: AMH predicts <em>egg quantity and stimulation response</em>, not the monthly chance of natural conception, and a young woman with low AMH usually still has good-quality eggs. Conversely, a normal AMH in a 41-year-old does not rescue her from the age-related quality decline. Holding both truths at once — and conveying them without either false alarm or false reassurance — is EPA 7 in action.</p>
+</div>
+
+<!-- TUBAL -->
+<h2 id="tubal"><span class="num">5</span>Tubal and uterine assessment</h2>
+<div class="section-lead">Can the gametes meet, and can an embryo implant? Two anatomical questions with escalating tests.</div>
+
+<h3>Tubal patency</h3>
+<p>Tubal factor accounts for roughly a fifth of cases, often from prior pelvic infection (particularly chlamydia). First-line assessment is either <em class="term">hysterosalpingo-contrast-sonography (HyCoSy)</em> — ultrasound-based, no ionising radiation, done in the clinic — or <em class="term">hysterosalpingography (HSG)</em>, a radiographic contrast study. The ESHRE unexplained-infertility guideline regards HyCoSy and HSG as comparable for tubal assessment, and both are reasonable first-line choices; HyCoSy has the practical advantages of no radiation and same-visit ultrasound of the uterus and ovaries. <em class="term">Laparoscopy with chromopertubation</em> remains the definitive test and is reserved for when tubal disease is likely (e.g. suspected endometriosis or prior pelvic infection) or when treatment might occur in the same procedure.</p>
+
+<div class="clinical-box">
+  <div class="cb-label">◆ Clinical relevance — the hydrosalpinx problem</div>
+  <p>A <strong>hydrosalpinx</strong> — a blocked, fluid-filled tube — does more than prevent gamete transport: the fluid is actively toxic to embryos and roughly halves IVF success if it communicates with the uterine cavity. This is why a hydrosalpinx identified before IVF is usually surgically dealt with (salpingectomy or proximal occlusion) rather than left alone. Recognising it on the tubal assessment changes the surgical plan before IVF, not after a failed cycle.</p>
+</div>
+
+<h3>Uterine cavity</h3>
+<p>The cavity is assessed for lesions that impair implantation — submucosal fibroids, endometrial polyps, intrauterine adhesions, and congenital anomalies. Transvaginal ultrasound is the screen; <strong>saline infusion sonography</strong> or <strong>hysteroscopy</strong> defines cavity lesions more precisely, with hysteroscopy offering diagnosis and treatment in one. Not every fibroid matters — <strong>submucosal</strong> fibroids distorting the cavity are the ones that impair fertility, whereas small intramural or subserosal fibroids often do not, a distinction that comes from the FIGO classification you will meet in Module 4.</p>
+
+<!-- SEMEN -->
+<h2 id="semen"><span class="num">6</span>Semen analysis — the male workup</h2>
+<div class="section-lead">The single most informative male test, and the most misread. Know the WHO 2021 limits and what they do and do not mean.</div>
+
+<p>A semen analysis is mandatory in every couple's workup. It must be performed to a proper standard (2–7 days' abstinence, correct collection, analysis by an accredited laboratory) and interpreted against the <strong>WHO 2021 (6th edition)</strong> lower reference limits. These limits are the <strong>5th centile</strong> of a reference population of ~3,500 men whose partners conceived naturally within 12 months — statistical benchmarks, not diagnostic thresholds.</p>
+
+<table>
+  <tr><th>Parameter</th><th>WHO 2021 lower reference limit (5th centile)</th></tr>
+  <tr><td>Semen volume</td><td>1.4 mL</td></tr>
+  <tr><td>Sperm concentration</td><td>16 million / mL</td></tr>
+  <tr><td>Total sperm number</td><td>39 million / ejaculate</td></tr>
+  <tr><td>Total motility (progressive + non-progressive)</td><td>42%</td></tr>
+  <tr><td>Progressive motility</td><td>30%</td></tr>
+  <tr><td>Vitality (live)</td><td>54%</td></tr>
+  <tr><td>Normal forms (morphology)</td><td>4%</td></tr>
+</table>
+
+<h3>Interpreting the result</h3>
+<p>Two principles matter more than the numbers. First, a result below a reference limit means the value sits in the lowest 5% of recently fertile men — <strong>not</strong> that conception is impossible. The parameters are continuous, the cut-offs are arbitrary lines, and a borderline result should not be over-read. Second, semen quality varies substantially between samples, so <strong>an abnormal result is repeated</strong> (usually after ~3 months, reflecting the spermatogenic cycle) before it is acted on. A single low count is a prompt to repeat, not a diagnosis.</p>
+
+<p>The descriptive vocabulary is worth knowing: <em class="term">oligozoospermia</em> (low concentration), <em class="term">asthenozoospermia</em> (reduced motility), <em class="term">teratozoospermia</em> (reduced normal forms), the common combination <em class="term">oligoasthenoteratozoospermia (OAT)</em>, and <em class="term">azoospermia</em> (no sperm in the ejaculate). Azoospermia forces the key downstream distinction — obstructive versus non-obstructive — which drives the male-factor pathway covered in Module 5.</p>
+
+<!-- UNEXPLAINED -->
+<h2 id="unexplained"><span class="num">7</span>Unexplained infertility</h2>
+<div class="section-lead">A quarter of couples. A diagnosis of exclusion, and a genuine area of clinical disagreement.</div>
+
+<p><em class="term">Unexplained infertility</em> is diagnosed when a couple has failed to conceive over an adequate period despite a <strong>complete, normal standard workup</strong> — confirmed ovulation, patent tubes, a normal uterine cavity, and a normal semen analysis, in a woman of reasonable reproductive age. It is not a non-diagnosis: many of these couples have subtle, unmeasured impairments in gamete quality, fertilisation, or implantation that current tests cannot detect.</p>
+
+<p>Management is genuinely contested, and it is worth understanding the disagreement rather than memorising one answer. There are three broad options: <strong>expectant management</strong> (continued trying, appropriate when the prognosis is good and duration short), <strong>ovarian stimulation with intrauterine insemination (IUI)</strong>, and <strong>IVF</strong>. Guidelines diverge: NICE has favoured moving to IVF after a defined period, whereas the 2023 ESHRE guideline supports stimulated IUI as a reasonable first-line active treatment. The evidence base is limited and the trials conflict, which is precisely why prognosis — age, duration, and reserve — drives the individualised decision more than any single guideline.</p>
+
+<div class="clinical-box">
+  <div class="cb-label">◆ Clinical relevance — "unexplained" is a prognosis conversation</div>
+  <p>Because there is no lesion to fix, the counselling shifts to probabilities and time. A 31-year-old with 18 months of unexplained infertility and good reserve has a real chance with continued trying or IUI; a 39-year-old with the same label has far less runway and is usually advised toward IVF sooner. The label is identical; the plan is not — because the prognosis is not. Communicating that distinction honestly, without over-promising, is the skill on display.</p>
+</div>
+
+<!-- MANAGEMENT -->
+<h2 id="management"><span class="num">8</span>From diagnosis to initial management</h2>
+<div class="section-lead">The category sets the direction; prognosis sets the pace.</div>
+
+<p>Initial management follows the diagnostic category, with a general principle of using the <strong>least invasive effective option first</strong> — tempered by the couple's prognosis, which can justify escalating faster.</p>
+
+<ul>
+  <li><strong>Ovulatory disorder</strong> → treat the cause (thyroid, prolactin) and induce ovulation. <strong>Letrozole</strong> is first-line for PCOS-related anovulation (superior live-birth rates to clomiphene in PCOS), with lifestyle optimisation. This restores the missing step — recall that in PCOS the follicles are there but a dominant one is not selected.</li>
+  <li><strong>Tubal factor</strong> → depends on severity. Minor disease may be amenable to surgery; significant bilateral disease or hydrosalpinx generally points to IVF (with the hydrosalpinx dealt with first).</li>
+  <li><strong>Uterine factor</strong> → hysteroscopic correction of the relevant lesion (submucosal fibroid, polyp, adhesions) before or alongside other treatment.</li>
+  <li><strong>Male factor</strong> → mild abnormalities may be managed with IUI or lifestyle change; significant male factor points to IVF with <strong>ICSI</strong> (recall from Module 1 that ICSI bypasses the fertilisation steps failing sperm cannot accomplish).</li>
+  <li><strong>Unexplained</strong> → expectant management, stimulated IUI, or IVF, guided by prognosis as discussed above.</li>
+</ul>
+
+<figure class="diagram">
+  <div class="fig-title">Figure 3 · The treatment escalation ladder</div>
+  <svg viewBox="0 0 700 270" role="img" aria-label="Treatment escalation from expectant management to ovulation induction/IUI to IVF/ICSI, with modifiers that accelerate escalation">
+    <defs>
+      <marker id="m3a" markerWidth="10" markerHeight="10" refX="7" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1a6b7a"/></marker>
+    </defs>
+    <!-- ladder boxes -->
+    <rect x="30" y="120" width="180" height="70" rx="8" fill="#e8f4f6" stroke="#1a6b7a"/>
+    <text x="120" y="148" text-anchor="middle" fill="#134e5a" font-size="13" font-weight="700">Expectant</text>
+    <text x="120" y="167" text-anchor="middle" fill="#37424a" font-size="11">timed intercourse,</text>
+    <text x="120" y="182" text-anchor="middle" fill="#37424a" font-size="11">lifestyle optimisation</text>
+
+    <rect x="260" y="120" width="180" height="70" rx="8" fill="#d5e9ee" stroke="#1a6b7a"/>
+    <text x="350" y="148" text-anchor="middle" fill="#134e5a" font-size="13" font-weight="700">OI ± IUI</text>
+    <text x="350" y="167" text-anchor="middle" fill="#37424a" font-size="11">letrozole for anovulation;</text>
+    <text x="350" y="182" text-anchor="middle" fill="#37424a" font-size="11">stimulated IUI</text>
+
+    <rect x="490" y="120" width="180" height="70" rx="8" fill="#1a6b7a"/>
+    <text x="580" y="148" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">IVF / ICSI</text>
+    <text x="580" y="167" text-anchor="middle" fill="#cfe6ea" font-size="11">ICSI for male factor;</text>
+    <text x="580" y="182" text-anchor="middle" fill="#cfe6ea" font-size="11">tubal / failed prior tx</text>
+
+    <line x1="210" y1="155" x2="258" y2="155" stroke="#1a6b7a" stroke-width="2.5" marker-end="url(#m3a)"/>
+    <line x1="440" y1="155" x2="488" y2="155" stroke="#1a6b7a" stroke-width="2.5" marker-end="url(#m3a)"/>
+
+    <!-- modifiers accelerate -->
+    <rect x="120" y="30" width="470" height="52" rx="8" fill="#fef3c7" stroke="#b7791f"/>
+    <text x="355" y="50" text-anchor="middle" fill="#8a5a12" font-size="12.5" font-weight="700">Factors that accelerate escalation (skip rungs):</text>
+    <text x="355" y="70" text-anchor="middle" fill="#5a3d0a" font-size="11.5">older age · long duration · low reserve · bilateral tubal disease · significant male factor</text>
+    <path d="M355,82 C 355,98 555,98 570,116" fill="none" stroke="#b7791f" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#m3a)"/>
+
+    <text x="350" y="230" text-anchor="middle" fill="#718096" font-size="12">Least invasive first — unless prognosis says otherwise.</text>
+  </svg>
+  <figcaption>The default is to climb the ladder from the bottom, but prognosis routinely justifies skipping rungs — an older woman with low reserve and a partner with significant male factor is not served by months of expectant management. The plan is category plus prognosis, not category alone.</figcaption>
+</figure>
+
+<div class="worked-example">
+  <div class="we-label">◆ Worked interpretation — work through it before the answer</div>
+  <div class="case">34-year-old woman, 34-year-old male partner. 2 years of primary infertility, intercourse 2–3×/week. Regular 29-day cycles; mid-luteal progesterone 42 nmol/L; AMH 22 pmol/L (normal); TSH and prolactin normal. HyCoSy: both tubes patent, normal cavity. Semen analysis: volume 2.0 mL, concentration 12 million/mL, total motility 38%, progressive 24%, normal forms 3%. No prior semen test.</div>
+  <p><strong>Sort the streams first.</strong> Which category or categories does this couple fall into? What is your next step before committing to a plan?</p>
+  <div class="interp">
+    <p style="margin-bottom:8px;"><strong>Interpretation.</strong> Ovulation is confirmed (progesterone 42 &gt; 30; regular cycles) and reserve is normal (AMH 22). Tubes are patent and the cavity is normal. The abnormality is the <strong>semen analysis</strong>: concentration (12 vs 16), total motility (38 vs 42), progressive motility (24 vs 30) and morphology (3 vs 4) all sit just below the WHO 2021 limits — a mild <strong>oligoasthenoteratozoospermia</strong> pattern.</p>
+    <p style="margin-bottom:8px;"><strong>Critical next step.</strong> This is a single, first semen analysis with borderline-low values. Do <strong>not</strong> diagnose or plan off it — <strong>repeat the semen analysis</strong> (after ~3 months) before deciding. Semen parameters vary between samples, and a repeat may normalise or confirm.</p>
+    <p style="margin-bottom:0;"><strong>Direction.</strong> If the repeat confirms mild male factor: given her good prognosis (age 34, ovulatory, normal reserve, patent tubes), reasonable initial options are lifestyle optimisation and a trial of stimulated IUI, reserving IVF/ICSI for failure or if repeat testing shows more significant male factor. If the repeat normalises, this becomes unexplained infertility of 2 years' duration — a prognosis-led conversation. Either way, the decision waits on the confirmatory test.</p>
+  </div>
+</div>
+
+<!-- COMMUNICATING -->
+<h2 id="communicating"><span class="num">9</span>Communicating the plan</h2>
+<div class="section-lead">The consultation is a clinical intervention in its own right. This is EPA 3.</div>
+
+<p>A diagnosis and plan are worthless if the couple leaves confused or falsely reassured. The initial-management consultation has a recognisable structure worth observing deliberately this week: <strong>summarise the findings</strong> in plain language (what each test showed and what it means), <strong>frame the diagnosis</strong> honestly including uncertainty (especially for "unexplained"), <strong>lay out the options</strong> with their trade-offs, <strong>give a realistic prognosis</strong> without false certainty, and <strong>check understanding</strong> before agreeing the next step.</p>
+
+<p>Infertility consultations carry emotional weight that a purely technical account misses. Couples arrive anxious, sometimes grieving, often having waited a long time. The best clinicians you observe this week will hold the clinical content and the emotional reality at once — neither retreating into jargon nor abandoning accuracy to reassure. Watch how they do it; that integration is the skill, and it is harder than it looks.</p>
+
+<div class="key-box">
+  <div class="kb-label">✓ Module 2 — the concepts you must carry forward</div>
+  <ul>
+    <li><strong>Investigate at 12 months — or 6 months if age ≥35 or a cause is likely.</strong> Age is the variable you cannot buy back.</li>
+    <li><strong>Sort every couple into categories</strong>: ovulatory, tubal, uterine, male, unexplained — and remember they overlap.</li>
+    <li><strong>Always assess both partners.</strong> A workup without a semen analysis is incomplete; male factor is contributory in ~40–50%.</li>
+    <li><strong>Ovulation and ovarian reserve are different questions</strong>: mid-luteal progesterone (&gt;30 nmol/L) confirms ovulation; AMH/AFC guide treatment, not fertility itself.</li>
+    <li><strong>Know the WHO 2021 semen limits and their meaning</strong>: 5th-centile benchmarks, not diagnostic lines. Repeat an abnormal result before acting.</li>
+    <li><strong>Management = category + prognosis.</strong> Least invasive first, but age, duration, reserve and male factor justify escalating faster.</li>
+  </ul>
+</div>
+
+<!-- READING -->
+<h2 id="reading"><span class="num">★</span>Further reading — CREI level</h2>
+<div class="section-lead">Scoped to this module: diagnostic evaluation, semen analysis standards, and the management of unexplained infertility. All peer-reviewed or official guidelines; verify against the latest editions.</div>
+
+<h3>Diagnostic evaluation</h3>
+<ul>
+  <li><strong>Practice Committee of the American Society for Reproductive Medicine.</strong> Fertility evaluation of infertile women: a committee opinion. <em>Fertil Steril.</em> 2021;116(5):1255–1265. — The current systematic account of the female workup: what to test, in what order, and why least-invasive-first.</li>
+  <li><strong>National Institute for Health and Care Excellence.</strong> Fertility problems: assessment and treatment (CG156). 2013, updated 2017. — The widely used UK framework for investigation thresholds and initial management; useful to contrast with ESHRE on unexplained infertility.</li>
+</ul>
+
+<h3>Ovarian reserve</h3>
+<ul>
+  <li><strong>Broer SL, Broekmans FJM, Laven JSE, Fauser BCJM.</strong> Anti-Müllerian hormone: ovarian reserve testing and its potential clinical implications. <em>Hum Reprod Update.</em> 2014;20(5):688–701. doi:10.1093/humupd/dmu020. — Carried over from Module 1: the definitive account of what reserve testing does and does not predict, directly relevant to the workup.</li>
+</ul>
+
+<h3>Semen analysis</h3>
+<ul>
+  <li><strong>World Health Organization.</strong> WHO Laboratory Manual for the Examination and Processing of Human Semen. 6th ed. Geneva: WHO; 2021. — The source for the reference limits and standardised methodology. Read the front matter on why the values are decision aids, not diagnostic cut-offs.</li>
+</ul>
+
+<h3>Unexplained infertility</h3>
+<ul>
+  <li><strong>ESHRE Guideline Group on Unexplained Infertility</strong> (Romualdi D, Ata B, Bhattacharya S, et al). Evidence-based guideline: unexplained infertility. <em>Hum Reprod.</em> 2023;38(10):1881–1890. — The current European position, including the case for stimulated IUI as first-line and the comparability of HyCoSy and HSG. The best single entry point to the management debate.</li>
+</ul>
+
+<div class="clinical-box">
+  <div class="cb-label">◆ How to use this list</div>
+  <p>Read the ASRM committee opinion and the ESHRE unexplained-infertility guideline in full — they are concise, practical, and represent the two poles of current practice. For the semen manual, the front matter and reference-limit rationale are the parts that change how you interpret a report. Module 5 carries the deeper male-factor and endometriosis primary literature; Module 3 covers stimulation and OHSS.</p>
+</div>
+
+<!-- REFERENCES -->
+<div class="references">
+  <h3>References</h3>
+  <ol>
+    <li>Practice Committee of the American Society for Reproductive Medicine. Fertility evaluation of infertile women: a committee opinion. Fertil Steril. 2021;116(5):1255–1265. doi:10.1016/j.fertnstert.2021.08.038.</li>
+    <li>ESHRE Guideline Group on Unexplained Infertility; Romualdi D, Ata B, Bhattacharya S, et al. Evidence-based guideline: unexplained infertility. Hum Reprod. 2023;38(10):1881–1890. doi:10.1093/humrep/dead150.</li>
+    <li>World Health Organization. WHO Laboratory Manual for the Examination and Processing of Human Semen. 6th ed. Geneva: WHO; 2021.</li>
+    <li>National Institute for Health and Care Excellence. Fertility problems: assessment and treatment (CG156). 2013, updated 2017.</li>
+    <li>Broer SL, Broekmans FJM, Laven JSE, Fauser BCJM. Anti-Müllerian hormone: ovarian reserve testing and its potential clinical implications. Hum Reprod Update. 2014;20(5):688–701. doi:10.1093/humupd/dmu020.</li>
+    <li>Teede HJ, et al. Recommendations from the 2023 International Evidence-based Guideline for the Assessment and Management of Polycystic Ovary Syndrome. J Clin Endocrinol Metab. 2023;108(10):2447–2469. doi:10.1210/clinem/dgad463.</li>
+  </ol>
+  <p style="font-size:12px; color:var(--mid-grey); margin-top:12px;">Reference thresholds are indicative and lab-dependent; always interpret against the reporting laboratory's own reference ranges and current local guidelines (RANZCOG, ESHRE, ASRM, NICE). Content for educational use within the Flinders Fertility rotation; not a substitute for supervised clinical judgement.</p>
+</div>
+
+</div>
+
+<div class="doc-footer">
+  <div>Flinders Fertility · Education Program · Module 2 · v1.0 Draft</div>
+  <div>For review and iteration</div>
+</div>
+
+</div>
+</body>
+</html>

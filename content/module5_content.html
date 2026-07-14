@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 5 — Complex Cases: Endometriosis, Male Factor &amp; Advanced ART</title>
+<style>
+  :root {
+    --teal: #1a6b7a; --teal-light: #e8f4f6; --teal-mid: #2d8fa3;
+    --dark: #1e2d2f; --grey: #37424a; --mid-grey: #718096;
+    --border: #cbd5e0; --bg: #f7fafc; --white: #ffffff;
+    --amber: #b7791f; --amber-light: #fef3c7; --green: #276749; --green-light: #d5f0dd;
+    --clinical: #6b46c1; --clinical-light: #ede9fb;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; font-size: 15.5px; line-height: 1.7; color: var(--grey); background: var(--bg); }
+  .page-wrap { max-width: 880px; margin: 0 auto; background: var(--white); box-shadow: 0 0 30px rgba(0,0,0,0.08); }
+  .doc-header { background: var(--teal); color: white; padding: 44px 52px 40px; }
+  .doc-header .clinic-name { font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.8; margin-bottom: 10px; }
+  .doc-header .mod-label { font-size: 13px; font-weight: 600; opacity: 0.85; margin-bottom: 6px; }
+  .doc-header h1 { font-size: 27px; font-weight: 700; line-height: 1.2; margin-bottom: 10px; }
+  .doc-header .subtitle { font-size: 16px; opacity: 0.85; }
+  .doc-header .meta { margin-top: 20px; font-size: 13px; opacity: 0.75; }
+  .doc-header .meta span { font-weight: 600; opacity: 1; }
+  .nav-strip { background: var(--dark); padding: 14px 52px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .nav-strip a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 20px; transition: all 0.2s; }
+  .nav-strip a:hover { background: rgba(255,255,255,0.15); color: white; }
+  .content { padding: 0 52px 60px; }
+  h2 { font-size: 22px; font-weight: 700; color: var(--teal); margin: 44px 0 4px; padding-top: 8px; }
+  h2 .num { color: var(--teal-mid); font-size: 18px; margin-right: 8px; }
+  .section-lead { font-size: 14px; color: var(--mid-grey); font-style: italic; margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid var(--teal-light); }
+  h3 { font-size: 17px; font-weight: 700; color: var(--dark); margin: 26px 0 10px; }
+  h4 { font-size: 14px; font-weight: 700; color: var(--teal); margin: 18px 0 6px; text-transform: uppercase; letter-spacing: 0.04em; }
+  p { margin-bottom: 14px; }
+  strong { color: var(--dark); }
+  em.term { font-style: normal; font-weight: 600; color: var(--teal); }
+  ul, ol { margin: 0 0 16px 22px; }
+  li { margin-bottom: 8px; }
+  .intro-block { background: var(--teal-light); border-left: 4px solid var(--teal); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 24px 0; }
+  .intro-block p:last-child { margin-bottom: 0; }
+  .intro-block h4 { margin-top: 0; }
+  .clinical-box { background: var(--clinical-light); border-left: 4px solid var(--clinical); border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 18px 0; }
+  .clinical-box .cb-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--clinical); margin-bottom: 6px; }
+  .clinical-box p { margin-bottom: 8px; font-size: 14.5px; }
+  .clinical-box p:last-child { margin-bottom: 0; }
+  .key-box { background: var(--green-light); border-left: 4px solid var(--green); border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 18px 0; }
+  .key-box .kb-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--green); margin-bottom: 8px; }
+  .key-box ul { margin-bottom: 0; }
+  .key-box li { font-size: 14.5px; }
+  figure.diagram { margin: 24px 0; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 20px 22px 10px; }
+  figure.diagram svg { width: 100%; height: auto; display: block; }
+  figure.diagram .fig-title { font-size: 12px; font-weight: 700; color: var(--teal); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 14px; }
+  figure.diagram figcaption { font-size: 13px; color: var(--mid-grey); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--border); line-height: 1.5; }
+  table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 14px; }
+  th { background: var(--teal); color: white; padding: 10px 12px; text-align: left; font-weight: 600; font-size: 13px; }
+  td { padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:nth-child(even) td { background: var(--teal-light); }
+  .worked-example { background: var(--amber-light); border: 1px solid #f6ad55; border-radius: 8px; padding: 20px 24px; margin: 22px 0; }
+  .worked-example .we-label { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--amber); margin-bottom: 12px; }
+  .worked-example .case { font-style: italic; color: #744210; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px dashed #f6ad55; }
+  .worked-example p { font-size: 14.5px; color: #5a3d0a; }
+  .worked-example .interp { background: white; border-radius: 6px; padding: 12px 16px; margin-top: 8px; }
+  .references { margin-top: 40px; padding-top: 20px; border-top: 2px solid var(--teal); }
+  .references h3 { color: var(--teal); }
+  .references ol { font-size: 13px; color: var(--mid-grey); margin-left: 18px; }
+  .references li { margin-bottom: 6px; }
+  .doc-footer { background: var(--dark); color: rgba(255,255,255,0.6); padding: 20px 52px; font-size: 12px; display: flex; justify-content: space-between; }
+  @media print { .nav-strip { display: none; } .page-wrap { box-shadow: none; } body { font-size: 11pt; background: white; } .clinical-box, .key-box, .worked-example, table, figure.diagram { page-break-inside: avoid; } }
+  @media (max-width: 600px) { .content, .doc-header, .nav-strip, .doc-footer { padding-left: 22px; padding-right: 22px; } .doc-header h1 { font-size: 21px; } .doc-footer { flex-direction: column; gap: 4px; } }
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+<div class="doc-header">
+  <div class="clinic-name">Flinders Fertility · Education Program</div>
+  <div class="mod-label">Module 5 of 6 · Week 5</div>
+  <h1>Complex Cases — Endometriosis, Male Factor &amp; Advanced ART</h1>
+  <div class="subtitle">Where the algorithm breaks down and clinical judgement begins</div>
+  <div class="meta"><span>Estimated self-directed time:</span> 7–9 hours · <span>MDT attendance this week</span></div>
+</div>
+
+<div class="nav-strip">
+  <a href="#intro">Orientation</a>
+  <a href="#endo-patho">Endometriosis: mechanism</a>
+  <a href="#endo-stage">Staging &amp; EFI</a>
+  <a href="#endo-mx">Endometriosis: management</a>
+  <a href="#male">Male factor</a>
+  <a href="#azoo">Azoospermia</a>
+  <a href="#retrieval">Sperm retrieval &amp; ICSI</a>
+  <a href="#rif">Recurrent failure</a>
+  <a href="#dor">Poor response &amp; donor</a>
+  <a href="#mdt">MDT &amp; the patient</a>
+  <a href="#reading">Further reading</a>
+</div>
+
+<div class="content">
+
+<!-- ORIENTATION -->
+<div id="intro">
+<div class="intro-block">
+  <h4>Where protocols end</h4>
+  <p>Modules 1–4 gave you the standard patient and the standard cycle. This module is about the couples for whom the algorithm runs out — advanced endometriosis, azoospermia, repeated failure, diminished reserve, the need for donor gametes. These cases need <strong>reasoning</strong>, not recipes: weighing competing priorities, tolerating uncertainty, and coordinating across disciplines. They are also where the biggest counselling and ethical demands live, which is why this week targets the multidisciplinary and psychosocial EPAs.</p>
+  <p>A theme runs through the whole module: <strong>the discipline of not over-treating</strong>. Complex, distressed patients are the most vulnerable to expensive, weakly-evidenced "add-ons" — and the mark of a good clinician here is knowing which interventions the evidence actually supports. You saw this with PGT-A in Module 3; you will see it again with surgery-before-IVF and endometrial receptivity testing.</p>
+</div>
+<p>This week, prepare a one-page summary of an MDT case before the meeting and present it if the environment allows (EPA 6). Watch closely how the team holds difficult conversations — failed cycles, poor prognosis, donor recommendations — because recognising and responding to distress is EPA 8, and it is on display in nearly every complex consultation.</p>
+</div>
+
+<!-- ENDO PATHO -->
+<h2 id="endo-patho"><span class="num">1</span>Endometriosis: why it impairs fertility</h2>
+<div class="section-lead">Not one mechanism but four. Understanding them explains why treatment is so case-dependent.</div>
+
+<p><em class="term">Endometriosis</em> is the presence of endometrial-like tissue outside the uterus, driving chronic inflammation and, often, subfertility. Its origin is still debated — the classic <strong>retrograde menstruation</strong> (Sampson) theory is now seen as incomplete, with coelomic metaplasia, altered immunity, and genetic/epigenetic factors all implicated. For fertility purposes, what matters is that endometriosis impairs conception through <strong>several independent mechanisms at once</strong>, and a given patient may be dominated by any of them:</p>
+
+<figure class="diagram">
+  <div class="fig-title">Figure 1 · Four ways endometriosis impairs fertility</div>
+  <svg viewBox="0 0 700 320" role="img" aria-label="Four mechanisms by which endometriosis impairs fertility, converging on subfertility">
+    <ellipse cx="350" cy="160" rx="86" ry="46" fill="#1a6b7a"/>
+    <text x="350" y="156" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">Endometriosis</text>
+    <text x="350" y="176" text-anchor="middle" fill="#cfe6ea" font-size="12">→ subfertility</text>
+    <defs><marker id="e5a" markerWidth="9" markerHeight="9" refX="6" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#6b46c1"/></marker></defs>
+    <!-- four boxes -->
+    <rect x="20" y="24" width="290" height="60" rx="8" fill="#ede9fb" stroke="#6b46c1"/>
+    <text x="34" y="46" fill="#4a3480" font-size="13" font-weight="700">1 · Distorted anatomy &amp; adhesions</text>
+    <text x="34" y="66" fill="#37424a" font-size="12">tubal distortion, impaired ovum pick-up, ovarian access</text>
+    <line x1="230" y1="84" x2="300" y2="128" stroke="#6b46c1" stroke-width="2" marker-end="url(#e5a)"/>
+
+    <rect x="390" y="24" width="290" height="60" rx="8" fill="#ede9fb" stroke="#6b46c1"/>
+    <text x="404" y="46" fill="#4a3480" font-size="13" font-weight="700">2 · Peritoneal inflammation</text>
+    <text x="404" y="66" fill="#37424a" font-size="12">cytokines &amp; ROS hostile to gametes and embryo</text>
+    <line x1="470" y1="84" x2="400" y2="128" stroke="#6b46c1" stroke-width="2" marker-end="url(#e5a)"/>
+
+    <rect x="20" y="238" width="290" height="60" rx="8" fill="#ede9fb" stroke="#6b46c1"/>
+    <text x="34" y="260" fill="#4a3480" font-size="13" font-weight="700">3 · Ovarian involvement (endometrioma)</text>
+    <text x="34" y="280" fill="#37424a" font-size="12">reduced reserve &amp; possibly oocyte quality</text>
+    <line x1="230" y1="238" x2="300" y2="194" stroke="#6b46c1" stroke-width="2" marker-end="url(#e5a)"/>
+
+    <rect x="390" y="238" width="290" height="60" rx="8" fill="#ede9fb" stroke="#6b46c1"/>
+    <text x="404" y="260" fill="#4a3480" font-size="13" font-weight="700">4 · Endometrial dysfunction</text>
+    <text x="404" y="280" fill="#37424a" font-size="12">progesterone resistance → impaired implantation</text>
+    <line x1="470" y1="238" x2="400" y2="194" stroke="#6b46c1" stroke-width="2" marker-end="url(#e5a)"/>
+  </svg>
+  <figcaption>The four mechanisms are partly independent, which is why a single intervention rarely fixes endometriosis-associated infertility and why management must be individualised. IVF is attractive precisely because it <em>bypasses</em> the first two (tubal transport and the peritoneal environment).</figcaption>
+</figure>
+
+<!-- STAGING -->
+<h2 id="endo-stage"><span class="num">2</span>Staging and the fertility prognosis</h2>
+<div class="section-lead">Anatomical stage and fertility prognosis are different things — and the anatomical stage predicts fertility poorly.</div>
+
+<p>The long-standing anatomical system is the <strong>revised ASRM (rASRM) classification</strong>, which scores lesions and adhesions into stages I (minimal) to IV (severe). It is useful for describing disease burden, but it correlates weakly with fertility — a woman with "stage IV" disease may conceive while a "stage I" woman does not.</p>
+
+<p>The <strong>Endometriosis Fertility Index (EFI)</strong> (Adamson &amp; Pasta, 2010) was developed to fill that gap. Calculated after surgical staging, it combines historical factors (age, duration of infertility, prior pregnancy) with a "least-function score" of the tubes, fimbria, and ovaries, to predict the chance of <em>non-ART</em> conception. It is a genuinely useful prognostic tool and is referenced in the ESHRE guideline for individualising the surgery-versus-ART decision.</p>
+
+<!-- ENDO MX -->
+<h2 id="endo-mx"><span class="num">3</span>Managing endometriosis-associated infertility</h2>
+<div class="section-lead">Three evidence points that reliably surprise trainees. Learn them precisely.</div>
+
+<h3>Medical suppression does not improve fertility</h3>
+<p>Counter-intuitively, hormonal suppression of endometriosis (GnRH agonists, the pill, progestins) does <strong>not</strong> improve natural fertility and delays conception attempts — it treats pain, not subfertility. The ESHRE guideline is explicit: <strong>ovarian suppression should not be used to improve fertility</strong>. This is a common error worth remembering.</p>
+
+<h3>Surgery before IVF is largely obsolete when ART is indicated</h3>
+<p>A key shift in the 2022 ESHRE guideline: when there is already a clear indication for ART, <strong>routine surgery before IVF is no longer recommended</strong> — because IVF bypasses the tubal and peritoneal mechanisms anyway, and surgery adds risk without reliably improving ART outcomes. Surgery before IVF is reserved for specific reasons: to treat significant pain, a rapidly growing or suspicious cyst, or when a large endometrioma blocks access to follicles at retrieval. Surgery retains a clearer role for improving <em>spontaneous</em> conception in earlier-stage disease.</p>
+
+<h3>The endometrioma–reserve trade-off</h3>
+<p>When surgery is chosen for an ovarian endometrioma, <strong>cystectomy</strong> (excising the cyst wall) gives lower recurrence and better spontaneous-pregnancy rates than drainage/coagulation — but it <strong>removes normal ovarian tissue and measurably reduces ovarian reserve</strong> (a fall in AMH; Somigliana et al., 2012). This creates the central dilemma: operating can help symptoms and spontaneous conception but cost eggs. In women with diminished reserve or bilateral disease, reserve-sparing ablative techniques are considered instead. This is exactly the kind of competing-priorities decision the module is about.</p>
+
+<figure class="diagram">
+  <div class="fig-title">Figure 2 · Endometrioma + infertility — the surgery decision</div>
+  <svg viewBox="0 0 700 300" role="img" aria-label="Decision flow for endometrioma in the context of infertility">
+    <defs><marker id="e5b" markerWidth="9" markerHeight="9" refX="6" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#1a6b7a"/></marker></defs>
+    <rect x="250" y="14" width="200" height="42" rx="8" fill="#1a6b7a"/>
+    <text x="350" y="40" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">Endometrioma + infertility</text>
+    <line x1="350" y1="56" x2="350" y2="74" stroke="#1a6b7a" stroke-width="2"/>
+    <line x1="160" y1="74" x2="540" y2="74" stroke="#1a6b7a" stroke-width="2"/>
+    <line x1="160" y1="74" x2="160" y2="92" stroke="#1a6b7a" stroke-width="2.5" marker-end="url(#e5b)"/>
+    <line x1="540" y1="74" x2="540" y2="92" stroke="#1a6b7a" stroke-width="2.5" marker-end="url(#e5b)"/>
+
+    <rect x="40" y="94" width="240" height="52" rx="8" fill="#e8f4f6" stroke="#1a6b7a"/>
+    <text x="160" y="115" text-anchor="middle" fill="#134e5a" font-size="12.5" font-weight="700">ART already indicated</text>
+    <text x="160" y="133" text-anchor="middle" fill="#37424a" font-size="11">(tubal / male factor / age)</text>
+    <line x1="160" y1="146" x2="160" y2="166" stroke="#1a6b7a" stroke-width="2.5" marker-end="url(#e5b)"/>
+    <rect x="24" y="168" width="272" height="66" rx="8" fill="#d5f0dd" stroke="#276749"/>
+    <text x="160" y="190" text-anchor="middle" fill="#1e6040" font-size="12.5" font-weight="700">Proceed to IVF — skip surgery</text>
+    <text x="160" y="208" text-anchor="middle" fill="#37424a" font-size="11">operate only for pain, rapid growth,</text>
+    <text x="160" y="223" text-anchor="middle" fill="#37424a" font-size="11">follicle access, or malignancy concern</text>
+
+    <rect x="420" y="94" width="240" height="52" rx="8" fill="#fef3c7" stroke="#b7791f"/>
+    <text x="540" y="115" text-anchor="middle" fill="#8a5a12" font-size="12.5" font-weight="700">Surgery chosen</text>
+    <text x="540" y="133" text-anchor="middle" fill="#5a3d0a" font-size="11">(symptoms / spontaneous conception)</text>
+    <line x1="540" y1="146" x2="540" y2="166" stroke="#b7791f" stroke-width="2.5" marker-end="url(#e5b)"/>
+    <rect x="404" y="168" width="272" height="66" rx="8" fill="#fef3c7" stroke="#b7791f"/>
+    <text x="540" y="188" text-anchor="middle" fill="#8a5a12" font-size="12" font-weight="700">Cystectomy = lower recurrence,</text>
+    <text x="540" y="204" text-anchor="middle" fill="#8a5a12" font-size="12" font-weight="700">but reduces reserve (AMH ↓)</text>
+    <text x="540" y="222" text-anchor="middle" fill="#5a3d0a" font-size="11">low reserve / bilateral → reserve-sparing</text>
+  </svg>
+  <figcaption>The 2022 ESHRE position in one diagram: if ART is already indicated, surgery before IVF is largely obsolete. When surgery is chosen, cystectomy is the better excisional option but carries a real reserve cost that must be weighed against the patient's remaining eggs.</figcaption>
+</figure>
+
+<!-- MALE FACTOR -->
+<h2 id="male"><span class="num">4</span>Male factor beyond the basic semen analysis</h2>
+<div class="section-lead">Module 2 screened for male factor; this is the specialist workup when it is significant.</div>
+
+<p>Recall the WHO 2021 parameters and the descriptive terms from Module 2 — oligozoospermia, asthenozoospermia, teratozoospermia, and the combined OAT pattern. When male factor is significant, the workup deepens: repeat confirmed analysis, a reproductive and physical examination (testicular volume, presence of the vas, varicocele), and <strong>reproductive hormones</strong> — chiefly FSH, LH and testosterone, which separate testicular failure from other causes. Sperm DNA fragmentation testing has a role in specific situations (e.g. recurrent loss) but is not a routine first-line test.</p>
+
+<p>The most consequential branch point is <strong>azoospermia</strong> — no sperm in the ejaculate — because it forces the obstructive-versus-non-obstructive distinction that determines everything downstream.</p>
+
+<!-- AZOOSPERMIA -->
+<h2 id="azoo"><span class="num">5</span>Azoospermia: obstructive vs non-obstructive</h2>
+<div class="section-lead">The central male-factor algorithm, with its mandatory genetic workup.</div>
+
+<p>Confirmed azoospermia (on a repeat, centrifuged sample) is categorised by history, examination, and FSH — <strong>not</strong> routinely by biopsy. <em class="term">Obstructive azoospermia (OA)</em> reflects normal sperm production with a blockage: typically normal testicular volume and normal FSH, sometimes an absent vas or a low-volume acidic ejaculate. <em class="term">Non-obstructive azoospermia (NOA)</em> reflects a production failure: usually small testes and elevated FSH.</p>
+
+<p>Both mandate a <strong>genetic workup</strong> before proceeding, because the results change both the retrieval prospects and the counselling:</p>
+<ul>
+  <li><strong>OA / absent vas (CBAVD)</strong> → test for <strong>CFTR mutations</strong> (including the 5T allele). Congenital bilateral absence of the vas is frequently a cystic-fibrosis-spectrum condition, with implications for the couple's offspring, so the partner may need carrier testing too.</li>
+  <li><strong>NOA</strong> → <strong>karyotype</strong> (to detect Klinefelter syndrome, 47,XXY, the commonest genetic cause) and <strong>Y-chromosome microdeletion</strong> analysis of the AZF regions. The AUA/ASRM guideline recommends Y-microdeletion testing for azoospermia or severe oligospermia (≤1 million/mL) with supporting features.</li>
+</ul>
+
+<figure class="diagram">
+  <div class="fig-title">Figure 3 · Azoospermia workup and the AZF regions</div>
+  <svg viewBox="0 0 700 380" role="img" aria-label="Azoospermia algorithm: obstructive versus non-obstructive with genetic testing and retrieval implications">
+    <defs><marker id="a5a" markerWidth="9" markerHeight="9" refX="6" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#1a6b7a"/></marker></defs>
+    <rect x="250" y="12" width="200" height="44" rx="8" fill="#1a6b7a"/>
+    <text x="350" y="32" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">Confirmed azoospermia</text>
+    <text x="350" y="49" text-anchor="middle" fill="#cfe6ea" font-size="11">history · exam · FSH (not biopsy)</text>
+    <line x1="350" y1="56" x2="350" y2="72" stroke="#1a6b7a" stroke-width="2"/>
+    <line x1="170" y1="72" x2="530" y2="72" stroke="#1a6b7a" stroke-width="2"/>
+    <line x1="170" y1="72" x2="170" y2="88" stroke="#1a6b7a" stroke-width="2.5" marker-end="url(#a5a)"/>
+    <line x1="530" y1="72" x2="530" y2="88" stroke="#1a6b7a" stroke-width="2.5" marker-end="url(#a5a)"/>
+
+    <!-- OA -->
+    <rect x="40" y="90" width="260" height="58" rx="8" fill="#e8f4f6" stroke="#1a6b7a"/>
+    <text x="170" y="112" text-anchor="middle" fill="#134e5a" font-size="13" font-weight="700">Obstructive (OA)</text>
+    <text x="170" y="130" text-anchor="middle" fill="#37424a" font-size="11">normal testes · normal FSH</text>
+    <text x="170" y="143" text-anchor="middle" fill="#37424a" font-size="11">± absent vas / low-volume ejaculate</text>
+    <line x1="170" y1="148" x2="170" y2="166" stroke="#1a6b7a" stroke-width="2.5" marker-end="url(#a5a)"/>
+    <rect x="40" y="168" width="260" height="46" rx="8" fill="#fff" stroke="#cbd5e0"/>
+    <text x="170" y="188" text-anchor="middle" fill="#37424a" font-size="12" font-weight="700">Test CFTR (esp. CBAVD)</text>
+    <text x="170" y="205" text-anchor="middle" fill="#718096" font-size="11">incl. 5T allele; test partner</text>
+    <line x1="170" y1="214" x2="170" y2="232" stroke="#1a6b7a" stroke-width="2.5" marker-end="url(#a5a)"/>
+    <rect x="40" y="234" width="260" height="44" rx="8" fill="#d5f0dd" stroke="#276749"/>
+    <text x="170" y="254" text-anchor="middle" fill="#1e6040" font-size="12" font-weight="700">Retrieval (PESA/TESA) → ICSI</text>
+    <text x="170" y="270" text-anchor="middle" fill="#37424a" font-size="11">sperm production is intact</text>
+
+    <!-- NOA -->
+    <rect x="400" y="90" width="260" height="58" rx="8" fill="#fef3c7" stroke="#b7791f"/>
+    <text x="530" y="112" text-anchor="middle" fill="#8a5a12" font-size="13" font-weight="700">Non-obstructive (NOA)</text>
+    <text x="530" y="130" text-anchor="middle" fill="#5a3d0a" font-size="11">small testes · elevated FSH</text>
+    <text x="530" y="143" text-anchor="middle" fill="#5a3d0a" font-size="11">production failure</text>
+    <line x1="530" y1="148" x2="530" y2="166" stroke="#b7791f" stroke-width="2.5" marker-end="url(#a5a)"/>
+    <rect x="400" y="168" width="260" height="46" rx="8" fill="#fff" stroke="#cbd5e0"/>
+    <text x="530" y="185" text-anchor="middle" fill="#37424a" font-size="12" font-weight="700">Karyotype + Y-microdeletion</text>
+    <text x="530" y="202" text-anchor="middle" fill="#718096" font-size="11">Klinefelter 47,XXY · AZFa / AZFb / AZFc</text>
+    <line x1="530" y1="214" x2="530" y2="232" stroke="#b7791f" stroke-width="2.5" marker-end="url(#a5a)"/>
+    <rect x="400" y="234" width="260" height="60" rx="8" fill="#fef3c7" stroke="#b7791f"/>
+    <text x="530" y="253" text-anchor="middle" fill="#8a5a12" font-size="12" font-weight="700">micro-TESE → ICSI (if sperm found)</text>
+    <text x="530" y="270" text-anchor="middle" fill="#5a3d0a" font-size="10.5">AZFc: often retrievable · AZFa/AZFb (complete):</text>
+    <text x="530" y="284" text-anchor="middle" fill="#5a3d0a" font-size="10.5">retrieval very unlikely — counsel accordingly</text>
+  </svg>
+  <figcaption>The AZF result is prognostic, not just diagnostic: a complete AZFa or AZFb deletion predicts that surgical retrieval will almost certainly fail, sparing a futile operation, whereas AZFc deletions are often compatible with retrievable sperm. Genetic counselling is essential — Y-microdeletions are transmitted to all sons.</figcaption>
+</figure>
+
+<!-- RETRIEVAL -->
+<h2 id="retrieval"><span class="num">6</span>Surgical sperm retrieval and ICSI</h2>
+<div class="section-lead">How azoospermic men can still father children — and the counselling that must accompany it.</div>
+
+<p>Where sperm cannot reach the ejaculate, they are retrieved directly. In <strong>OA</strong>, sperm are abundant and retrieval is straightforward — <em class="term">PESA</em> (percutaneous epididymal sperm aspiration) or <em class="term">TESA</em> (testicular sperm aspiration). In <strong>NOA</strong>, sperm are sparse and patchy, so <em class="term">micro-TESE</em> (microdissection testicular sperm extraction) — searching the testis under the operating microscope for the rare productive tubules — gives the best yield. Retrieved sperm are then used with <strong>ICSI</strong> (Module 1/3): a single sperm injected into each oocyte, which is the only way such small numbers can achieve fertilisation.</p>
+
+<div class="clinical-box">
+  <div class="cb-label">◆ Clinical relevance — the counselling is genetic, not just procedural</div>
+  <p>Surgical retrieval plus ICSI can give a genetically-related child where none was possible a generation ago — but it can also <strong>transmit the cause of infertility</strong>. A man with a Y-microdeletion passes it to every son, who will likely face the same infertility. A CFTR carrier risks a child with cystic fibrosis if the partner also carries a mutation. Klinefelter carries its own considerations. So the workup is not box-ticking: it drives genetic counselling that a couple needs <em>before</em> committing to retrieval, and it is a recurring theme of the ethics content in Module 6.</p>
+</div>
+
+<!-- RIF -->
+<h2 id="rif"><span class="num">7</span>Recurrent implantation failure — and the add-on trap</h2>
+<div class="section-lead">The area where distressed patients are most over-tested. Know what the evidence actually supports.</div>
+
+<p><em class="term">Recurrent implantation failure (RIF)</em> — repeated failure of good-quality embryos to implant — is real but frequently <strong>over-diagnosed and over-investigated</strong>. The crucial reframe: much of what is labelled "implantation failure" is actually <strong>expected embryo attrition due to aneuploidy</strong>, especially in older women transferring untested embryos. Recall from Module 1 that aneuploidy rises steeply with age; a 40-year-old transferring three untested embryos and not conceiving may simply have transferred three aneuploid embryos, not have an endometrial problem at all.</p>
+
+<p>This matters because RIF drives a marketplace of expensive add-ons — endometrial receptivity testing, immunological therapies, endometrial "scratch" — most with weak or absent evidence. The best trial of <strong>endometrial receptivity testing (ERA)</strong> found <strong>no improvement in live birth</strong> versus standard-timed transfer (Doyle et al., JAMA 2022). The rational approach to apparent RIF is to first ensure the basics are right — embryo quality (consider PGT-A or a euploid transfer), an adequate endometrium, no hydrosalpinx or cavity lesion — rather than reaching for unproven tests.</p>
+
+<figure class="diagram">
+  <div class="fig-title">Figure 4 · Reframing "recurrent implantation failure"</div>
+  <svg viewBox="0 0 700 270" role="img" aria-label="Reframing recurrent implantation failure as embryo versus endometrial factor with an add-on caution">
+    <defs><marker id="r5a" markerWidth="9" markerHeight="9" refX="6" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#1a6b7a"/></marker></defs>
+    <rect x="250" y="12" width="200" height="42" rx="8" fill="#1a6b7a"/>
+    <text x="350" y="38" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">Repeated transfer failure</text>
+    <line x1="350" y1="54" x2="350" y2="70" stroke="#1a6b7a" stroke-width="2"/>
+    <line x1="180" y1="70" x2="520" y2="70" stroke="#1a6b7a" stroke-width="2"/>
+    <line x1="180" y1="70" x2="180" y2="86" stroke="#1a6b7a" stroke-width="2.5" marker-end="url(#r5a)"/>
+    <line x1="520" y1="70" x2="520" y2="86" stroke="#1a6b7a" stroke-width="2.5" marker-end="url(#r5a)"/>
+
+    <rect x="40" y="88" width="280" height="70" rx="8" fill="#e8f4f6" stroke="#1a6b7a"/>
+    <text x="180" y="110" text-anchor="middle" fill="#134e5a" font-size="13" font-weight="700">Embryo factor (usual)</text>
+    <text x="180" y="129" text-anchor="middle" fill="#37424a" font-size="11.5">aneuploidy — expected given age &amp;</text>
+    <text x="180" y="144" text-anchor="middle" fill="#37424a" font-size="11.5">untested embryos → PGT-A / more eggs / donor</text>
+
+    <rect x="380" y="88" width="280" height="70" rx="8" fill="#eef1f4" stroke="#718096"/>
+    <text x="520" y="110" text-anchor="middle" fill="#4a5568" font-size="13" font-weight="700">Endometrial factor (rarer)</text>
+    <text x="520" y="129" text-anchor="middle" fill="#37424a" font-size="11.5">check cavity, hydrosalpinx, thin lining —</text>
+    <text x="520" y="144" text-anchor="middle" fill="#37424a" font-size="11.5">true receptivity defects are uncommon</text>
+
+    <rect x="120" y="188" width="460" height="58" rx="8" fill="#fef3c7" stroke="#b7791f"/>
+    <text x="350" y="210" text-anchor="middle" fill="#8a5a12" font-size="12.5" font-weight="700">◆ Add-on caution</text>
+    <text x="350" y="230" text-anchor="middle" fill="#5a3d0a" font-size="12">ERA, immune therapy, scratch — weak/absent RCT evidence (ERA: no live-birth benefit, JAMA 2022)</text>
+  </svg>
+  <figcaption>Most apparent implantation failure is an embryo-number-and-quality problem, not an endometrial one. Reaching first for expensive endometrial or immune add-ons — before confirming embryo competence — is the trap. Sound reasoning here is a defining CREI-level skill.</figcaption>
+</figure>
+
+<!-- DOR -->
+<h2 id="dor"><span class="num">8</span>Diminished reserve, poor response, and donor gametes</h2>
+<div class="section-lead">When the eggs are the limiting factor — stratifying prognosis and knowing when to change strategy.</div>
+
+<p><em class="term">Diminished ovarian reserve</em> and <em class="term">poor ovarian response</em> to stimulation are among the hardest situations, because the lever — more or better eggs — is the one hardest to move. Modern practice stratifies these patients with the <strong>POSEIDON criteria</strong> (Alviggi et al., 2016), which refine the older Bologna definition by combining age, ovarian reserve markers, and prior response into "low-prognosis" groups — a more useful basis for tailoring stimulation and counselling than a single "poor responder" label. Protocol adjustments (higher doses, adjuvants, alternative protocols) can help at the margins, but none manufactures eggs the ovary does not have.</p>
+
+<p>When a woman's own oocytes cannot achieve a reasonable chance — very low reserve, advanced age, repeated failure with aneuploidy, or premature ovarian insufficiency — <strong>donor eggs</strong> become the option that most changes the odds. Recall the biology from Module 1: because oocyte age drives aneuploidy, young donor eggs largely restore success rates regardless of the recipient's age. It is often the single most effective intervention available — and simultaneously one of the most emotionally and ethically weighty conversations in the clinic.</p>
+
+<!-- MDT -->
+<h2 id="mdt"><span class="num">9</span>The multidisciplinary team and the patient in front of you</h2>
+<div class="section-lead">Complex cases are team decisions carrying heavy emotional freight. This is EPA 6 and EPA 8.</div>
+
+<p>Complex cases are rarely one clinician's call. The <strong>multidisciplinary team</strong> — fertility specialists, embryologists, nurses, counsellors, and often urology, genetics, or surgical colleagues — pools expertise on exactly the cases this module covers. Attending the MDT this week, and presenting a case, is your EPA 6 opportunity: it is where you see clinical reasoning done collectively, and where you learn to present a case concisely and identify your own knowledge gaps in real time.</p>
+
+<p>These cases also carry the heaviest <strong>psychosocial burden</strong> in the clinic. Advanced disease, azoospermia, repeated failure, and the recommendation of donor gametes all land as loss — of a hoped-for outcome, of a genetic connection, of control. Recognising distress, anxiety, grief, and relationship strain, and responding with appropriate support and referral, is EPA 8. Watch how the best clinicians hold the clinical and the human together: they neither retreat into the technical nor abandon accuracy to comfort. In these consultations, the counselling <em>is</em> the medicine.</p>
+
+<div class="worked-example">
+  <div class="we-label">◆ Worked interpretation — reason before reading the answer</div>
+  <div class="case">A 40-year-old woman has had three frozen transfers of good-morphology, <strong>untested</strong> day-5 blastocysts, none resulting in pregnancy. She is distressed and has read online about the "ERA test" and "immune treatment for implantation failure," and asks the clinic to arrange both. Her uterine cavity is normal on recent hysteroscopy; there is no hydrosalpinx. She has two blastocysts remaining.</div>
+  <p><strong>How would you frame the problem, and what would you advise — and not advise?</strong></p>
+  <div class="interp">
+    <p style="margin-bottom:8px;"><strong>Reframe first.</strong> At 40, a large proportion of morphologically good embryos are aneuploid (Module 1). Three failed transfers of <em>untested</em> embryos is, statistically, consistent with having transferred aneuploid embryos — this is <strong>expected attrition, not necessarily an implantation problem</strong>. The normal cavity and absent hydrosalpinx already exclude the common structural endometrial causes.</p>
+    <p style="margin-bottom:8px;"><strong>What the evidence supports.</strong> The rational next step is to address <em>embryo</em> competence: consider PGT-A on the remaining/future embryos to select a euploid one, and have an honest prognosis conversation that may include donor eggs given her age. Endometrial receptivity testing (ERA) showed <strong>no live-birth benefit</strong> in the best RCT (Doyle 2022, JAMA), and immune therapies lack supporting evidence — so recommending them would be spending her money and hope on unproven add-ons.</p>
+    <p style="margin-bottom:0;"><strong>How to say it (EPA 3 + EPA 8).</strong> The skill is declining the add-ons <em>without</em> dismissing her distress: acknowledge how demoralising three failures are, explain in plain terms why the problem is most likely the embryos rather than her uterus, and offer the evidence-based path forward. Validate the feeling, redirect the plan. That integration — honest, kind, and evidence-based — is the whole point of this module.</p>
+  </div>
+</div>
+
+<div class="key-box">
+  <div class="kb-label">✓ Module 5 — the concepts you must carry forward</div>
+  <ul>
+    <li><strong>Endometriosis impairs fertility by four mechanisms</strong> (anatomy, inflammation, ovarian reserve, implantation) — IVF bypasses the first two.</li>
+    <li><strong>Anatomical stage (rASRM) predicts fertility poorly; the EFI is the fertility-prognosis tool.</strong></li>
+    <li><strong>Ovarian suppression does not improve fertility; surgery before IVF is largely obsolete when ART is indicated; cystectomy costs ovarian reserve.</strong></li>
+    <li><strong>Azoospermia splits into OA (normal FSH/testes) and NOA (high FSH/small testes)</strong> — both need genetic workup (CFTR for OA/CBAVD; karyotype + Y-microdeletion for NOA).</li>
+    <li><strong>Surgical retrieval + ICSI enables paternity but can transmit the cause</strong> — genetic counselling is mandatory. AZFa/AZFb-complete deletions predict failed retrieval.</li>
+    <li><strong>Most "recurrent implantation failure" is embryo aneuploidy, not endometrium</strong> — ERA and immune add-ons lack live-birth evidence (JAMA 2022).</li>
+    <li><strong>Donor eggs largely restore success regardless of recipient age</strong> (oocyte age drives aneuploidy) — the most effective, and most weighty, option.</li>
+  </ul>
+</div>
+
+<!-- READING -->
+<h2 id="reading"><span class="num">★</span>Further reading — CREI level</h2>
+<div class="section-lead">Scoped to this module: the guidelines and trials behind the complex-case decisions above. These are the papers a CREI candidate is expected to know.</div>
+
+<h3>Endometriosis &amp; fertility</h3>
+<ul>
+  <li><strong>Becker CM, et al. (ESHRE Endometriosis Guideline Group).</strong> ESHRE guideline: endometriosis. <em>Hum Reprod Open.</em> 2022;2022(2):hoac009. — The current comprehensive guideline; read the infertility and surgery sections. (Note: published under CC BY-NC — cite freely, but non-commercial for image reuse.)</li>
+  <li><strong>Adamson GD, Pasta DJ.</strong> Endometriosis fertility index: the new, validated endometriosis staging system. <em>Fertil Steril.</em> 2010;94(5):1609–1615. — The EFI, and why anatomical stage alone predicts fertility poorly.</li>
+  <li><strong>Somigliana E, et al.</strong> Surgical excision of endometriomas and ovarian reserve: a systematic review on serum anti-Müllerian hormone level modifications. <em>Fertil Steril.</em> 2012;98(6):1531–1538. — The evidence for the cystectomy–reserve trade-off.</li>
+</ul>
+
+<h3>Male factor</h3>
+<ul>
+  <li><strong>Schlegel PN, et al.</strong> Diagnosis and treatment of infertility in men: AUA/ASRM guideline. <em>Fertil Steril.</em> 2021;115(1):54–61 (Part I) and 62–69 (Part II). — The definitive workup, including the OA/NOA split and the genetic-testing thresholds.</li>
+</ul>
+
+<h3>Recurrent implantation failure</h3>
+<ul>
+  <li><strong>Doyle N, et al.</strong> Effect of timing by endometrial receptivity testing vs standard timing of frozen embryo transfer on live birth in patients undergoing IVF: a randomized clinical trial. <em>JAMA.</em> 2022;328(21):2117–2125. — The RCT that undercut routine endometrial receptivity testing. The reference point for counselling on this add-on.</li>
+</ul>
+
+<h3>Poor ovarian response</h3>
+<ul>
+  <li><strong>Alviggi C, et al. (POSEIDON Group).</strong> A new more detailed stratification of low responders to ovarian stimulation: from a poor ovarian response to a low prognosis concept. <em>Fertil Steril.</em> 2016;105(6):1452–1453. — The POSEIDON framework for stratifying and tailoring low-prognosis patients.</li>
+</ul>
+
+<div class="clinical-box">
+  <div class="cb-label">◆ How to use this list</div>
+  <p>The through-line is evidence-based restraint. The ESHRE endometriosis guideline (surgery-before-IVF), the Doyle JAMA trial (ERA), and — from Module 3 — the PGT-A trials all make the same point: intuitively appealing interventions often do not improve live birth, and complex, distressed patients are the ones most exposed to them. Reading these primary sources, rather than a summary, is how you build the judgement to counsel honestly. Module 6 takes this into the ethics and communication of exactly these conversations.</p>
+</div>
+
+<!-- REFERENCES -->
+<div class="references">
+  <h3>References</h3>
+  <ol>
+    <li>Becker CM, Bokor A, Heikinheimo O, et al; ESHRE Endometriosis Guideline Group. ESHRE guideline: endometriosis. Hum Reprod Open. 2022;2022(2):hoac009. doi:10.1093/hropen/hoac009.</li>
+    <li>Adamson GD, Pasta DJ. Endometriosis fertility index: the new, validated endometriosis staging system. Fertil Steril. 2010;94(5):1609–1615.</li>
+    <li>Somigliana E, Berlanda N, Benaglia L, Viganò P, Vercellini P, Fedele L. Surgical excision of endometriomas and ovarian reserve: a systematic review on serum anti-Müllerian hormone level modifications. Fertil Steril. 2012;98(6):1531–1538.</li>
+    <li>Schlegel PN, Sigman M, Collura B, et al. Diagnosis and treatment of infertility in men: AUA/ASRM guideline (Parts I &amp; II). Fertil Steril. 2021;115(1):54–61, 62–69.</li>
+    <li>Doyle N, Jahandideh S, Hill MJ, Widra EA, Levy M, Devine K. Effect of timing by endometrial receptivity testing vs standard timing of frozen embryo transfer on live birth in patients undergoing in vitro fertilization: a randomized clinical trial. JAMA. 2022;328(21):2117–2125.</li>
+    <li>Alviggi C, Andersen CY, Buehler K, et al; POSEIDON Group. A new more detailed stratification of low responders to ovarian stimulation: from a poor ovarian response to a low prognosis concept. Fertil Steril. 2016;105(6):1452–1453.</li>
+  </ol>
+  <p style="font-size:12px; color:var(--mid-grey); margin-top:12px;">Guidelines and thresholds evolve; interpret against current local guidance (RANZCOG, ESHRE, ASRM/AUA) and the treating clinic's protocols. Content for educational use within the Flinders Fertility rotation; not a substitute for supervised clinical judgement.</p>
+</div>
+
+</div>
+
+<div class="doc-footer">
+  <div>Flinders Fertility · Education Program · Module 5 · v1.0 Draft</div>
+  <div>For review and iteration</div>
+</div>
+
+</div>
+</body>
+</html>

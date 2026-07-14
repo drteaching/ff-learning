@@ -1,0 +1,29 @@
+---
+description: Clinical Rotation learning platform — stack, specs, security guardrails
+alwaysApply: true
+---
+
+# Clinical Rotation in Reproductive Medicine
+
+This is a Next.js (App Router, TypeScript) + Supabase learning platform: "Clinical Rotation in Reproductive Medicine". Audiences: medical students, new-start doctors, nurses.
+
+## Specs
+
+- Follow `docs/PLATFORM_BUILD_SPEC.md` and `docs/PLATFORM_BUILD_v1.1_phase0.md`.
+- Content assets live in `content/`. Brand tokens live in `docs/brand-tokens.css`.
+
+## Stack
+
+- Use `@supabase/ssr` for auth, Tailwind for styling, and the tokens in `docs/brand-tokens.css`.
+- Keep all secrets in environment variables, never in code.
+
+## Security & privacy (non-negotiable)
+
+- Enforce row-level security on every table.
+- Never store patient-identifiable data.
+- `SUPABASE_SERVICE_ROLE_KEY` is server/scripts only — never expose to the browser.
+
+## Working style
+
+- Work in small, reviewable steps.
+- After each change, tell the user how to test it.

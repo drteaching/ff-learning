@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reproductive Medicine Rotation — Clinical Logbook</title>
+<style>
+  :root {
+    --teal: #1a6b7a; --teal-light: #e8f4f6; --teal-mid: #2d8fa3;
+    --dark: #1e2d2f; --grey: #37424a; --mid-grey: #718096;
+    --border: #cbd5e0; --bg: #f7fafc; --white: #ffffff;
+    --amber: #b7791f; --amber-light: #fef3c7; --green: #276749; --green-light: #d5f0dd;
+    --l1: #718096; --l2: #2d8fa3; --l3: #1a6b7a; --l4: #276749;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; font-size: 15px; line-height: 1.6; color: var(--grey); background: var(--bg); }
+  .page-wrap { max-width: 900px; margin: 0 auto; background: var(--white); box-shadow: 0 0 30px rgba(0,0,0,0.08); }
+
+  /* toolbar (screen only) */
+  .toolbar { position: sticky; top: 0; z-index: 50; background: var(--dark); padding: 10px 24px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .toolbar button { font-family: inherit; font-size: 13px; font-weight: 600; color: white; background: var(--teal-mid); border: none; border-radius: 6px; padding: 8px 14px; cursor: pointer; transition: background 0.15s; }
+  .toolbar button:hover { background: var(--teal); }
+  .toolbar button.ghost { background: transparent; border: 1px solid rgba(255,255,255,0.3); }
+  .toolbar button.ghost:hover { background: rgba(255,255,255,0.12); }
+  .toolbar .tb-note { color: rgba(255,255,255,0.55); font-size: 12px; margin-left: auto; }
+
+  .doc-header { background: var(--teal); color: white; padding: 40px 48px 34px; }
+  .doc-header .clinic-name { font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.8; margin-bottom: 10px; }
+  .doc-header h1 { font-size: 27px; font-weight: 700; line-height: 1.2; margin-bottom: 8px; }
+  .doc-header .subtitle { font-size: 15px; opacity: 0.85; }
+
+  .content { padding: 0 48px 56px; }
+  h2 { font-size: 20px; font-weight: 700; color: var(--teal); margin: 38px 0 4px; padding-top: 8px; }
+  h2 .num { color: var(--teal-mid); font-size: 16px; margin-right: 8px; }
+  .lead { font-size: 13.5px; color: var(--mid-grey); font-style: italic; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--teal-light); }
+  p { margin-bottom: 12px; }
+  strong { color: var(--dark); }
+
+  /* fillable fields */
+  .field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 24px; margin: 16px 0; }
+  .field { display: flex; flex-direction: column; gap: 4px; }
+  .field.full { grid-column: 1 / -1; }
+  .field label { font-size: 12px; font-weight: 700; color: var(--teal); text-transform: uppercase; letter-spacing: 0.04em; }
+  input[type="text"], input[type="date"], textarea, select { font-family: inherit; font-size: 14px; color: var(--dark); border: none; border-bottom: 1.5px solid var(--border); background: #fcfdfe; padding: 6px 4px; width: 100%; }
+  input:focus, textarea:focus, select:focus { outline: none; border-bottom-color: var(--teal); background: var(--teal-light); }
+  textarea { resize: vertical; min-height: 48px; border: 1.5px solid var(--border); border-radius: 6px; }
+  select { border: 1.5px solid var(--border); border-radius: 6px; background: #fcfdfe; cursor: pointer; }
+
+  .intro-block { background: var(--teal-light); border-left: 4px solid var(--teal); border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 18px 0; font-size: 14px; }
+  .intro-block p:last-child { margin-bottom: 0; }
+
+  /* entrustability scale */
+  .scale-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 16px 0; }
+  .scale-card { border-radius: 8px; padding: 12px 14px; color: white; }
+  .scale-card .lv { font-size: 22px; font-weight: 800; }
+  .scale-card .nm { font-size: 14px; font-weight: 700; margin: 2px 0 4px; }
+  .scale-card .ds { font-size: 12px; line-height: 1.4; opacity: 0.92; }
+  .lv1 { background: var(--l1); } .lv2 { background: var(--l2); } .lv3 { background: var(--l3); } .lv4 { background: var(--l4); }
+
+  /* dashboard */
+  .dash { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 16px 0; }
+  .dash-item { border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; background: var(--bg); }
+  .dash-item .de { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+  .dash-item .dt { font-size: 12.5px; font-weight: 700; color: var(--dark); }
+  .dash-item .dtgt { font-size: 11px; color: var(--mid-grey); white-space: nowrap; }
+  .dash-bar { height: 8px; border-radius: 5px; background: #e2e8f0; margin-top: 8px; overflow: hidden; }
+  .dash-bar > span { display: block; height: 100%; border-radius: 5px; transition: width 0.3s; }
+  .dash-item .dstat { font-size: 11px; font-weight: 700; margin-top: 6px; }
+  .met { color: var(--green); } .notyet { color: var(--amber); } .none { color: var(--mid-grey); }
+
+  /* EPA log blocks */
+  .epa { margin: 26px 0; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .epa-head { background: var(--teal); color: white; padding: 14px 18px; }
+  .epa-head .et { font-size: 16px; font-weight: 700; }
+  .epa-head .em { font-size: 12px; opacity: 0.85; margin-top: 2px; }
+  .epa-body { padding: 16px 18px; }
+  .epa-def { font-size: 13.5px; margin-bottom: 12px; }
+  .epa-levels { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 14px; font-size: 11.5px; }
+  .epa-levels .el { border-radius: 6px; padding: 7px 8px; background: var(--bg); border: 1px solid var(--border); }
+  .epa-levels .el b { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 2px; }
+  .epa-target { display: inline-block; font-size: 11.5px; font-weight: 700; color: var(--teal); background: var(--teal-light); border-radius: 12px; padding: 3px 10px; margin-bottom: 12px; }
+
+  table.log { width: 100%; border-collapse: collapse; font-size: 13px; }
+  table.log th { background: var(--teal-mid); color: white; padding: 7px 8px; text-align: left; font-weight: 600; font-size: 11.5px; }
+  table.log td { padding: 5px 6px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+  table.log input, table.log select { border: none; border-bottom: 1px dashed var(--border); border-radius: 0; background: transparent; font-size: 12.5px; padding: 5px 3px; }
+  table.log input:focus { background: var(--teal-light); }
+  .col-date { width: 12%; } .col-set { width: 16%; } .col-desc { width: 46%; } .col-lvl { width: 15%; } .col-sup { width: 11%; }
+
+  /* sign-off */
+  .signoff { margin: 20px 0; }
+  table.signoff-tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
+  table.signoff-tbl th { background: var(--teal); color: white; padding: 8px 10px; text-align: left; font-size: 12px; }
+  table.signoff-tbl td { padding: 8px 10px; border-bottom: 1px solid var(--border); }
+  table.signoff-tbl input { border-bottom: 1px solid var(--border); }
+  .declaration { background: var(--green-light); border-left: 4px solid var(--green); border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 18px 0; font-size: 14px; }
+
+  .doc-footer { background: var(--dark); color: rgba(255,255,255,0.6); padding: 18px 48px; font-size: 12px; }
+
+  @media (max-width: 640px) {
+    .content, .doc-header, .doc-footer { padding-left: 20px; padding-right: 20px; }
+    .field-grid, .dash { grid-template-columns: 1fr; }
+    .scale-grid, .epa-levels { grid-template-columns: 1fr 1fr; }
+    .doc-header h1 { font-size: 21px; }
+  }
+
+  @media print {
+    .toolbar { display: none !important; }
+    .page-wrap { box-shadow: none; max-width: 100%; }
+    body { background: white; font-size: 10.5pt; }
+    input, textarea, select { background: transparent !important; }
+    .epa, .signoff, .scale-grid, .dash { page-break-inside: avoid; }
+    .epa { page-break-before: auto; }
+    h2 { page-break-after: avoid; }
+    .doc-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .epa-head, table.log th, .scale-card, .dash-bar > span, table.signoff-tbl th, .epa-target { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+<div class="toolbar">
+  <button onclick="window.print()">Print / Save as PDF</button>
+  <button onclick="saveData()">Save my data</button>
+  <button class="ghost" onclick="document.getElementById('loadFile').click()">Load saved data</button>
+  <input type="file" id="loadFile" accept="application/json" style="display:none" onchange="loadData(event)">
+  <button class="ghost" onclick="resetAll()">Reset</button>
+  <span class="tb-note">Works offline · your entries stay on your device</span>
+</div>
+
+<div class="doc-header">
+  <div class="clinic-name">Flinders Fertility · Education Program</div>
+  <h1>Reproductive Medicine Rotation — Clinical Logbook</h1>
+  <div class="subtitle">Six-week clinical immersion · entrustable professional activities (EPAs)</div>
+</div>
+
+<div class="content">
+
+<!-- STUDENT DETAILS -->
+<h2><span class="num">§1</span>Student &amp; rotation details</h2>
+<div class="field-grid">
+  <div class="field"><label>Student name</label><input type="text" id="stu-name"></div>
+  <div class="field"><label>Student / registration ID</label><input type="text" id="stu-id"></div>
+  <div class="field"><label>Institution</label><input type="text" id="stu-inst"></div>
+  <div class="field"><label>Year / level of training</label><input type="text" id="stu-year"></div>
+  <div class="field"><label>Rotation start date</label><input type="date" id="rot-start"></div>
+  <div class="field"><label>Rotation end date</label><input type="date" id="rot-end"></div>
+  <div class="field"><label>Primary supervisor</label><input type="text" id="sup-name"></div>
+  <div class="field"><label>Site</label><input type="text" id="site" value="Flinders Fertility"></div>
+</div>
+
+<!-- HOW IT WORKS -->
+<h2><span class="num">§2</span>How this logbook works</h2>
+<div class="intro-block">
+  <p>This logbook is the record of your clinical immersion — the part of this rotation that no online course can replicate. For each of the eight entrustable professional activities (EPAs) below, log the encounters where you observed, participated in, or performed the activity, and have your supervisor confirm the level you reached.</p>
+  <p>You do not need to log every patient. <strong>Log representative encounters that show your progression</strong> toward each EPA's target level. Aim for quality of evidence over quantity. Six rows are provided per EPA; print additional pages if you need more.</p>
+</div>
+
+<h3 style="font-size:15px;color:var(--dark);margin:18px 0 8px;">The entrustability scale</h3>
+<div class="scale-grid">
+  <div class="scale-card lv1"><div class="lv">1</div><div class="nm">Observed</div><div class="ds">Watched the activity performed by a clinician.</div></div>
+  <div class="scale-card lv2"><div class="lv">2</div><div class="nm">Assisted</div><div class="ds">Participated under direct, hands-on guidance.</div></div>
+  <div class="scale-card lv3"><div class="lv">3</div><div class="nm">Supervised</div><div class="ds">Performed with a supervisor present or immediately available.</div></div>
+  <div class="scale-card lv4"><div class="lv">4</div><div class="nm">Independent</div><div class="ds">Performed competently without direct supervision, within scope.</div></div>
+</div>
+<p style="font-size:13px;color:var(--mid-grey);">Each EPA has a <strong>realistic target level for a six-week rotation</strong> — some activities (history-taking, interpreting results) can reach "supervised," while others (oocyte retrieval, ultrasound) are observation- or assistance-level for a student. Targets are shown on each EPA and are honest by design; a logbook that claimed independence in egg collection after six weeks would not survive accreditation review.</p>
+
+<!-- DASHBOARD -->
+<h2><span class="num">§3</span>Progress at a glance</h2>
+<div class="lead">Updates live as you record levels below. On paper, this reflects the state at printing.</div>
+<div class="dash" id="dashboard"><!-- generated --></div>
+
+<!-- EPA LOGS -->
+<h2><span class="num">§4</span>EPA encounter log</h2>
+<div class="lead">Record the date, setting, a brief description of what you did, the level reached, and your supervisor's initials.</div>
+<div id="epa-container"><!-- generated --></div>
+
+<!-- REFLECTION -->
+<h2><span class="num">§5</span>Weekly reflection</h2>
+<div class="lead">A short structured note each week (Gibbs' cycle — Module 6). This feeds your capstone reflection.</div>
+<div class="field-grid">
+  <div class="field full"><label>Week 1 — a moment that stayed with you, and what you'll do differently</label><textarea id="refl-1"></textarea></div>
+  <div class="field full"><label>Week 2</label><textarea id="refl-2"></textarea></div>
+  <div class="field full"><label>Week 3</label><textarea id="refl-3"></textarea></div>
+  <div class="field full"><label>Week 4</label><textarea id="refl-4"></textarea></div>
+  <div class="field full"><label>Week 5</label><textarea id="refl-5"></textarea></div>
+  <div class="field full"><label>Week 6</label><textarea id="refl-6"></textarea></div>
+</div>
+
+<!-- SIGN OFF -->
+<h2><span class="num">§6</span>Final supervisor sign-off</h2>
+<div class="lead">Completed at the end of the rotation. Confirms the level reached for each EPA against its target.</div>
+<div class="signoff">
+  <table class="signoff-tbl" id="signoff-tbl">
+    <thead><tr><th style="width:44%">EPA</th><th style="width:14%">Target</th><th style="width:14%">Reached</th><th style="width:16%">Supervisor initials</th><th style="width:12%">Date</th></tr></thead>
+    <tbody><!-- generated --></tbody>
+  </table>
+</div>
+
+<div class="declaration">
+  <p style="margin-bottom:10px;"><strong>Supervisor declaration.</strong> I confirm that the entries in this logbook are an accurate record of this student's participation during the reproductive medicine rotation, and that the levels recorded reflect my assessment of their performance.</p>
+  <div class="field-grid" style="margin-bottom:0;">
+    <div class="field"><label>Supervisor name</label><input type="text" id="dec-name"></div>
+    <div class="field"><label>Position</label><input type="text" id="dec-pos"></div>
+    <div class="field"><label>Signature</label><input type="text" id="dec-sig"></div>
+    <div class="field"><label>Date</label><input type="date" id="dec-date"></div>
+  </div>
+</div>
+
+</div>
+
+<div class="doc-footer">
+  Flinders Fertility · Education Program · Clinical Logbook · v1.0 Draft · Use the "Save my data" button to keep your entries; "Print / Save as PDF" for the signed record.
+</div>
+
+</div>
+
+<script>
+const EPAS = [
+  { n:1, title:"Reproductive & fertility history-taking", module:"Module 2", target:3,
+    def:"Take a structured reproductive and fertility history from one or both partners — covering menstrual, obstetric, sexual, medical, surgical, lifestyle and family domains.",
+    levels:["Observed a clinician take a full reproductive history.","Took parts of the history with direct prompting.","Took a complete, structured history with a supervisor available.","Took a complete history independently, appropriately tailored."] },
+  { n:2, title:"Interpreting the fertility workup", module:"Module 2", target:3,
+    def:"Interpret a basic fertility workup (ovulation, ovarian reserve, tubal patency, semen analysis) and synthesise a differential.",
+    levels:["Observed results being interpreted.","Interpreted individual results with guidance.","Synthesised a full workup into a differential, supervised.","Interpreted and synthesised independently."] },
+  { n:3, title:"Explaining a management or treatment plan", module:"Modules 3 & 5", target:3,
+    def:"Explain a proposed investigation or treatment plan (e.g. IUI, IVF, ICSI, or a complex-case strategy) to a patient in clear, accurate terms.",
+    levels:["Observed a clinician explain a plan.","Explained parts of a plan with support.","Explained a complete plan to a patient, supervised.","Explained independently, checking understanding."] },
+  { n:4, title:"Follicular-tracking ultrasound", module:"Module 4", target:2,
+    def:"Identify normal pelvic structures and track follicles on transvaginal ultrasound; handle the probe under supervision.",
+    levels:["Observed follicle-tracking scans.","Handled the probe / identified structures under direct supervision.","Performed a tracking scan with a supervisor available (stretch goal).","Not expected within this rotation."] },
+  { n:5, title:"Understanding oocyte retrieval & embryo transfer", module:"Module 3", target:1,
+    def:"Describe the OPU and embryo-transfer procedures and the laboratory workflow, having observed them; counsel a patient on what to expect.",
+    levels:["Observed OPU and/or embryo transfer and the laboratory.","Participated in the procedural setting under supervision.","Not typically expected within this rotation.","Not expected within this rotation."] },
+  { n:6, title:"Contributing to the multidisciplinary team", module:"Module 5", target:2,
+    def:"Prepare and present a case to the multidisciplinary team and contribute to the discussion.",
+    levels:["Observed an MDT meeting.","Prepared and presented a case with support.","Presented and contributed to the management discussion, supervised.","Not expected within this rotation."] },
+  { n:7, title:"Communicating prognosis & difficult news", module:"Modules 5 & 6", target:2,
+    def:"Communicate prognosis or unwelcome news (e.g. a failed cycle, a low chance of success) using a structured approach (SPIKES), with empathy.",
+    levels:["Observed a difficult-news conversation.","Participated in or led part of such a conversation, supervised.","Led a prognosis conversation with a supervisor present.","Not expected within this rotation."] },
+  { n:8, title:"Recognising & responding to psychosocial distress", module:"Modules 5 & 6", target:2,
+    def:"Recognise signs of psychosocial distress (grief, anxiety, reproductive coercion) and respond appropriately, including knowing the referral pathways.",
+    levels:["Observed recognition of and response to distress.","Identified distress and responded appropriately, with support.","Recognised and managed distress including referral, supervised.","Not expected within this rotation."] }
+];
+const LV_NAMES = ["", "Observed", "Assisted", "Supervised", "Independent"];
+const LV_COLORS = ["", "#718096", "#2d8fa3", "#1a6b7a", "#276749"];
+const ROWS_PER_EPA = 6;
+
+// build EPA log blocks
+const epaC = document.getElementById('epa-container');
+EPAS.forEach(e => {
+  let levelCards = e.levels.map((d,i)=>`<div class="el" style="border-left:3px solid ${LV_COLORS[i+1]}"><b style="color:${LV_COLORS[i+1]}">${i+1} · ${LV_NAMES[i+1]}</b>${d}</div>`).join('');
+  let rows = '';
+  for (let r=1; r<=ROWS_PER_EPA; r++){
+    rows += `<tr>
+      <td class="col-date"><input type="date" id="e${e.n}-r${r}-date"></td>
+      <td class="col-set"><input type="text" id="e${e.n}-r${r}-set" placeholder="clinic / theatre / lab…"></td>
+      <td class="col-desc"><input type="text" id="e${e.n}-r${r}-desc" placeholder="what you did"></td>
+      <td class="col-lvl"><select id="e${e.n}-r${r}-lvl" data-epa="${e.n}" onchange="updateDashboard()">
+        <option value="">—</option><option value="1">1 Observed</option><option value="2">2 Assisted</option><option value="3">3 Supervised</option><option value="4">4 Independent</option>
+      </select></td>
+      <td class="col-sup"><input type="text" id="e${e.n}-r${r}-sup" placeholder="init."></td>
+    </tr>`;
+  }
+  epaC.insertAdjacentHTML('beforeend', `
+    <div class="epa">
+      <div class="epa-head"><div class="et">EPA ${e.n} · ${e.title}</div><div class="em">${e.module}</div></div>
+      <div class="epa-body">
+        <div class="epa-def">${e.def}</div>
+        <span class="epa-target">Target for this rotation: level ${e.target} — ${LV_NAMES[e.target]}</span>
+        <div class="epa-levels">${levelCards}</div>
+        <table class="log">
+          <thead><tr><th>Date</th><th>Setting</th><th>Brief description</th><th>Level</th><th>Sup.</th></tr></thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </div>
+    </div>`);
+});
+
+// build dashboard
+const dash = document.getElementById('dashboard');
+EPAS.forEach(e => {
+  dash.insertAdjacentHTML('beforeend', `
+    <div class="dash-item">
+      <div class="de"><span class="dt">EPA ${e.n} · ${e.title}</span><span class="dtgt">target L${e.target}</span></div>
+      <div class="dash-bar"><span id="bar-${e.n}" style="width:0%"></span></div>
+      <div class="dstat none" id="stat-${e.n}">not yet logged</div>
+    </div>`);
+});
+
+// build sign-off rows
+const sBody = document.querySelector('#signoff-tbl tbody');
+EPAS.forEach(e => {
+  sBody.insertAdjacentHTML('beforeend', `
+    <tr>
+      <td>EPA ${e.n} · ${e.title}</td>
+      <td>L${e.target} ${LV_NAMES[e.target]}</td>
+      <td><select id="so-${e.n}-reached"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option></select></td>
+      <td><input type="text" id="so-${e.n}-init"></td>
+      <td><input type="date" id="so-${e.n}-date"></td>
+    </tr>`);
+});
+
+function updateDashboard(){
+  EPAS.forEach(e => {
+    let max = 0;
+    for (let r=1; r<=ROWS_PER_EPA; r++){
+      const v = parseInt((document.getElementById(`e${e.n}-r${r}-lvl`)||{}).value) || 0;
+      if (v > max) max = v;
+    }
+    const bar = document.getElementById(`bar-${e.n}`);
+    const stat = document.getElementById(`stat-${e.n}`);
+    const pct = (max/4)*100;
+    bar.style.width = pct + '%';
+    bar.style.background = max ? LV_COLORS[max] : '#e2e8f0';
+    if (!max){ stat.textContent = 'not yet logged'; stat.className = 'dstat none'; }
+    else if (max >= e.target){ stat.textContent = `reached L${max} (${LV_NAMES[max]}) — target met`; stat.className = 'dstat met'; }
+    else { stat.textContent = `at L${max} (${LV_NAMES[max]}) — working toward L${e.target}`; stat.className = 'dstat notyet'; }
+  });
+}
+
+// save / load / reset
+function saveData(){
+  const data = {};
+  document.querySelectorAll('input, textarea, select').forEach(el => { if (el.id) data[el.id] = el.value; });
+  const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+  const name = (document.getElementById('stu-name').value || 'rotation').trim().replace(/\s+/g,'_');
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `logbook_${name}.json`;
+  a.click(); URL.revokeObjectURL(a.href);
+}
+function loadData(ev){
+  const file = ev.target.files[0]; if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      const data = JSON.parse(reader.result);
+      Object.keys(data).forEach(id => { const el = document.getElementById(id); if (el) el.value = data[id]; });
+      updateDashboard();
+    } catch(err){ alert('That file could not be read as a saved logbook. Check you selected the right .json file.'); }
+    ev.target.value = '';
+  };
+  reader.readAsText(file);
+}
+function resetAll(){
+  if (!confirm('Clear all entries in this logbook? This cannot be undone unless you have saved your data.')) return;
+  document.querySelectorAll('input, textarea, select').forEach(el => { if (el.id && el.id !== 'site') el.value = ''; });
+  updateDashboard();
+}
+updateDashboard();
+</script>
+</body>
+</html>

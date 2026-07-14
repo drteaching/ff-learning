@@ -1,68 +1,265 @@
+@import "../docs/brand-tokens.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
+    /* Map shadcn tokens onto Flinders brand */
+    --background: 210 33% 97%;
+    --foreground: 216 21% 22%;
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
+    --card-foreground: 216 21% 22%;
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 84.2% 60.2%;
+    --popover-foreground: 216 21% 22%;
+    --primary: 209 87% 30%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 212 33% 94%;
+    --secondary-foreground: 209 87% 30%;
+    --muted: 212 33% 94%;
+    --muted-foreground: 216 15% 47%;
+    --accent: 43 73% 93%;
+    --accent-foreground: 209 87% 30%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
+    --border: 210 24% 86%;
+    --input: 210 24% 86%;
+    --ring: 209 87% 30%;
     --radius: 0.5rem;
   }
-  .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
-  }
-}
 
-@layer base {
   * {
     @apply border-border;
   }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-[var(--ff-surface)] text-[var(--ff-text)] antialiased;
+    font-family: var(--ff-body);
   }
+
+  h1,
+  h2,
+  h3,
+  .font-display {
+    font-family: var(--ff-display);
+    color: var(--ff-ink);
+  }
+}
+
+/* Module lesson HTML (ported body; styles live here so SVGs + structure stay on-brand) */
+.lesson-html {
+  color: var(--ff-text);
+  font-size: 1.02rem;
+  line-height: 1.7;
+}
+
+.lesson-html .page-wrap {
+  max-width: none;
+  box-shadow: none;
+  background: transparent;
+}
+
+.lesson-html .doc-header {
+  background: linear-gradient(135deg, var(--ff-ink) 0%, var(--ff-primary) 100%);
+  color: white;
+  padding: 2rem 1.75rem;
+  border-radius: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.lesson-html .doc-header .clinic-name,
+.lesson-html .doc-header .mod-label,
+.lesson-html .doc-header .meta {
+  opacity: 0.85;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+.lesson-html .doc-header h1 {
+  color: white;
+  font-size: 1.75rem;
+  margin: 0.35rem 0 0.5rem;
+  line-height: 1.25;
+}
+
+.lesson-html .doc-header .subtitle {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  font-family: var(--ff-body);
+}
+
+.lesson-html .nav-strip {
+  display: none;
+}
+
+.lesson-html .content {
+  padding: 0;
+}
+
+.lesson-html h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--ff-primary);
+  margin: 2.25rem 0 0.35rem;
+  padding-top: 0.35rem;
+}
+
+.lesson-html h2 .num {
+  color: var(--ff-primary-2);
+  margin-right: 0.4rem;
+}
+
+.lesson-html .section-lead {
+  font-size: 0.92rem;
+  color: var(--ff-muted);
+  font-style: italic;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--ff-tint);
+}
+
+.lesson-html h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ff-ink);
+  margin: 1.5rem 0 0.6rem;
+}
+
+.lesson-html h4 {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--ff-primary);
+  margin: 1rem 0 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.lesson-html p {
+  margin-bottom: 0.9rem;
+}
+
+.lesson-html strong {
+  color: var(--ff-ink);
+}
+
+.lesson-html em.term {
+  font-style: normal;
+  font-weight: 600;
+  color: var(--ff-primary);
+}
+
+.lesson-html ul,
+.lesson-html ol {
+  margin: 0 0 1rem 1.35rem;
+}
+
+.lesson-html li {
+  margin-bottom: 0.45rem;
+}
+
+.lesson-html .intro-block {
+  background: var(--ff-tint);
+  border-left: 4px solid var(--ff-primary);
+  border-radius: 0 0.5rem 0.5rem 0;
+  padding: 1rem 1.25rem;
+  margin: 1.25rem 0;
+}
+
+.lesson-html .clinical-box {
+  background: #ede9fb;
+  border-left: 4px solid #6b46c1;
+  border-radius: 0 0.5rem 0.5rem 0;
+  padding: 0.9rem 1.1rem;
+  margin: 1rem 0;
+}
+
+.lesson-html .clinical-box .cb-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #6b46c1;
+  margin-bottom: 0.35rem;
+}
+
+.lesson-html .key-box {
+  background: var(--ff-green-tint);
+  border-left: 4px solid var(--ff-green);
+  border-radius: 0 0.5rem 0.5rem 0;
+  padding: 0.9rem 1.1rem;
+  margin: 1rem 0;
+}
+
+.lesson-html .key-box .kb-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ff-green);
+  margin-bottom: 0.4rem;
+}
+
+.lesson-html figure.diagram {
+  margin: 1.25rem 0;
+  background: var(--ff-surface);
+  border: 1px solid var(--ff-border);
+  border-radius: 0.5rem;
+  padding: 1rem 1.1rem 0.6rem;
+}
+
+.lesson-html figure.diagram svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.lesson-html figure.diagram .fig-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--ff-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.75rem;
+}
+
+.lesson-html figure.diagram figcaption {
+  font-size: 0.85rem;
+  color: var(--ff-muted);
+  margin-top: 0.7rem;
+  padding-top: 0.55rem;
+  border-top: 1px solid var(--ff-border);
+}
+
+.lesson-html table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.92rem;
+}
+
+.lesson-html th {
+  background: var(--ff-primary);
+  color: white;
+  padding: 0.55rem 0.7rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.lesson-html td {
+  padding: 0.5rem 0.7rem;
+  border-bottom: 1px solid var(--ff-border);
+  vertical-align: top;
+}
+
+.lesson-html .doc-footer {
+  margin-top: 2rem;
+  padding: 1rem 0;
+  border-top: 1px solid var(--ff-border);
+  color: var(--ff-muted);
+  font-size: 0.8rem;
 }

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reproductive Medicine Rotation — Question Bank &amp; Quizzes</title>
+<style>
+  :root {
+    --teal:#1a6b7a; --teal-light:#e8f4f6; --teal-mid:#2d8fa3; --dark:#1e2d2f;
+    --grey:#37424a; --mid-grey:#718096; --border:#cbd5e0; --bg:#f7fafc; --white:#fff;
+    --amber:#b7791f; --amber-light:#fef3c7; --green:#276749; --green-light:#d5f0dd;
+    --red:#b03030; --red-light:#fce8e8;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;font-size:15px;line-height:1.6;color:var(--grey);background:var(--bg);}
+  .page-wrap{max-width:900px;margin:0 auto;background:var(--white);box-shadow:0 0 30px rgba(0,0,0,0.08);}
+
+  .toolbar{position:sticky;top:0;z-index:50;background:var(--dark);padding:10px 24px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+  .toolbar button{font-family:inherit;font-size:12.5px;font-weight:600;color:#fff;background:var(--teal-mid);border:none;border-radius:6px;padding:7px 12px;cursor:pointer;transition:background .15s;}
+  .toolbar button:hover{background:var(--teal);}
+  .toolbar button.ghost{background:transparent;border:1px solid rgba(255,255,255,.3);}
+  .toolbar button.ghost:hover{background:rgba(255,255,255,.12);}
+  .toolbar .sp{margin-left:auto;color:rgba(255,255,255,.55);font-size:12px;}
+
+  .doc-header{background:var(--teal);color:#fff;padding:36px 48px 30px;}
+  .doc-header .clinic-name{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;opacity:.8;margin-bottom:10px;}
+  .doc-header h1{font-size:26px;font-weight:700;line-height:1.2;margin-bottom:8px;}
+  .doc-header .subtitle{font-size:15px;opacity:.85;}
+
+  .content{padding:26px 48px 56px;}
+
+  .picker{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 6px;}
+  .picker button{font-family:inherit;font-size:13.5px;font-weight:600;color:var(--teal);background:var(--teal-light);border:1.5px solid transparent;border-radius:8px;padding:9px 16px;cursor:pointer;transition:all .15s;}
+  .picker button:hover{border-color:var(--teal-mid);}
+  .picker button.active{background:var(--teal);color:#fff;}
+  .picker .wide{background:var(--dark);color:#fff;}
+  .picker .wide.active{background:var(--teal);}
+  .hint{font-size:13px;color:var(--mid-grey);font-style:italic;margin-bottom:10px;}
+
+  .quiz-meta{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:18px 0 8px;padding-bottom:10px;border-bottom:2px solid var(--teal-light);}
+  .quiz-meta h2{font-size:20px;color:var(--teal);font-weight:700;}
+  .quiz-meta .count{font-size:13px;color:var(--mid-grey);}
+
+  .scorebar{display:none;position:sticky;top:52px;z-index:40;background:var(--green-light);border:1px solid var(--green);border-radius:8px;padding:12px 18px;margin:14px 0;font-weight:700;color:var(--green);}
+  .scorebar.show{display:block;}
+  .scorebar .pct{font-size:20px;}
+  .scorebar .brk{font-weight:400;color:var(--grey);font-size:13px;margin-top:4px;}
+
+  .q{border:1px solid var(--border);border-radius:10px;padding:18px 20px;margin:16px 0;background:var(--white);}
+  .q .qtag{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--teal-mid);margin-bottom:6px;}
+  .q .stem{font-size:15px;font-weight:600;color:var(--dark);margin-bottom:12px;}
+  .q .stem .qn{color:var(--teal-mid);margin-right:6px;}
+  .opt{display:flex;gap:10px;align-items:flex-start;padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;margin-bottom:7px;cursor:pointer;transition:all .12s;font-size:14px;}
+  .opt:hover{border-color:var(--teal-mid);background:var(--bg);}
+  .opt input{margin-top:3px;accent-color:var(--teal);}
+  .opt .lt{font-weight:700;color:var(--teal);margin-right:2px;}
+  .opt.correct{background:var(--green-light);border-color:var(--green);}
+  .opt.wrong{background:var(--red-light);border-color:var(--red);}
+  .opt.correct .lt{color:var(--green);}
+  .opt.wrong .lt{color:var(--red);}
+  .rationale{display:none;margin-top:10px;padding:11px 14px;background:var(--teal-light);border-left:3px solid var(--teal);border-radius:0 6px 6px 0;font-size:13.5px;}
+  .rationale.show{display:block;}
+  .rationale b{color:var(--teal);}
+  .q.answered.iscorrect{border-color:var(--green);}
+  .q.answered.isincorrect{border-color:var(--red);}
+
+  .actions{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0;}
+  .actions button{font-family:inherit;font-size:14px;font-weight:700;border:none;border-radius:8px;padding:11px 20px;cursor:pointer;}
+  .btn-check{background:var(--teal);color:#fff;}
+  .btn-check:hover{background:var(--teal-mid);}
+  .btn-reset{background:var(--bg);color:var(--grey);border:1.5px solid var(--border) !important;}
+
+  .empty{padding:40px 20px;text-align:center;color:var(--mid-grey);}
+  .doc-footer{background:var(--dark);color:rgba(255,255,255,.6);padding:18px 48px;font-size:12px;}
+
+  @media (max-width:640px){.content,.doc-header,.doc-footer{padding-left:20px;padding-right:20px;}.doc-header h1{font-size:20px;}}
+  @media print{
+    .toolbar,.picker,.actions,.scorebar{display:none !important;}
+    .page-wrap{box-shadow:none;max-width:100%;}
+    body{background:#fff;font-size:10.5pt;}
+    .q{page-break-inside:avoid;border-color:#999;}
+    .rationale{display:block !important;background:#f0f5f6;}
+    .opt input{display:none;}
+    .doc-header{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  }
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+<div class="toolbar">
+  <button onclick="checkAll()">Check answers</button>
+  <button class="ghost" onclick="resetQuiz()">Reset</button>
+  <button class="ghost" onclick="revealAll()">Reveal key (print)</button>
+  <button class="ghost" onclick="window.print()">Print</button>
+  <span class="sp">90-question bank · single best answer</span>
+</div>
+
+<div class="doc-header">
+  <div class="clinic-name">Flinders Fertility · Education Program</div>
+  <h1>Question Bank &amp; Quizzes</h1>
+  <div class="subtitle">90 single-best-answer MCQs across the six modules · with teaching rationales</div>
+</div>
+
+<div class="content">
+  <div class="picker" id="picker"></div>
+  <div class="hint">Pick a module quiz (15 questions), a mixed exam (30, spanning all modules), or the full bank (90). Answer, then <strong>Check answers</strong> for your score and the rationales.</div>
+
+  <div class="scorebar" id="scorebar"></div>
+
+  <div class="quiz-meta" id="quizmeta" style="display:none;">
+    <h2 id="quiztitle"></h2>
+    <span class="count" id="quizcount"></span>
+  </div>
+
+  <div id="quiz"><div class="empty">Choose a quiz above to begin.</div></div>
+
+  <div class="actions" id="actions" style="display:none;">
+    <button class="btn-check" onclick="checkAll()">Check answers</button>
+    <button class="btn-reset" onclick="resetQuiz()">Try again</button>
+  </div>
+</div>
+
+<div class="doc-footer">
+  Flinders Fertility · Education Program · Question Bank v1.0 Draft · Rationales reflect content verified during module development; confirm against current guidelines before clinical use.
+</div>
+
+<script>
+/* ---- QUESTION BANK: m = module, q = stem, o = options, a = correct index (0-based), r = rationale ---- */
+const BANK = [
+/* ===== MODULE 1 · Physiology & Endocrinology ===== */
+{m:1,q:"GnRH is normally released in a pulsatile fashion. What is the effect of CONTINUOUS (non-pulsatile) GnRH exposure on the pituitary?",o:["Amplified LH and FSH release","Desensitisation and suppression of gonadotrophins","Selective FSH release only","No change in gonadotrophin output"],a:1,r:"Continuous GnRH downregulates and desensitises pituitary receptors, suppressing LH and FSH. This paradox is exploited by GnRH-agonist protocols to switch the axis off."},
+{m:1,q:"In the two-cell, two-gonadotrophin model, which cell produces oestrogen and under which gonadotrophin?",o:["Theca cells under LH","Granulosa cells under FSH (aromatising theca-derived androgens)","Granulosa cells under LH","Theca cells under FSH"],a:1,r:"LH drives theca cells to make androgens; FSH drives granulosa-cell aromatase to convert those androgens to oestrogen. Both cells and both gonadotrophins are required."},
+{m:1,q:"What triggers the mid-cycle LH surge?",o:["A fall in oestradiol","Sustained high oestradiol switching feedback from negative to positive","A rise in progesterone","A fall in inhibin B"],a:1,r:"Once oestradiol is sustained above a threshold, feedback flips from negative to positive, producing the LH surge that triggers ovulation."},
+{m:1,q:"How is a single dominant follicle selected in a natural cycle?",o:["Rising FSH rescues all follicles","Falling FSH in the late follicular phase selects the most FSH-sensitive follicle","LH selects the largest follicle","Progesterone suppresses the smaller follicles"],a:1,r:"As FSH falls, only the most FSH-sensitive (dominant) follicle survives; the rest undergo atresia. Stimulation defeats this by keeping FSH high."},
+{m:1,q:"A primary oocyte is arrested at which stage until the LH surge?",o:["Metaphase II","Prophase I (dictyate)","Anaphase I","Prophase II"],a:1,r:"Oocytes are arrested in prophase I from fetal life. The LH surge completes meiosis I; the oocyte then arrests again at metaphase II until fertilisation."},
+{m:1,q:"Anti-Müllerian hormone (AMH), used as a reserve marker, is produced by:",o:["Theca cells of antral follicles","Granulosa cells of pre-antral and small antral follicles","The corpus luteum","Pituitary gonadotrophs"],a:1,r:"AMH from granulosa cells of small growing follicles reflects the size of the remaining follicle pool, making it an operator-independent reserve marker."},
+{m:1,q:"Why is luteal progesterone support given in stimulated IVF cycles?",o:["To trigger ovulation","Because stimulation and the trigger disrupt normal corpus luteum function","To thin the endometrium","To prevent multiple pregnancy"],a:1,r:"Progesterone from the corpus luteum maintains the endometrium; stimulation and the trigger impair luteal function, so exogenous progesterone replaces it."},
+{m:1,q:"The window of implantation is best described as:",o:["Oestrogen-driven receptivity in the proliferative phase","A progesterone-driven period of endometrial receptivity in the mid-secretory phase","Continuous receptivity throughout the luteal phase","Receptivity only at the time of ovulation"],a:1,r:"Receptivity is a limited, progesterone-driven mid-secretory window (roughly a week after ovulation) — the basis for precise timing in frozen transfers."},
+{m:1,q:"Which event blocks polyspermy at fertilisation?",o:["The acrosome reaction","The cortical reaction hardening the zona pellucida","Capacitation","Completion of meiosis I"],a:1,r:"After sperm entry, the cortical reaction modifies the zona to prevent further sperm binding, ensuring monospermic fertilisation."},
+{m:1,q:"Why do young donor eggs largely restore IVF success in an older recipient?",o:["The older uterus is the main limiting factor","Aneuploidy is driven by oocyte age, not uterine age","Older recipients produce more progesterone","Donor eggs implant faster"],a:1,r:"Age-related decline is chiefly an oocyte (aneuploidy) problem; a young donor oocyte bypasses it, and the older uterus remains largely receptive."},
+{m:1,q:"The rise in aneuploidy with maternal age is primarily due to:",o:["Uterine ageing","Meiotic non-disjunction in the long-arrested oocyte","Sperm DNA fragmentation","Reduced FSH"],a:1,r:"Oocytes arrested since fetal life accumulate errors; non-disjunction at meiosis I rises with age, increasing aneuploidy."},
+{m:1,q:"Inhibin B, produced by granulosa cells, primarily provides feedback on:",o:["LH","FSH","GnRH pulse frequency","Progesterone"],a:1,r:"Inhibin B selectively suppresses FSH, contributing to the fall in FSH that drives dominant-follicle selection."},
+{m:1,q:"By the blastocyst stage, the inner cell mass and trophectoderm become, respectively:",o:["Placenta and fetus","Fetus and placenta","Both the fetus","Both the placenta"],a:1,r:"The inner cell mass becomes the fetus; the trophectoderm becomes the placenta. PGT-A biopsies trophectoderm — the future placenta, not the future baby."},
+{m:1,q:"On ultrasound, the proliferative (oestrogen-dominant) endometrium characteristically appears as:",o:["Homogeneously echogenic","A trilaminar 'triple-line' pattern","Thin and irregular","Cystic"],a:1,r:"Oestrogen produces the trilaminar pattern in the proliferative phase; progesterone then converts it to a homogeneously echogenic secretory endometrium."},
+{m:1,q:"The 'FSH threshold' concept refers to:",o:["The FSH level above which follicle growth is sustained","The maximum safe FSH dose","The FSH level that triggers ovulation","The FSH needed to make AMH"],a:0,r:"Follicles grow only when FSH exceeds a threshold; stimulation keeps the whole cohort above it, overriding natural single-follicle selection."},
+
+/* ===== MODULE 2 · Assessment & Initial Management ===== */
+{m:2,q:"A 32-year-old woman has been trying to conceive for 10 months. When is investigation of infertility conventionally indicated?",o:["Immediately","After 12 months of regular unprotected intercourse","After 24 months","After 6 months"],a:1,r:"Investigate after 12 months of regular unprotected intercourse — but earlier (6 months) if the woman is ≥35 or there is a known cause."},
+{m:2,q:"A 37-year-old presents after 7 months trying. What is the appropriate approach to timing of investigation?",o:["Wait until 12 months","Investigate now, because at age ≥35 the threshold is 6 months","Wait until 24 months","No investigation needed under 40"],a:1,r:"At age ≥35, investigate after 6 months rather than 12, because declining reserve makes delay costly."},
+{m:2,q:"Under the WHO 2021 manual, the lower reference limit for sperm concentration is approximately:",o:["5 million/mL","16 million/mL","39 million/mL","60 million/mL"],a:1,r:"WHO 2021 lower reference limits include concentration ≥16 million/mL (and total count ≥39 million). These are reference limits, not thresholds of fertility."},
+{m:2,q:"A first semen analysis shows borderline-low concentration and motility. What is the correct next step?",o:["Diagnose male-factor infertility","Repeat the analysis before diagnosing","Proceed straight to ICSI","Start empirical testosterone"],a:1,r:"Semen parameters vary; a borderline abnormal result should be confirmed on a repeat sample before a diagnosis or treatment decision."},
+{m:2,q:"Ovulation is most simply confirmed by:",o:["Day-2 FSH","A mid-luteal (around day 21) serum progesterone","AMH","Basal body temperature alone"],a:1,r:"A raised mid-luteal progesterone confirms ovulation occurred in that cycle. AMH and FSH assess reserve, not ovulation."},
+{m:2,q:"Which combination best assesses ovarian reserve?",o:["FSH alone","AMH and antral follicle count","LH and progesterone","Oestradiol alone"],a:1,r:"AMH and AFC are the primary reserve markers. Day-3 FSH is less sensitive and more variable."},
+{m:2,q:"Tubal patency is most commonly assessed first-line with:",o:["Laparoscopy and dye","Hysterosalpingography (HSG) or HyCoSy","MRI","CT"],a:1,r:"HSG (or hysterosalpingo-contrast-sonography) is the usual first-line tubal test; laparoscopy is reserved for when surgery is otherwise indicated."},
+{m:2,q:"A hydrosalpinx is found before planned IVF. Why does it matter?",o:["It has no effect on IVF","The fluid is toxic to embryos and roughly halves IVF success unless treated","It only affects natural conception","It improves implantation"],a:1,r:"Hydrosalpinx fluid communicating with the cavity is embryotoxic and about halves IVF success; salpingectomy or proximal occlusion before transfer restores it."},
+{m:2,q:"Which is the single most important prognostic factor in a couple's fertility?",o:["Male BMI","Female age","Duration of the relationship","Blood group"],a:1,r:"Female age is the dominant prognostic factor because it drives oocyte quantity and quality (aneuploidy)."},
+{m:2,q:"The commonest cause of anovulatory infertility is:",o:["Premature ovarian insufficiency","Polycystic ovary syndrome","Hyperprolactinaemia","Thyroid disease"],a:1,r:"PCOS is the most frequent cause of anovulatory infertility; the others are less common contributors that should still be excluded."},
+{m:2,q:"The usual escalation of treatment for suitable couples is:",o:["IVF → IUI → ovulation induction","Ovulation induction → intrauterine insemination → IVF","IVF first for everyone","IUI → IVF → ovulation induction"],a:1,r:"Where appropriate, treatment escalates from ovulation induction to IUI to IVF, individualised by cause, age and duration."},
+{m:2,q:"In assessing an infertile couple, which is true?",o:["Only the woman needs assessment","Both partners should be investigated","The man is assessed only if the woman is normal","Assessment is sequential, never concurrent"],a:1,r:"Both partners are investigated — male factor contributes to a large share of cases and is easily missed if only the woman is assessed."},
+{m:2,q:"Which lifestyle factor most clearly reduces fertility in both partners?",o:["Moderate coffee intake","Smoking","Vegetarian diet","Regular exercise"],a:1,r:"Smoking impairs fertility in both sexes; extremes of BMI also matter. These are addressed before or alongside treatment."},
+{m:2,q:"'Unexplained infertility' is best defined as:",o:["Infertility the couple refuses to investigate","Infertility with a normal standard workup in both partners","Male-factor infertility","Infertility due to age alone"],a:1,r:"It is a diagnosis of exclusion — normal ovulation, tubes, and semen analysis — and is managed by expectant, IUI, or IVF approaches depending on age and duration."},
+{m:2,q:"Which statement about male-factor infertility is correct?",o:["It is rare","It contributes to a substantial proportion of cases and warrants routine semen analysis","It is always obstructive","It cannot coexist with female factors"],a:1,r:"Male factor contributes to a large share of infertility, often alongside female factors, so semen analysis is a routine first-line test."},
+
+/* ===== MODULE 3 · ART Stimulation, IVF & Laboratory ===== */
+{m:3,q:"Which stimulation protocol is now first-line in the general IVF population, and why?",o:["Agonist long protocol, for higher yield","GnRH antagonist protocol, for comparable efficacy and higher safety","Natural cycle, for cost","Agonist flare, for poor responders"],a:1,r:"The antagonist protocol is first-line: comparable efficacy but higher safety, chiefly because it permits a GnRH-agonist trigger that dramatically lowers OHSS risk."},
+{m:3,q:"The fundamental purpose of controlled ovarian stimulation is to:",o:["Improve egg quality","Override natural single-follicle selection to grow multiple follicles","Prevent implantation","Suppress the endometrium"],a:1,r:"Sustained high FSH keeps the whole recruited cohort growing rather than allowing all but one to undergo atresia."},
+{m:3,q:"A GnRH-agonist trigger (instead of hCG) is possible only in which cycle type, and its main advantage is:",o:["Agonist cycles; higher yield","Antagonist cycles; a short LH surge that markedly reduces OHSS risk","Natural cycles; lower cost","Any cycle; better egg quality"],a:1,r:"An agonist trigger requires a responsive pituitary (antagonist cycle). It gives a short endogenous surge, avoiding the prolonged hCG stimulus that drives OHSS."},
+{m:3,q:"Why does an hCG trigger carry a higher OHSS risk than a GnRH-agonist trigger?",o:["It is given at a higher dose","Its long half-life sustains ovarian stimulation for days after retrieval","It causes premature ovulation","It thins the endometrium"],a:1,r:"hCG's long half-life prolongs ovarian stimulation, and if pregnancy occurs endogenous hCG worsens it — the mechanism behind OHSS."},
+{m:3,q:"Which patient is at highest risk of OHSS?",o:["A 40-year-old poor responder","A young woman with PCOS, high AMH and many follicles","A woman on natural-cycle IVF","A woman with diminished ovarian reserve"],a:1,r:"High responders — PCOS, high AMH, many follicles, steeply rising oestradiol — are the OHSS-risk group and the ones managed with agonist trigger plus freeze-all."},
+{m:3,q:"A randomised trial of freeze-all versus fresh transfer in women with PCOS showed:",o:["No difference in any outcome","Higher live birth and lower OHSS with freeze-all","Lower live birth with freeze-all","Higher OHSS with freeze-all"],a:1,r:"In PCOS (Chen et al., NEJM 2016), freeze-all improved live birth and reduced OHSS — a clear indication in this group."},
+{m:3,q:"In ovulatory women WITHOUT PCOS, elective freeze-all compared with fresh transfer:",o:["Clearly increases live birth","Does not improve live birth, though it reduces OHSS","Reduces live birth","Has no effect on OHSS"],a:1,r:"In ovulatory non-PCOS women (Shi et al., NEJM 2018), freeze-all did not raise live birth, though OHSS was lower — so it is not a universal upgrade."},
+{m:3,q:"ICSI is specifically indicated for:",o:["All IVF cycles","Significant male factor or prior fertilisation failure","Improving outcomes in non-male-factor couples","Reducing OHSS"],a:1,r:"ICSI addresses male factor, prior fertilisation failure, or surgically retrieved sperm; it is not superior in non-male-factor cases and is not a default."},
+{m:3,q:"Normal fertilisation is confirmed on day 1 by the presence of:",o:["A blastocyst","Two pronuclei (2PN)","A single pronucleus","Cardiac activity"],a:1,r:"Two pronuclei (one maternal, one paternal) confirm normal fertilisation. 1PN or 3PN embryos are abnormal and not used."},
+{m:3,q:"In the Gardner system, a blastocyst graded '4AA' denotes:",o:["A cleavage-stage embryo","An expanded blastocyst with good inner cell mass and good trophectoderm","A poor-quality embryo","An aneuploid embryo"],a:1,r:"The number grades expansion (1–6) and the two letters grade the inner cell mass and trophectoderm (A–C). Grading is morphological, not genetic."},
+{m:3,q:"The main rationale for culturing embryos to blastocyst (day 5) before transfer is:",o:["To reduce laboratory cost","To let stronger embryos self-select, as many abnormal embryos arrest earlier","To guarantee a euploid embryo","To speed up the cycle"],a:1,r:"Extended culture allows self-selection; many chromosomally abnormal embryos arrest before blastocyst, improving the chance a transferred embryo is viable — though it is not a genetic test."},
+{m:3,q:"In good-prognosis patients, the best randomised evidence comparing PGT-A with conventional IVF shows:",o:["PGT-A clearly raises cumulative live birth","Conventional IVF is non-inferior for cumulative live birth","PGT-A halves live birth","No embryos survive without PGT-A"],a:1,r:"Yan et al. (NEJM 2021) found conventional IVF non-inferior for cumulative live birth in good-prognosis patients, though PGT-A reduced miscarriage per transfer."},
+{m:3,q:"Final oocyte maturation is typically triggered when lead follicles reach about:",o:["10–12 mm","17–18 mm","25–30 mm","6–8 mm"],a:1,r:"Triggering at a lead-follicle diameter of ~17–18 mm times maturity; oocyte retrieval follows ~36 hours later, before ovulation occurs."},
+{m:3,q:"Every transfer of gametes or embryos between vessels in the IVF laboratory is double-witnessed principally to prevent:",o:["Contamination","Mismatching one patient's gametes or embryos with another's","Temperature error","Overgrowth"],a:1,r:"Double-witnessing (or electronic witnessing) guards against the catastrophic error of mixing up patients' gametes or embryos — a core RTAC-audited safety discipline."},
+{m:3,q:"A young woman with PCOS has 24 follicles and a high oestradiol on the planned trigger day of an antagonist cycle. The safest strategy is:",o:["hCG trigger and fresh transfer","GnRH-agonist trigger with a freeze-all","Cancel the cycle","hCG trigger with immediate transfer of two embryos"],a:1,r:"This is a high OHSS-risk picture; an agonist trigger (available because it is an antagonist cycle) plus freeze-all minimises OHSS, and freeze-all also aids live birth in PCOS."},
+
+/* ===== MODULE 4 · Ultrasound ===== */
+{m:4,q:"Compared with transabdominal ultrasound, transvaginal ultrasound offers:",o:["Greater depth, lower resolution","Higher frequency and resolution but less depth","The same image quality","Better views of large abdominal masses"],a:1,r:"TVS uses a high-frequency probe close to the pelvic organs — higher resolution, less depth. It is the workhorse of reproductive ultrasound."},
+{m:4,q:"A periovulatory endometrium favourable for implantation is typically:",o:["Thin and echogenic","Trilaminar and at least ~7 mm","Cystic","Absent"],a:1,r:"An oestrogenised trilaminar endometrium of roughly ≥7 mm is associated with better implantation, though this is an association rather than a hard cut-off."},
+{m:4,q:"During stimulation monitoring, follicle tracking is used chiefly to:",o:["Diagnose pregnancy","Time the trigger and flag OHSS risk","Measure the endometrium only","Assess tubal patency"],a:1,r:"Serial scans size the lead follicles (to time the trigger, ~17–18 mm) and count the cohort (to flag OHSS risk)."},
+{m:4,q:"Which FIGO leiomyoma types are the ones most relevant to fertility and typically resected?",o:["Subserosal types 6–7","Submucosal types 0–2","Intramural type 4","Type 8 (cervical)"],a:1,r:"Submucosal fibroids (types 0–2) distort or contact the cavity and impair implantation; subserosal fibroids generally do not affect fertility."},
+{m:4,q:"Using a high-frequency (≥8 MHz) transducer, the 2023-guideline threshold for polycystic ovarian morphology is:",o:["≥12 follicles per ovary","≥20 follicles per ovary","≥5 follicles per ovary","≥30 follicles per ovary"],a:1,r:"The threshold rose from the old Rotterdam ≥12 to ≥20 follicles per ovary (2–9 mm) with a high-frequency probe, reflecting better resolution."},
+{m:4,q:"When image quality or older equipment precludes an accurate follicle count, PCOM may instead be defined by:",o:["Ovarian volume ≥10 mL","Endometrial thickness","Uterine size","Tubal calibre"],a:0,r:"An ovarian volume ≥10 mL (or an elevated AMH, a newer alternative) can define PCOM when follicles cannot be counted reliably."},
+{m:4,q:"The classic ultrasound appearance of an ovarian endometrioma is:",o:["An anechoic simple cyst","A cyst with homogeneous low-level 'ground-glass' echoes","A solid vascular mass","A thin-walled septated cyst"],a:1,r:"Endometriomas show homogeneous low-level 'ground-glass' internal echoes without solid vascular components."},
+{m:4,q:"On a transvaginal scan, a pregnancy is DEFINITIVELY non-viable when:",o:["The gestational sac is 15 mm with no embryo","The mean sac diameter is ≥25 mm with no embryo","A yolk sac is present","The CRL is 4 mm with no cardiac activity"],a:1,r:"A mean sac diameter ≥25 mm with no embryo (or CRL ≥7 mm with no cardiac activity) is definitive for non-viability; smaller measurements are only suspicious."},
+{m:4,q:"An embryo with a crown-rump length of 5 mm shows no cardiac activity. The correct interpretation is:",o:["Definitely non-viable","Suspicious but not diagnostic — arrange a follow-up scan","Normal","Ectopic"],a:1,r:"Below the CRL ≥7 mm threshold, absent cardiac activity is suspicious, not diagnostic; the correct action is a follow-up scan, never a diagnosis of miscarriage."},
+{m:4,q:"In early pregnancy on TVS, the first structure to confirm an intrauterine pregnancy, appearing around 5.5 weeks, is the:",o:["Fetal pole","Yolk sac within the gestational sac","Placenta","Amniotic band"],a:1,r:"The yolk sac within the sac (about 5.5 weeks) is the first definite sign of an intrauterine pregnancy; cardiac activity follows around 6 weeks."},
+{m:4,q:"A positive pregnancy test with no intrauterine gestational sac on TVS should prompt consideration of:",o:["Twin pregnancy","Ectopic pregnancy / pregnancy of unknown location","Normal early pregnancy only","Molar pregnancy only"],a:1,r:"Positive test with no visible intrauterine pregnancy raises ectopic pregnancy or 'pregnancy of unknown location' — an actively managed state, not a reassurance."},
+{m:4,q:"A hydrosalpinx on ultrasound typically appears as:",o:["A solid ovarian mass","A tubular fluid-filled adnexal structure separate from the ovary","A trilaminar endometrium","A simple ovarian cyst"],a:1,r:"A blocked, fluid-filled tube appears tubular (sometimes cog-wheel), separate from the ovary — a finding that changes the IVF plan before transfer."},
+{m:4,q:"Which procedure is performed under continuous transvaginal ultrasound guidance?",o:["Embryo transfer","Oocyte retrieval (OPU)","Semen analysis","Hysteroscopy"],a:1,r:"OPU is guided in real time by transvaginal ultrasound; embryo transfer is often guided transabdominally."},
+{m:4,q:"The antral follicle count is best performed:",o:["In the mid-luteal phase","Early in the cycle, counting follicles ~2–10 mm across both ovaries","Only after stimulation","At the time of ovulation"],a:1,r:"AFC is an early-cycle count of small antral follicles across both ovaries; with AMH it estimates reserve, though it is operator-dependent."},
+{m:4,q:"Why did the PCOM follicle-number threshold increase from ≥12 to ≥20?",o:["Because PCOS became more severe","Because higher-resolution transducers detect more follicles","Because ovaries enlarged over time","Because AMH replaced ultrasound"],a:1,r:"The change is technological, not biological — better probes visualise more follicles, so the threshold was raised to preserve specificity."},
+
+/* ===== MODULE 5 · Complex Cases ===== */
+{m:5,q:"Endometriosis impairs fertility through several mechanisms. Which does IVF most directly BYPASS?",o:["Reduced ovarian reserve","Distorted tubal anatomy and the peritoneal environment","Endometrial progesterone resistance","Oocyte quality"],a:1,r:"IVF bypasses tubal transport and the hostile peritoneal environment — two of the four mechanisms — which is part of why surgery before IVF is often unnecessary."},
+{m:5,q:"Regarding endometriosis and fertility, the anatomical rASRM stage:",o:["Predicts fertility accurately","Correlates poorly with fertility, so the Endometriosis Fertility Index is used for prognosis","Determines the exact IVF protocol","Is the same as the EFI"],a:1,r:"rASRM stage describes disease burden but predicts fertility poorly; the EFI was developed to give a fertility prognosis."},
+{m:5,q:"Hormonal (ovarian) suppression of endometriosis to improve natural fertility is:",o:["First-line","Not effective for fertility and delays conception — it treats pain, not subfertility","Recommended before every IVF cycle","Curative"],a:1,r:"Ovarian suppression does not improve fertility and delays attempts; ESHRE is explicit that it should not be used to improve fertility."},
+{m:5,q:"When ART is already clearly indicated, the 2022 ESHRE position on surgery for endometriosis before IVF is that it is:",o:["Mandatory","Largely obsolete, reserved for pain, access, or suspicious lesions","Always superior to proceeding to IVF","Required to improve egg quality"],a:1,r:"When ART is indicated, routine surgery before IVF is largely obsolete because IVF bypasses the relevant mechanisms; surgery is reserved for specific reasons."},
+{m:5,q:"Ovarian cystectomy for an endometrioma, compared with drainage/coagulation, gives lower recurrence but:",o:["Improves ovarian reserve","Reduces ovarian reserve (a fall in AMH)","Has no effect on reserve","Cures endometriosis"],a:1,r:"Cystectomy removes normal ovarian tissue and measurably lowers reserve; in low-reserve or bilateral disease, reserve-sparing techniques are considered."},
+{m:5,q:"Azoospermia with small testes and an elevated FSH is most consistent with:",o:["Obstructive azoospermia","Non-obstructive azoospermia (production failure)","Retrograde ejaculation","Normal variant"],a:1,r:"High FSH and small testes indicate a production failure — non-obstructive azoospermia. Normal FSH with normal testes suggests obstruction."},
+{m:5,q:"A man with congenital bilateral absence of the vas deferens (obstructive azoospermia) should be tested for:",o:["Y-chromosome microdeletion","CFTR mutations","Karyotype only","Sperm DNA fragmentation"],a:1,r:"CBAVD is frequently a cystic-fibrosis-spectrum condition; CFTR testing (including the 5T allele) is indicated, and the partner may need carrier testing."},
+{m:5,q:"Which genetic tests are indicated in non-obstructive azoospermia?",o:["CFTR only","Karyotype and Y-chromosome microdeletion analysis","No testing needed","Sperm DNA fragmentation only"],a:1,r:"NOA warrants karyotype (e.g. Klinefelter 47,XXY) and Y-microdeletion (AZF) analysis, which inform both retrieval prospects and counselling."},
+{m:5,q:"On Y-microdeletion analysis, which finding predicts that surgical sperm retrieval will almost certainly FAIL?",o:["AZFc deletion","Complete AZFa or AZFb deletion","No deletion","Any partial deletion"],a:1,r:"Complete AZFa or AZFb deletions predict failed retrieval (sparing a futile operation), whereas AZFc deletions are often compatible with retrievable sperm."},
+{m:5,q:"The commonest genetic cause of non-obstructive azoospermia is:",o:["Cystic fibrosis","Klinefelter syndrome (47,XXY)","AZFc deletion","Kallmann syndrome"],a:1,r:"Klinefelter syndrome (47,XXY) is the commonest chromosomal cause of NOA, identified on karyotype."},
+{m:5,q:"Surgical sperm retrieval with ICSI in a man with a Y-chromosome microdeletion carries which counselling point?",o:["It cures the infertility","The microdeletion is transmitted to all male offspring","It prevents transmission","No genetic implications"],a:1,r:"Y-microdeletions are passed to every son, who will likely face the same infertility — so genetic counselling is mandatory before retrieval."},
+{m:5,q:"A 40-year-old has three failed transfers of untested, good-morphology blastocysts, with a normal cavity. The most likely explanation is:",o:["An endometrial receptivity defect","Expected embryo aneuploidy given age and untested embryos","A clotting disorder","Immune rejection"],a:1,r:"Much 'recurrent implantation failure' is expected aneuploidy, especially with untested embryos at older ages — an embryo problem, not an endometrial one."},
+{m:5,q:"The best randomised evidence on endometrial receptivity testing (ERA) to time transfer shows:",o:["A clear increase in live birth","No improvement in live birth versus standard-timed transfer","A large reduction in miscarriage","It is required for all RIF"],a:1,r:"The best RCT (Doyle et al., JAMA 2022) found no live-birth benefit from receptivity-guided timing — so ERA is a weak add-on, not routine."},
+{m:5,q:"For a woman with very low reserve and repeated aneuploid losses, the single most effective option is usually:",o:["Higher-dose stimulation","Donor eggs from a young donor","Immune therapy","Endometrial scratch"],a:1,r:"Because oocyte age drives success, young donor eggs largely restore the odds — the most effective, and most emotionally weighty, intervention."},
+{m:5,q:"The POSEIDON criteria are used to:",o:["Grade embryos","Stratify low-prognosis / poor-responder patients to tailor management","Diagnose endometriosis","Time the trigger"],a:1,r:"POSEIDON refines the older poor-responder concept into 'low-prognosis' groups (by age, reserve markers and prior response) to individualise care."},
+
+/* ===== MODULE 6 · Ethics, Law & Communication ===== */
+{m:6,q:"Beyond the four principles of biomedical ethics, reproductive medicine distinctively also weighs:",o:["Cost-effectiveness only","The welfare of the potential child and the moral status of the embryo","The clinician's autonomy","Advertising standards"],a:1,r:"ART uniquely considers the welfare of a not-yet-existent child and the status of gametes/embryos, alongside autonomy, beneficence, non-maleficence and justice."},
+{m:6,q:"In Australia, day-to-day clinical ART practice is chiefly governed by:",o:["A single Commonwealth ART statute","NHMRC ethical guidelines, RTAC accreditation, and (in some states) state ART law","Only state law","Only hospital policy"],a:1,r:"There is no single federal law governing clinical ART; the operational controls are the NHMRC guidelines, RTAC accreditation, and state ART Acts where they exist (e.g. SA)."},
+{m:6,q:"The practical force of RTAC accreditation for an Australian clinic is that it is:",o:["Optional",'Required to receive Medicare rebates',"A tax concession","Purely advisory"],a:1,r:"RTAC accreditation is a professional scheme, but clinics must hold it to receive Medicare rebates — which underpins the economics of ART, making it a powerful control."},
+{m:6,q:"Compliance with the NHMRC Ethical Guidelines on ART is:",o:["Voluntary","A condition of clinic accreditation","Only relevant to research","Superseded by hospital policy"],a:1,r:"Adherence to the NHMRC guidelines is itself a condition of accreditation, so the regulatory layers reinforce each other."},
+{m:6,q:"Consent in ART differs from ordinary surgical consent chiefly because it must:",o:["Be given only once","Govern gametes and embryos across future events (storage, separation, death, disposal) and can be withdrawn","Be given by one partner only","Never be revisited"],a:1,r:"ART consent is forward-looking: it must anticipate storage, relationship breakdown, death, incapacity, donation and disposal, needs both providers, and can be withdrawn."},
+{m:6,q:"A separated couple disagree about their stored embryos — one wants to use them, the other refuses. The clinic should:",o:["Act on the wish of the party who contributed more","Not use the embryos, because ongoing consent of both providers is required","Destroy them immediately without process","Decide on the couple's behalf"],a:1,r:"Use generally requires the ongoing consent of both gamete providers; one party's withdrawal prevents use. The right not to be forced into parenthood is treated as decisive."},
+{m:6,q:"Regarding donor conception in Australia, current practice requires that:",o:["Donation be anonymous","Donation be identity-release, with no anonymous donation permitted","Donors never be identifiable","Only sperm may be donated"],a:1,r:"Under the NHMRC guidelines, a clinic may only use a donation if the donor consents to identity release to the donor-conceived person at 18; anonymous donation is not permitted."},
+{m:6,q:"From 26 February 2025, a significant change to South Australian law gives donor-conceived people:",o:["Reduced access to donor information","Access to identifying donor information retrospectively, even where anonymity was originally assured","No change","Access only if the donor agrees now"],a:1,r:"The SA amendment allows retrospective access to identifying donor information, reflecting the principle that knowledge of one's genetic heritage is a right — a fast-moving detail to confirm as current."},
+{m:6,q:"Across Australia, surrogacy is lawful only when it is:",o:["Commercial","Altruistic (reasonable expenses only; no fee)","Arranged overseas","Unregulated"],a:1,r:"Only altruistic surrogacy is lawful; commercial surrogacy is prohibited. In SA it is governed by the Surrogacy Act 2019, with mandated counselling and legal advice."},
+{m:6,q:"Under the NHMRC guidelines, sex selection is:",o:["Permitted for family balancing","Prohibited for non-medical (social) reasons","Always permitted","Permitted if the clinic agrees"],a:1,r:"Sex selection for non-medical reasons is not permitted; it may be considered only to avoid a serious sex-linked genetic condition."},
+{m:6,q:"Seeing both partners and taking consent independently helps the clinic guard against:",o:["Billing errors","Reproductive coercion and family violence","Laboratory mix-ups","OHSS"],a:1,r:"Independent consultation and consent create space for each person's own wishes, part of the clinic's duty to recognise and respond to reproductive coercion."},
+{m:6,q:"The SPIKES protocol is a structured approach to:",o:["Stimulation dosing","Breaking bad news","Embryo grading","Ultrasound reporting"],a:1,r:"SPIKES (Setting, Perception, Invitation, Knowledge, Emotions, Strategy) scaffolds difficult conversations — directly relevant to communicating a failed cycle or poor prognosis."},
+{m:6,q:"Gibbs' reflective cycle is used to:",o:["Grade embryos","Structure reflective practice, from description through analysis to an action plan","Time the trigger","Assess ovarian reserve"],a:1,r:"Gibbs' cycle structures reflection; the learning lies in the analysis and action-plan stages, not merely describing what happened."},
+{m:6,q:"Mitochondrial donation in Australia is:",o:["Prohibited","Legal since 'Maeve's Law' (2022) and being introduced under regulated conditions","Unregulated","Available only overseas"],a:1,r:"Maeve's Law (2022) legalised mitochondrial donation federally; the 2023 NHMRC guideline update added Part D to support its ethical introduction."},
+{m:6,q:"Which best captures how ethics and law function in a fertility clinic?",o:["As abstract theory separate from practice","As operational constraints that determine consent, storage, use, and counselling","As optional considerations","As matters only for lawyers"],a:1,r:"In this field ethics and law are operational — they determine what consent is taken, what may be stored and used, and how patients are counselled."}
+];
+
+/* ---- quiz engine ---- */
+const MODTITLES = {1:"Module 1 · Physiology & Endocrinology",2:"Module 2 · Assessment & Initial Management",3:"Module 3 · ART Stimulation, IVF & Laboratory",4:"Module 4 · Ultrasound",5:"Module 5 · Complex Cases",6:"Module 6 · Ethics, Law & Communication"};
+const LETTERS=["A","B","C","D","E"];
+let current=[]; // current question set (references into BANK)
+let checked=false;
+
+// build picker
+const picker=document.getElementById('picker');
+[1,2,3,4,5,6].forEach(m=>{
+  const b=document.createElement('button'); b.textContent="Module "+m; b.dataset.sel="m"+m;
+  b.onclick=()=>selectQuiz("m"+m,b); picker.appendChild(b);
+});
+const bMix=document.createElement('button'); bMix.textContent="Mixed exam (30)"; bMix.className="wide"; bMix.dataset.sel="mix";
+bMix.onclick=()=>selectQuiz("mix",bMix); picker.appendChild(bMix);
+const bAll=document.createElement('button'); bAll.textContent="Full bank (90)"; bAll.className="wide"; bAll.dataset.sel="all";
+bAll.onclick=()=>selectQuiz("all",bAll); picker.appendChild(bAll);
+
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+function selectQuiz(sel,btn){
+  document.querySelectorAll('.picker button').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  checked=false;
+  let idxs=[];
+  if(sel.startsWith('m')){const m=+sel.slice(1); BANK.forEach((q,i)=>{if(q.m===m)idxs.push(i);});}
+  else if(sel==='all'){BANK.forEach((q,i)=>idxs.push(i));}
+  else if(sel==='mix'){
+    // 5 from each module, shuffled
+    for(let m=1;m<=6;m++){let mi=[];BANK.forEach((q,i)=>{if(q.m===m)mi.push(i);});shuffle(mi);idxs.push(...mi.slice(0,5));}
+    shuffle(idxs);
+  }
+  current=idxs;
+  let title = sel.startsWith('m')?MODTITLES[+sel.slice(1)] : sel==='all'?"Full question bank" : "Mixed exam";
+  document.getElementById('quizmeta').style.display='flex';
+  document.getElementById('quiztitle').textContent=title;
+  document.getElementById('quizcount').textContent=idxs.length+" questions";
+  document.getElementById('actions').style.display='flex';
+  render();
+  document.getElementById('scorebar').classList.remove('show');
+  window.scrollTo({top:document.getElementById('quizmeta').offsetTop-70,behavior:'smooth'});
+}
+
+function render(){
+  const box=document.getElementById('quiz'); box.innerHTML='';
+  current.forEach((qi,n)=>{
+    const q=BANK[qi];
+    const opts=q.o.map((t,oi)=>`
+      <label class="opt" id="opt-${n}-${oi}">
+        <input type="radio" name="q${n}" value="${oi}">
+        <span class="lt">${LETTERS[oi]}.</span><span>${t}</span>
+      </label>`).join('');
+    box.insertAdjacentHTML('beforeend',`
+      <div class="q" id="q-${n}" data-qi="${qi}">
+        <div class="qtag">Question ${n+1} · ${MODTITLES[q.m].split(' · ')[0]}</div>
+        <div class="stem"><span class="qn">Q${n+1}.</span>${q.q}</div>
+        <div class="opts">${opts}</div>
+        <div class="rationale" id="rat-${n}"><b>Answer: ${LETTERS[q.a]}.</b> ${q.r}</div>
+      </div>`);
+  });
+}
+
+function checkAll(){
+  if(!current.length) return;
+  checked=true;
+  let correct=0; const perMod={};
+  current.forEach((qi,n)=>{
+    const q=BANK[qi];
+    const picked=document.querySelector(`input[name="q${n}"]:checked`);
+    const pv=picked?+picked.value:-1;
+    // mark options
+    q.o.forEach((t,oi)=>{
+      const el=document.getElementById(`opt-${n}-${oi}`);
+      el.classList.remove('correct','wrong');
+      if(oi===q.a) el.classList.add('correct');
+      if(oi===pv && pv!==q.a) el.classList.add('wrong');
+    });
+    document.getElementById(`rat-${n}`).classList.add('show');
+    const qEl=document.getElementById(`q-${n}`); qEl.classList.add('answered');
+    perMod[q.m]=perMod[q.m]||{c:0,t:0}; perMod[q.m].t++;
+    if(pv===q.a){correct++; qEl.classList.add('iscorrect'); perMod[q.m].c++;}
+    else qEl.classList.add('isincorrect');
+  });
+  const pct=Math.round(100*correct/current.length);
+  const sb=document.getElementById('scorebar');
+  let brk=Object.keys(perMod).sort().map(m=>`M${m}: ${perMod[m].c}/${perMod[m].t}`).join(' · ');
+  sb.innerHTML=`<span class="pct">${correct} / ${current.length} correct (${pct}%)</span><div class="brk">${brk}</div>`;
+  sb.classList.add('show');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function resetQuiz(){
+  checked=false;
+  document.getElementById('scorebar').classList.remove('show');
+  render();
+}
+function revealAll(){
+  if(!current.length){alert('Choose a quiz first.');return;}
+  current.forEach((qi,n)=>{
+    const q=BANK[qi];
+    document.getElementById(`opt-${n}-${q.a}`).classList.add('correct');
+    document.getElementById(`rat-${n}`).classList.add('show');
+  });
+}
+</script>
+</div>
+</body>
+</html>
