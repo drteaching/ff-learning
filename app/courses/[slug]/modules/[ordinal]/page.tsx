@@ -69,13 +69,7 @@ export default async function ModuleReaderPage({ params }: Props) {
       )}
 
       <article className="mt-8 border-t border-ff-border pt-8">
-        {lesson?.body_html ? (
-          <SafeLessonHtml html={lesson.body_html} />
-        ) : (
-          <p className="text-sm text-ff-muted">
-            No lesson content yet. Run the content seed script.
-          </p>
-        )}
+        <SafeLessonHtml html={lesson?.body_html} lessonId={lesson?.id} />
       </article>
 
       <nav className="mt-12 flex items-center justify-between border-t border-ff-border pt-6 text-sm">

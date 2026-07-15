@@ -1,7 +1,11 @@
 import DOMPurify from "isomorphic-dompurify";
 
 /** Sanitise lesson HTML while keeping inline SVGs and presentation attributes. */
-export function sanitizeLessonHtml(dirty: string): string {
+export function sanitizeLessonHtml(dirty: string | null | undefined): string {
+  if (typeof dirty !== "string" || dirty.length === 0) {
+    return "";
+  }
+
   return DOMPurify.sanitize(dirty, {
     USE_PROFILES: { html: true, svg: true, svgFilters: true },
     ADD_ATTR: [
