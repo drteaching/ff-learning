@@ -13,7 +13,7 @@ export type EnrolmentRow = {
   id: string;
   course_id: string;
   status: string;
-  track_id: string;
+  track_id: string | null;
 };
 
 export type UserProfile = {

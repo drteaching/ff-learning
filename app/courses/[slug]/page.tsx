@@ -1,19 +1,25 @@
 import Link from "next/link";
 import { requireCourseAccess } from "@/lib/learning/access";
 import { createClient } from "@/lib/supabase/server";
+import { loadCourseEpaCatalogue } from "@/lib/learning/logbook-data";
+import { levelLabel } from "@/lib/learning/logbook";
+import { EpaLevelDescriptors } from "@/components/epa-level-descriptors";
 
 type Props = { params: Promise<{ slug: string }> };
 
 export default async function CourseOverviewPage({ params }: Props) {
   const { slug } = await params;
-  const { course } = await requireCourseAccess(slug);
+  const { course, enrolment } = await requireCourseAccess(slug);
   const supabase = await createClient();
 
-  const { data: modules } = await supabase
-    .from("modules")
-    .select("id, ordinal, title, summary")
-    .eq("course_id", course.id)
-    .order("ordinal");
+  const [{ data: modules }, epaCatalogue] = await Promise.all([
+    supabase
+      .from("modules")
+      .select("id, ordinal, title, summary")
+      .eq("course_id", course.id)
+      .order("ordinal"),
+    loadCourseEpaCatalogue(course.id, enrolment?.track_id),
+  ]);
 
   return (
     <main className="mx-auto max-w-5xl px-5 py-10">
@@ -22,7 +28,7 @@ export default async function CourseOverviewPage({ params }: Props) {
       </p>
       <h1 className="mt-2 font-display text-4xl text-ff-ink">{course.title}</h1>
       <p className="mt-4 max-w-3xl text-base leading-relaxed text-ff-text">
-        {course.description}
+        {course.description ?? ""}
       </p>
 
       <div className="mt-6 flex flex-wrap gap-3">
@@ -68,6 +74,49 @@ export default async function CourseOverviewPage({ params }: Props) {
             information.
           </p>
         </div>
+      </section>
+
+      <section className="mt-12">
+        <h2 className="font-display text-2xl text-ff-ink">EPAs &amp; targets</h2>
+        <p className="mt-1 text-sm text-ff-muted">
+          Level names come from each EPA&apos;s descriptors. Longer
+          descriptions are optional — some seeds only store level + name.
+        </p>
+        {epaCatalogue.rows.length === 0 ? (
+          <p className="mt-4 text-sm text-ff-muted">
+            No EPA definitions are available for this course yet.
+          </p>
+        ) : (
+          <ul className="mt-6 space-y-4">
+            {epaCatalogue.rows.map(({ epa, targetLevel }) => (
+              <li
+                key={epa.id}
+                className="border border-ff-border bg-ff-card p-5"
+              >
+                <div className="flex flex-wrap items-start justify-between gap-2">
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-wide text-ff-primary-2">
+                      EPA {epa.number ?? "—"}
+                    </p>
+                    <h3 className="font-display text-xl text-ff-ink">
+                      {epa.title ?? "Untitled EPA"}
+                    </h3>
+                  </div>
+                  <span className="shrink-0 text-xs font-semibold text-ff-muted">
+                    Track target: {levelLabel(targetLevel)}
+                  </span>
+                </div>
+                {epa.definition ? (
+                  <p className="mt-2 text-sm text-ff-text">{epa.definition}</p>
+                ) : null}
+                <EpaLevelDescriptors
+                  descriptors={epa.level_descriptors}
+                  className="mt-3 space-y-1.5 text-sm text-ff-text"
+                />
+              </li>
+            ))}
+          </ul>
+        )}
       </section>
 
       <section className="mt-12">

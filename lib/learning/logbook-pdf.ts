@@ -125,7 +125,8 @@ export async function buildLogbookPdf(input: PdfInput): Promise<Uint8Array> {
 
   // Progress
   drawLines(["Progress against targets", ""], 14, fontBold, primary);
-  for (const p of input.progress) {
+  for (const p of input.progress ?? []) {
+    if (!p) continue;
     ensureSpace(40);
     const status =
       p.status === "target_met"
@@ -135,7 +136,7 @@ export async function buildLogbookPdf(input: PdfInput): Promise<Uint8Array> {
           : "NOT STARTED";
     drawLines(
       [
-        `EPA ${p.number} · ${p.title}`,
+        `EPA ${p.number ?? "—"} · ${p.title ?? "Untitled"}`,
         `  Target ${levelLabel(p.targetLevel)} · Signed ${p.signedPeak ? levelLabel(p.signedPeak) : "—"} · Self ${p.selfPeak ? levelLabel(p.selfPeak) : "—"} · ${status}`,
       ],
       10,
@@ -146,14 +147,15 @@ export async function buildLogbookPdf(input: PdfInput): Promise<Uint8Array> {
 
   y -= 10;
   drawLines(["Encounter log", ""], 14, fontBold, primary);
-  if (!input.entries.length) {
+  if (!input.entries?.length) {
     drawLines(["No entries recorded."], 10, font, muted);
   }
-  for (const e of input.entries) {
+  for (const e of input.entries ?? []) {
+    if (!e) continue;
     const title = input.epaTitles.get(e.epa_id) ?? "EPA";
     const body = wrap(
       font,
-      `${e.entry_date} · ${e.setting} · Self ${levelLabel(e.self_level)} · ${title}: ${e.description}`,
+      `${e.entry_date ?? "—"} · ${e.setting ?? ""} · Self ${levelLabel(e.self_level)} · ${title}: ${e.description ?? ""}`,
       10,
       contentWidth,
     );
@@ -163,17 +165,18 @@ export async function buildLogbookPdf(input: PdfInput): Promise<Uint8Array> {
 
   y -= 10;
   drawLines(["Supervisor sign-offs (immutable)", ""], 14, fontBold, primary);
-  if (!input.signoffs.length) {
+  if (!input.signoffs?.length) {
     drawLines(["No sign-offs recorded."], 10, font, muted);
   }
-  for (const s of input.signoffs) {
+  for (const s of input.signoffs ?? []) {
+    if (!s) continue;
     const title = input.epaTitles.get(s.epa_id) ?? "EPA";
     const name =
       s.supervisor?.display_name || s.supervisor?.email || s.supervisor_user_id;
     const note = s.note ? ` Note: ${s.note}` : "";
     const body = wrap(
       font,
-      `${s.signed_at.slice(0, 19)}Z · ${title} · ${levelLabel(s.level)} · Supervisor: ${name}.${note}`,
+      `${(s.signed_at ?? "").slice(0, 19) || "—"}Z · ${title} · ${levelLabel(s.level)} · Supervisor: ${name}.${note}`,
       10,
       contentWidth,
     );

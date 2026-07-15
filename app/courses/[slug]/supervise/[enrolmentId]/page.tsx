@@ -48,7 +48,9 @@ export default async function SuperviseLearnerPage({ params }: Props) {
   if (!bundle) notFound();
 
   const epaTitle = new Map(
-    bundle.epas.map((e) => [e.id, `EPA ${e.number} · ${e.title}`] as const),
+    (bundle.epas ?? []).map(
+      (e) => [e.id, `EPA ${e.number ?? "—"} · ${e.title ?? "Untitled"}`] as const,
+    ),
   );
 
   return (
@@ -75,7 +77,7 @@ export default async function SuperviseLearnerPage({ params }: Props) {
         {bundle.learner?.display_name || bundle.learner?.email || "Learner"}
       </h1>
       <p className="mt-1 text-sm text-ff-muted">
-        {bundle.learner?.email} · {bundle.track?.label} track
+        {bundle.learner?.email ?? "—"} · {bundle.track?.label ?? "—"} track
       </p>
 
       <section className="mt-10">
@@ -87,28 +89,29 @@ export default async function SuperviseLearnerPage({ params }: Props) {
         <SignoffForm
           enrolmentId={enrolmentId}
           courseSlug={slug}
-          epas={bundle.epas}
-          existingSignoffs={bundle.signoffs}
+          epas={bundle.epas ?? []}
+          existingSignoffs={bundle.signoffs ?? []}
         />
       </section>
 
       <section className="mt-12">
         <h2 className="font-display text-2xl text-ff-ink">Learner entries</h2>
         <ul className="mt-4 space-y-3">
-          {bundle.entries.map((e) => (
+          {(bundle.entries ?? []).map((e) => (
             <li
               key={e.id}
               className="border border-ff-border bg-ff-card px-4 py-3 text-sm"
             >
               <p className="font-semibold text-ff-ink">
-                {e.entry_date} · {epaTitle.get(e.epa_id)} ·{" "}
+                {e.entry_date ?? "—"} ·{" "}
+                {epaTitle.get(e.epa_id) ?? "Unknown EPA"} ·{" "}
                 {levelLabel(e.self_level)}
               </p>
-              <p className="mt-1 text-ff-muted">{e.setting}</p>
-              <p className="mt-1 text-ff-text">{e.description}</p>
+              <p className="mt-1 text-ff-muted">{e.setting ?? ""}</p>
+              <p className="mt-1 text-ff-text">{e.description ?? ""}</p>
             </li>
           ))}
-          {bundle.entries.length === 0 && (
+          {(bundle.entries ?? []).length === 0 && (
             <li className="text-sm text-ff-muted">No entries yet.</li>
           )}
         </ul>
@@ -119,22 +122,26 @@ export default async function SuperviseLearnerPage({ params }: Props) {
           Sign-off history (immutable)
         </h2>
         <ul className="mt-4 space-y-3">
-          {bundle.signoffs.map((s) => (
+          {(bundle.signoffs ?? []).map((s) => (
             <li
               key={s.id}
               className="border border-ff-border bg-ff-tint/40 px-4 py-3 text-sm"
             >
               <p className="font-semibold text-ff-ink">
-                {epaTitle.get(s.epa_id)} · {levelLabel(s.level)}
+                {epaTitle.get(s.epa_id) ?? "Unknown EPA"} · {levelLabel(s.level)}
               </p>
               <p className="mt-1 text-ff-muted">
-                {s.supervisor?.display_name || s.supervisor?.email} ·{" "}
-                {new Date(s.signed_at).toLocaleString()} · id {s.id.slice(0, 8)}…
+                {s.supervisor?.display_name || s.supervisor?.email || "Supervisor"}{" "}
+                ·{" "}
+                {s.signed_at
+                  ? new Date(s.signed_at).toLocaleString()
+                  : "—"}{" "}
+                · id {(s.id ?? "").slice(0, 8) || "—"}…
               </p>
-              {s.note && <p className="mt-1 text-ff-text">{s.note}</p>}
+              {s.note ? <p className="mt-1 text-ff-text">{s.note}</p> : null}
             </li>
           ))}
-          {bundle.signoffs.length === 0 && (
+          {(bundle.signoffs ?? []).length === 0 && (
             <li className="text-sm text-ff-muted">No sign-offs yet.</li>
           )}
         </ul>

@@ -1,11 +1,26 @@
 import { cn } from "@/lib/utils";
 import { levelLabel, type EpaProgress } from "@/lib/learning/logbook";
 
-export function ProgressDashboard({ progress }: { progress: EpaProgress[] }) {
+export function ProgressDashboard({
+  progress,
+}: {
+  progress?: EpaProgress[] | null;
+}) {
+  const rows = progress ?? [];
+
+  if (rows.length === 0) {
+    return (
+      <p className="text-sm text-ff-muted">
+        No EPA targets are configured for this track yet.
+      </p>
+    );
+  }
+
   return (
     <div className="grid gap-3 sm:grid-cols-2">
-      {progress.map((p) => {
-        const reached = p.signedPeak || p.selfPeak;
+      {rows.map((p) => {
+        if (!p) return null;
+        const reached = p.signedPeak || p.selfPeak || 0;
         const pct = Math.min(100, (reached / 4) * 100);
         return (
           <div
@@ -15,9 +30,11 @@ export function ProgressDashboard({ progress }: { progress: EpaProgress[] }) {
             <div className="flex items-start justify-between gap-2">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-wide text-ff-primary-2">
-                  EPA {p.number}
+                  EPA {p.number ?? "—"}
                 </p>
-                <h3 className="font-display text-base text-ff-ink">{p.title}</h3>
+                <h3 className="font-display text-base text-ff-ink">
+                  {p.title ?? "Untitled EPA"}
+                </h3>
               </div>
               <span className="shrink-0 text-xs text-ff-muted">
                 target {levelLabel(p.targetLevel)}

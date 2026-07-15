@@ -54,6 +54,12 @@ export function LogbookEntryForm({ enrolmentId, courseSlug, epas }: Props) {
       className="space-y-4 border border-ff-border bg-ff-card p-5"
     >
       <h2 className="font-display text-xl text-ff-ink">Log an encounter</h2>
+      {(epas ?? []).length === 0 ? (
+        <p className="text-sm text-ff-muted">
+          No EPAs are available for this course yet, so you cannot log
+          encounters.
+        </p>
+      ) : null}
       <p className="text-xs text-ff-muted">
         De-identify everything. Do not include patient names, MRNs, DOB, or other
         identifiers.
@@ -103,7 +109,7 @@ export function LogbookEntryForm({ enrolmentId, courseSlug, epas }: Props) {
           >
             {[1, 2, 3, 4].map((n) => (
               <option key={n} value={n}>
-                {n} · {LEVEL_NAMES[n]}
+                {n} · {LEVEL_NAMES[n] ?? "Unknown"}
               </option>
             ))}
           </select>

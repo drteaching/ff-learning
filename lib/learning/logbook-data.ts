@@ -7,7 +7,7 @@ export type LogbookEntryRow = {
   entry_date: string;
   setting: string;
   description: string;
-  self_level: number;
+  self_level: number | null;
   created_at: string;
 };
 
@@ -15,7 +15,7 @@ export type SignoffRow = {
   id: string;
   epa_id: string;
   supervisor_user_id: string;
-  level: number;
+  level: number | null;
   note: string | null;
   signed_at: string;
   supervisor?: { display_name: string | null; email: string } | null;
@@ -25,11 +25,19 @@ export type EpaDefRow = {
   id: string;
   number: number;
   title: string;
-  definition: string;
+  definition: string | null;
   level_descriptors: unknown;
 };
 
-export async function loadLogbookBundle(enrolmentId: string, trackId: string) {
+export type EpaTargetRow = {
+  epa_id: string;
+  target_level: number | null;
+};
+
+export async function loadLogbookBundle(
+  enrolmentId: string,
+  trackId: string | null | undefined,
+) {
   const supabase = await createClient();
 
   const { data: enrolment } = await supabase
@@ -39,6 +47,8 @@ export async function loadLogbookBundle(enrolmentId: string, trackId: string) {
     .maybeSingle();
 
   if (!enrolment) return null;
+
+  const resolvedTrackId = trackId || enrolment.track_id || null;
 
   const [
     { data: epas },
@@ -53,10 +63,12 @@ export async function loadLogbookBundle(enrolmentId: string, trackId: string) {
       .select("id, number, title, definition, level_descriptors")
       .eq("course_id", enrolment.course_id)
       .order("number"),
-    supabase
-      .from("epa_targets")
-      .select("epa_id, target_level")
-      .eq("track_id", trackId),
+    resolvedTrackId
+      ? supabase
+          .from("epa_targets")
+          .select("epa_id, target_level")
+          .eq("track_id", resolvedTrackId)
+      : Promise.resolve({ data: [] as EpaTargetRow[] | null }),
     supabase
       .from("logbook_entries")
       .select("id, epa_id, entry_date, setting, description, self_level, created_at")
@@ -72,15 +84,21 @@ export async function loadLogbookBundle(enrolmentId: string, trackId: string) {
       .select("id, email, display_name")
       .eq("id", enrolment.user_id)
       .maybeSingle(),
-    supabase
-      .from("audience_tracks")
-      .select("id, key, label")
-      .eq("id", trackId)
-      .maybeSingle(),
+    resolvedTrackId
+      ? supabase
+          .from("audience_tracks")
+          .select("id, key, label")
+          .eq("id", resolvedTrackId)
+          .maybeSingle()
+      : Promise.resolve({ data: null }),
   ]);
 
   const supervisorIds = [
-    ...new Set((signoffRows ?? []).map((s) => s.supervisor_user_id)),
+    ...new Set(
+      (signoffRows ?? [])
+        .map((s) => s?.supervisor_user_id)
+        .filter((id): id is string => Boolean(id)),
+    ),
   ];
   const { data: supervisors } =
     supervisorIds.length > 0
@@ -88,29 +106,45 @@ export async function loadLogbookBundle(enrolmentId: string, trackId: string) {
           .from("users")
           .select("id, email, display_name")
           .in("id", supervisorIds)
-      : { data: [] as { id: string; email: string; display_name: string | null }[] };
+      : {
+          data: [] as {
+            id: string;
+            email: string;
+            display_name: string | null;
+          }[],
+        };
 
   const supervisorById = new Map(
     (supervisors ?? []).map((s) => [s.id, s] as const),
   );
 
-  const signoffs: SignoffRow[] = (signoffRows ?? []).map((s) => ({
-    ...s,
-    supervisor: supervisorById.get(s.supervisor_user_id) ?? null,
-  }));
+  const signoffs: SignoffRow[] = (signoffRows ?? [])
+    .filter((s): s is NonNullable<typeof s> => s != null)
+    .map((s) => ({
+      ...s,
+      supervisor: supervisorById.get(s.supervisor_user_id) ?? null,
+    }));
 
-  const targetByEpa = new Map(
-    (targets ?? []).map((t) => [t.epa_id, t.target_level] as const),
+  const safeEpas = ((epas ?? []) as EpaDefRow[]).filter((e) => e?.id);
+  const safeTargets = ((targets ?? []) as EpaTargetRow[]).filter(
+    (t) => t?.epa_id,
+  );
+  const safeEntries = ((entries ?? []) as LogbookEntryRow[]).filter(
+    (e) => e?.id,
   );
 
-  const progress: EpaProgress[] = (epas ?? []).map((epa) =>
+  const targetByEpa = new Map(
+    safeTargets.map((t) => [t.epa_id, t.target_level] as const),
+  );
+
+  const progress: EpaProgress[] = safeEpas.map((epa) =>
     computeEpaProgress({
       epaId: epa.id,
-      number: epa.number,
-      title: epa.title,
+      number: epa.number ?? 0,
+      title: epa.title ?? "Untitled EPA",
       definition: epa.definition,
       targetLevel: targetByEpa.get(epa.id) ?? 1,
-      entryLevels: (entries ?? [])
+      entryLevels: safeEntries
         .filter((e) => e.epa_id === epa.id)
         .map((e) => e.self_level),
       signoffLevels: signoffs
@@ -121,8 +155,9 @@ export async function loadLogbookBundle(enrolmentId: string, trackId: string) {
 
   return {
     enrolment,
-    epas: (epas ?? []) as EpaDefRow[],
-    entries: (entries ?? []) as LogbookEntryRow[],
+    epas: safeEpas,
+    targets: safeTargets,
+    entries: safeEntries,
     signoffs,
     progress,
     learner: learner as {
@@ -131,5 +166,44 @@ export async function loadLogbookBundle(enrolmentId: string, trackId: string) {
       display_name: string | null;
     } | null,
     track: track as { id: string; key: string; label: string } | null,
+  };
+}
+
+/** Course-scoped EPA catalogue + optional track targets (no enrolment history). */
+export async function loadCourseEpaCatalogue(
+  courseId: string,
+  trackId?: string | null,
+) {
+  const supabase = await createClient();
+
+  const [{ data: epas }, { data: targets }] = await Promise.all([
+    supabase
+      .from("epa_definitions")
+      .select("id, number, title, definition, level_descriptors")
+      .eq("course_id", courseId)
+      .order("number"),
+    trackId
+      ? supabase
+          .from("epa_targets")
+          .select("epa_id, target_level")
+          .eq("track_id", trackId)
+      : Promise.resolve({ data: [] as EpaTargetRow[] | null }),
+  ]);
+
+  const safeEpas = ((epas ?? []) as EpaDefRow[]).filter((e) => e?.id);
+  const safeTargets = ((targets ?? []) as EpaTargetRow[]).filter(
+    (t) => t?.epa_id,
+  );
+  const targetByEpa = new Map(
+    safeTargets.map((t) => [t.epa_id, t.target_level] as const),
+  );
+
+  return {
+    epas: safeEpas,
+    targets: safeTargets,
+    rows: safeEpas.map((epa) => ({
+      epa,
+      targetLevel: targetByEpa.get(epa.id) ?? null,
+    })),
   };
 }

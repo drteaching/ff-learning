@@ -88,7 +88,9 @@ export function SignoffForm({
             <p className="mt-1 text-xs text-ff-muted">
               Prior sign-offs for this EPA:{" "}
               {priorForEpa
-                .map((s) => `${levelLabel(s.level)} (${s.signed_at.slice(0, 10)})`)
+                .map((s) =>
+                  `${levelLabel(s?.level)} (${(s?.signed_at ?? "").slice(0, 10) || "—"})`,
+                )
                 .join("; ")}
             </p>
           )}
@@ -105,7 +107,7 @@ export function SignoffForm({
           >
             {[1, 2, 3, 4].map((n) => (
               <option key={n} value={n}>
-                {n} · {LEVEL_NAMES[n]}
+                {n} · {LEVEL_NAMES[n] ?? "Unknown"}
               </option>
             ))}
           </select>
