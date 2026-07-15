@@ -4,16 +4,14 @@ import { getAuthUser, getActiveEnrolment } from "@/lib/learning/access";
 
 const COMING_SOON = [
   {
-    title: "GAMSAT preparation",
-    blurb: "Structured science and reasoning prep for medical school entry.",
+    title: "Ultrasound in Women's Health",
+    blurb:
+      "Point-of-care and clinical ultrasound for women's health practice.",
   },
   {
-    title: "USMLE prep",
-    blurb: "Step-focused content for international medical graduates.",
-  },
-  {
-    title: "O&G prep",
-    blurb: "Obstetrics and gynaecology revision for exams and clinical work.",
+    title: "Trauma Informed Care",
+    blurb:
+      "Trauma-informed communication and care in clinical education settings.",
   },
 ];
 
@@ -49,13 +47,16 @@ export default async function CataloguePage() {
         />
         <div className="relative mx-auto max-w-5xl px-5 py-16 sm:py-20">
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-ff-accent">
-            Flinders Fertility · Education Program
+            Clinical Education
           </p>
-          <h1 className="mt-3 max-w-2xl font-display text-4xl leading-tight text-white sm:text-5xl">
-            Clinical Rotation in Reproductive Medicine
+          <h1 className="mt-3 font-display text-5xl leading-tight tracking-wide text-white sm:text-6xl">
+            SCOLA
           </h1>
-          <p className="mt-4 max-w-xl text-base text-white/85 sm:text-lg">
-            A multi-course learning home for medical students, new-start
+          <p className="mt-3 max-w-xl font-display text-xl text-white/90 sm:text-2xl">
+            Structured Clinical Online Learning &amp; Assessment
+          </p>
+          <p className="mt-4 max-w-xl text-base text-white/80 sm:text-lg">
+            Multi-course clinical education for medical students, new-start
             doctors, and nurses — modules, quizzes, and an EPA clinical
             logbook.
           </p>

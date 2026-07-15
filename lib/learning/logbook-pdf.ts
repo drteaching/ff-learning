@@ -82,7 +82,7 @@ export async function buildLogbookPdf(input: PdfInput): Promise<Uint8Array> {
     height: 90,
     color: ink,
   });
-  page.drawText("Flinders Fertility · Education Program", {
+  page.drawText("Clinical Education · SCOLA", {
     x: margin,
     y: pageHeight - 38,
     size: 10,
@@ -182,13 +182,16 @@ export async function buildLogbookPdf(input: PdfInput): Promise<Uint8Array> {
   }
 
   // Footer on last page
-  page.drawText("Clinical Rotation in Reproductive Medicine · accreditation export", {
-    x: margin,
-    y: 28,
-    size: 8,
-    font,
-    color: muted,
-  });
+  page.drawText(
+    "SCOLA · Structured Clinical Online Learning & Assessment · accreditation export",
+    {
+      x: margin,
+      y: 28,
+      size: 8,
+      font,
+      color: muted,
+    },
+  );
 
   return doc.save();
 }

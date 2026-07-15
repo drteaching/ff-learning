@@ -53,10 +53,10 @@ This creates a Next.js app already wired with Supabase auth, TypeScript, Tailwin
 
 ```
 NEXT_PUBLIC_SUPABASE_URL=your-project-url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-or-publishable-key
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your-anon-or-publishable-key
 ```
 
-(The starter's README names the exact variables — match them. Never commit this file; it's already git-ignored.)
+(Use the **publishable** key from Supabase → Project Settings → API — it may start with `sb_publishable_…`, or use the legacy JWT anon key. Never commit this file; it's already git-ignored.)
 
 ### 1.5 Run it locally
 
@@ -72,9 +72,15 @@ Open **http://localhost:3000**. You should see the starter app. Click through to
 
 1. **Push to GitHub.** In Cursor's left sidebar, open the **Source Control** panel → *Publish to GitHub* → create a **private** repo. (Or use `git init`, commit, and push — Cursor can do this for you if you ask its agent.)
 2. **Deploy on Vercel.** Go to vercel.com → **Add New → Project → Import** your `ff-learning` repo.
-3. In the import screen, **add the same two environment variables** (`NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`). *Tip: install the official **Supabase integration** from the Vercel marketplace and it syncs these automatically.*
-4. Set the **Functions region to Sydney (`syd1`)** in Project Settings → Functions, so compute stays onshore too.
-5. Click **Deploy.** In ~2 minutes you have a live URL.
+3. In the import screen, **add the same environment variables** as `.env.local`:
+   - `NEXT_PUBLIC_SUPABASE_URL`
+   - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` (not `ANON_KEY` — the app expects this name)
+   - Optional for admin seed scripts only: `SUPABASE_SERVICE_ROLE_KEY` (keep secret; never prefix with `NEXT_PUBLIC_`)
+   *Tip: install the official **Supabase integration** from the Vercel marketplace and it can sync keys — then rename/copy so the publishable value is under `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`.*
+4. After **any** env change on Vercel, trigger a **Redeploy** (Deployments → … → Redeploy). `NEXT_PUBLIC_*` values are baked in at build time.
+5. In Supabase → Authentication → URL Configuration, set **Site URL** to your Vercel production URL and add Redirect URLs: `http://localhost:3000/**` and `https://YOUR-APP.vercel.app/**`.
+6. Set the **Functions region to Sydney (`syd1`)** in Project Settings → Functions, so compute stays onshore too.
+7. Click **Deploy.** In ~2 minutes you have a live URL.
 
 **Stage 1 done:** a hosted, running site with working sign-up and login, database in Sydney. Nothing course-specific yet — that's Stage 2.
 

@@ -2,6 +2,11 @@
 
 import { cn } from "@/lib/utils";
 import { createClient } from "@/lib/supabase/client";
+import { safeNextPath } from "@/lib/auth/origin";
+import {
+  AuthMethodDivider,
+  GoogleAuthButton,
+} from "@/components/google-auth-button";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -15,13 +20,6 @@ import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
-
-function safeNextPath(raw: string | null): string {
-  if (!raw || !raw.startsWith("/") || raw.startsWith("//")) {
-    return "/dashboard";
-  }
-  return raw;
-}
 
 export function LoginForm({
   className,
@@ -67,7 +65,9 @@ export function LoginForm({
             Enter your email to access your courses
           </CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="flex flex-col gap-6">
+          <GoogleAuthButton next={next} />
+          <AuthMethodDivider />
           <form onSubmit={handleLogin}>
             <div className="flex flex-col gap-6">
               <div className="grid gap-2">

@@ -9,11 +9,11 @@ const defaultUrl = process.env.VERCEL_URL
 export const metadata: Metadata = {
   metadataBase: new URL(defaultUrl),
   title: {
-    default: "Clinical Rotation in Reproductive Medicine",
-    template: "%s · Flinders Fertility Education",
+    default: "SCOLA",
+    template: "%s · SCOLA",
   },
   description:
-    "Multi-course learning platform for medical students, new-start doctors, and nurses — Clinical Rotation in Reproductive Medicine.",
+    "SCOLA — Structured Clinical Online Learning & Assessment. Multi-course clinical education for medical students, new-start doctors, and nurses.",
 };
 
 export default function RootLayout({
