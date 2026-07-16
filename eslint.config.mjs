@@ -10,6 +10,9 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
+  // Never lint build output or deps (relevant once `npm run build` has run,
+  // e.g. in the bug-fix CI workflow which builds before linting).
+  { ignores: [".next/**", "node_modules/**", "out/**", "build/**", "next-env.d.ts"] },
   ...compat.extends("next/core-web-vitals", "next/typescript"),
 ];
 
