@@ -6,13 +6,18 @@ export default async function AdminHomePage() {
   const { profile } = await requireAdmin();
   const supabase = await createClient();
 
-  const [{ data: courses }, { count: pendingAccess }] = await Promise.all([
-    supabase.from("courses").select("id, slug, title, published").order("title"),
-    supabase
-      .from("professional_profiles")
-      .select("*", { count: "exact", head: true })
-      .eq("verified", false),
-  ]);
+  const [{ data: courses }, { count: pendingAccess }, { count: newReports }] =
+    await Promise.all([
+      supabase.from("courses").select("id, slug, title, published").order("title"),
+      supabase
+        .from("professional_profiles")
+        .select("*", { count: "exact", head: true })
+        .eq("verified", false),
+      supabase
+        .from("bug_reports")
+        .select("*", { count: "exact", head: true })
+        .in("status", ["new", "triaged"]),
+    ]);
 
   return (
     <main className="mx-auto max-w-5xl px-5 py-10">
@@ -33,6 +38,16 @@ export default async function AdminHomePage() {
           <p className="mt-1 text-sm text-ff-muted">
             Approve AHPRA / student ID requests
             {pendingAccess ? ` · ${pendingAccess} pending` : ""}
+          </p>
+        </Link>
+        <Link
+          href="/admin/bug-reports"
+          className="border border-ff-border bg-ff-card p-5 hover:bg-ff-tint"
+        >
+          <h2 className="font-display text-xl text-ff-ink">Bug reports</h2>
+          <p className="mt-1 text-sm text-ff-muted">
+            Issues & design suggestions from the in-app widget
+            {newReports ? ` · ${newReports} open` : ""}
           </p>
         </Link>
       </div>
