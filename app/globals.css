@@ -47,6 +47,32 @@
   }
 }
 
+@layer components {
+  /* Shared form controls (bug-report widget, etc.). Plain CSS so the focus
+     ring can use an alpha of the brand colour, which @apply cannot express
+     for a var()-based colour. */
+  .ff-input,
+  .ff-textarea {
+    width: 100%;
+    border-radius: 0.375rem;
+    border: 1px solid var(--ff-border);
+    background: var(--ff-surface);
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    color: var(--ff-ink);
+    outline: none;
+  }
+  .ff-input:focus,
+  .ff-textarea:focus {
+    border-color: var(--ff-primary);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--ff-primary) 20%, transparent);
+  }
+  .ff-textarea {
+    resize: vertical;
+  }
+}
+
 /* Module lesson HTML (ported body; styles live here so SVGs + structure stay on-brand) */
 .lesson-html {
   color: var(--ff-text);
